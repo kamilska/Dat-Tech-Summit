@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAT TECH Summit | Kraków Edition</title>
+    
+    <!-- Google Fonts: Cinzel (magiczny, elegancki nagłówek) & Plus Jakarta Sans (czytelne UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Konfiguracja Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        arcane: {
+                            950: '#040814',
+                            900: '#081026',
+                            800: '#0e1b3d',
+                            700: '#16295c',
+                        },
+                        gold: {
+                            100: '#fbf5d9',
+                            300: '#f3d98b',
+                            400: '#e5be53',
+                            500: '#d4af37',
+                            600: '#aa8825',
+                        }
+                    },
+                    fontFamily: {
+                        magic: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #040814;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Tło z magicznym gradientem */
+        .bg-mystic {
+            background: radial-gradient(circle at 50% 0%, #11224d 0%, #081026 45%, #040814 100%);
+        }
+
+        /* Złoty tekst z gradientem */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #fbf5d9 0%, #d4af37 50%, #aa8825 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Szklane karty (Glassmorphism) ze złotą obwódką */
+        .magic-card {
+            background: rgba(14, 27, 61, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(251, 245, 217, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .magic-card:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 15px 45px -10px rgba(212, 175, 55, 0.15), inset 0 1px 0 0 rgba(251, 245, 217, 0.2);
+        }
+
+        /* Animacje dla kurtyny otwierającej */
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spinReverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .ring-outer { animation: spinSlow 18s linear infinite; }
+        .ring-inner { animation: spinReverse 12s linear infinite; }
+        .portal-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+        /* Przejście kurtyny */
+        #intro-curtain {
+            transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.2s;
+        }
+        #intro-curtain.opened {
+            opacity: 0;
+            transform: scale(1.15);
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Animacja wejścia treści po otwarciu kurtyny */
+        .reveal-content {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+        }
+        .reveal-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stylizacja scrollbara */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #040814; }
+        ::-webkit-scrollbar-thumb { background: #16295c; border-radius: 4px; border: 1px solid #d4af37; }
+    </style>
+</head>
+<body class="bg-mystic min-h-screen relative selection:bg-gold-500 selection:text-arcane-950">
+
+    <!-- ========================================== -->
+    <!-- ANIMACJA POCZĄTKOWA (MAGICZNY PORTAL)       -->
+    <!-- ========================================== -->
+    <div id="intro-curtain" class="fixed inset-0 z-50 bg-arcane-950 flex flex-col items-center justify-center overflow-hidden">
+        <!-- Tło poświaty -->
+        <div class="absolute w-96 h-96 bg-gold-500/10 rounded-full blur-3xl portal-glow"></div>
+        
+        <!-- Magiczny okrąg SVG -->
+        <div class="relative w-64 h-64 flex items-center justify-center mb-8">
+            <!-- Zewnętrzny pierścień -->
+            <svg class="absolute inset-0 w-full h-full ring-outer text-gold-500/60" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="92" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4"/>
+                <circle cx="100" cy="100" r="84" stroke="currentColor" stroke-width="1.5"/>
+                <polygon points="100,12 188,100 100,188 12,100" stroke="currentColor" stroke-width="0.75" opacity="0.6"/>
+                <polygon points="38,38 162,38 162,162 38,162" stroke="currentColor" stroke-width="0.75" opacity="0.6"/>
+            </svg>
+            
+            <!-- Wewnętrzny pierścień -->
+            <svg class="absolute inset-6 w-52 h-52 ring-inner text-gold-300/80" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="1" stroke-dasharray="12 6 2 6"/>
+                <circle cx="100" cy="100" r="55" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+
+            <!-- Centralny symbol -->
+            <div class="relative z-10 text-center">
+                <span class="font-magic text-3xl font-bold tracking-widest text-gold-gradient drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">DAT</span>
+            </div>
+        </div>
+
+        <p class="font-magic text-gold-300 tracking-[0.3em] text-sm uppercase animate-pulse">Unlocking the Summit...</p>
+    </div>
+
+    <!-- Płótno dla magicznych cząsteczek w tle -->
+    <canvas id="magic-particles" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
+
+    <!-- ========================================== -->
+    <!-- GŁÓWNA ZAWARTOŚĆ STRONY                    -->
+    <!-- ========================================== -->
+    <div id="main-wrapper" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <!-- Pasek powitalny dla delegacji międzynarodowych -->
+        <div class="reveal-content flex flex-wrap items-center justify-center gap-3 sm:gap-6 mb-10 text-xs sm:text-sm text-gold-300/90 font-medium tracking-wider uppercase">
+            <span class="flex items-center gap-1.5 bg-arcane-900/80 border border-gold-500/20 px-3 py-1 rounded-full">🇺🇸 Welcome</span>
+            <span class="flex items-center gap-1.5 bg-arcane-900/80 border border-gold-500/20 px-3 py-1 rounded-full">🇬🇧 Welcome</span>
+            <span class="flex items-center gap-1.5 bg-arcane-900/80 border border-gold-500/20 px-3 py-1 rounded-full">🇵🇹 Bem-vindo</span>
+            <span class="flex items-center gap-1.5 bg-arcane-900/80 border border-gold-500/20 px-3 py-1 rounded-full">🇹🇷 Hoş Geldiniz</span>
+            <span class="flex items-center gap-1.5 bg-arcane-900/80 border border-gold-500/20 px-3 py-1 rounded-full">🇩🇪 Willkommen</span>
+        </div>
+
+        <!-- NAGŁÓWEK (HERO HEADER) -->
+        <header class="reveal-content text-center mb-14 sm:mb-16 relative">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs font-semibold tracking-[0.25em] uppercase mb-5">
+                <svg class="w-3.5 h-3.5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                Kraków • International Gathering
+            </div>
+            
+            <h1 class="font-magic text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-wider text-gold-gradient drop-shadow-[0_4px_24px_rgba(212,175,55,0.25)] mb-4">
+                DAT TECH summit
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-slate-300 text-base sm:text-lg font-light leading-relaxed">
+                Where cutting-edge technology meets the timeless magic of Kraków. Your essential guide for the upcoming summit.
+            </p>
+
+            <!-- Ozdobny separator -->
+            <div class="flex items-center justify-center gap-4 mt-8">
+                <div class="h-px w-24 sm:w-40 bg-gradient-to-r from-transparent to-gold-500/60"></div>
+                <div class="w-2.5 h-2.5 rotate-45 border border-gold-400 bg-gold-500/20"></div>
+                <div class="h-px w-24 sm:w-40 bg-gradient-to-l from-transparent to-gold-500/60"></div>
+            </div>
+        </header>
+
+        <!-- ========================================== -->
+        <!-- GŁÓWNA SIATKA: AGENDA (LEWA) & INFO (PRAWA) -->
+        <!-- ========================================== -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEWA STRONA: AGENDA (7 kolumn na dużych ekranach) -->
+            <section class="reveal-content lg:col-span-7 magic-card rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between border-b border-gold-500/20 pb-5 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="font-magic text-2xl sm:text-3xl font-bold text-gold-100 tracking-wide">Event Agenda</h2>
+                            <p class="text-xs text-gold-400/80 uppercase tracking-widest mt-0.5">Schedule & Key Sessions</p>
+                        </div>
+                    </div>
+
+                    <!-- Przełącznik dni -->
+                    <div class="flex bg-arcane-950/80 p-1 rounded-lg border border-gold-500/20">
+                        <button onclick="switchDay(1)" id="btn-day-1" class="px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-gold-500 text-arcane-950 shadow">
+                            Day 1
+                        </button>
+                        <button onclick="switchDay(2)" id="btn-day-2" class="px-3 py-1.5 rounded-md text-xs font-semibold transition-all text-slate-300 hover:text-gold-300">
+                            Day 2
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Harmonogram Dzień 1 -->
+                <div id="agenda-day-1" class="relative border-l-2 border-gold-500/30 ml-3 sm:ml-4 space-y-7 py-2">
+                    
+                    <!-- Punkt 1 -->
+                    <div class="relative pl-7 group">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-arcane-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors shadow-[0_0_10px_rgba(212,175,55,0.6)]"></span>
+                        <span class="inline-block text-xs font-bold tracking-wider text-gold-400 bg-gold-500/10 px-2.5 py-0.5 rounded border border-gold-500/20 mb-1.5">
+                            09:00 – 09:45
+                        </span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-gold-300 transition-colors">Welcome Coffee & Arcane Registration</h3>
+                        <p class="text-sm text-slate-300/90 mt-1 leading-relaxed">
+                            Badge pickup, welcome gift bags, and morning espresso at the DAT Office lobby.
+                        </p>
+                    </div>
+
+                    <!-- Punkt 2 -->
+                    <div class="relative pl-7 group">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-arcane-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors"></span>
+                        <span class="inline-block text-xs font-bold tracking-wider text-gold-400 bg-gold-500/10 px-2.5 py-0.5 rounded border border-gold-500/20 mb-1.5">
+                            09:45 – 11:00
+                        </span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-gold-300 transition-colors">Opening Keynote: The Alchemy of Modern Tech</h3>
+                        <p class="text-sm text-slate-300/90 mt-1 leading-relaxed">
+                            Strategic vision, cross-border synergy between our US, UK, PT, TR, DE & PL teams, and 2026/2027 roadmap.
+                        </p>
+                    </div>
+
+                    <!-- Punkt 3 -->
+                    <div class="relative pl-7 group">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-arcane-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors"></span>
+                        <span class="inline-block text-xs font-bold tracking-wider text-gold-400 bg-gold-500/10 px-2.5 py-0.5 rounded border border-gold-500/20 mb-1.5">
+                            11:15 – 13:00
+                        </span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-gold-300 transition-colors">Interactive Architecture & AI Workshops</h3>
+                        <p class="text-sm text-slate-300/90 mt-1 leading-relaxed">
+                            Deep-dive technical breakouts into next-gen platforms, automation, and customer experience innovation.
+                        </p>
+                    </div>
+
+                    <!-- Punkt 4 -->
+                    <div class="relative pl-7 group">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-arcane-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors"></span>
+                        <span class="inline-block text-xs font-bold tracking-wider text-gold-400 bg-gold-500/10 px-2.5 py-0.5 rounded border border-gold-500/20 mb-1.5">
+                            13:00 – 14:15
+                        </span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-gold-300 transition-colors">Networking Lunch</h3>
+                        <p class="text-sm text-slate-300/90 mt-1 leading-relaxed">
+                            Curated culinary selection featuring modern Polish and international dishes.
+                        </p>
+                    </div>
+
+                    <!-- Punkt 5 -->
+                    <div class="relative pl-7 group">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-arcane-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors"></span>
+                        <span class="inline-block text-xs font-bold tracking-wider text-gold-400 bg-gold-500/10 px-2.5 py-0.5 rounded border border-gold-500/20 mb-1.5">
+                            19:30 – Late
+                        </span>
+                        <h3 class="text-lg font-semibold text-gold-300">✨ Enchanted Gala Dinner & Old Town Walk</h3>
+                        <p class="text-sm text-slate-300/90 mt-1 leading-relaxed">
+                            Evening gathering near Wawel Castle & Sheraton Grand, followed by a magical dinner in the heart of Kraków.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Harmonogram Dzień 2 (ukryty domyślnie) -->
+                <div id="agenda-day-2" class="hidden relative border-l-2 border-gold-500/30 ml-3 sm:ml-4 space-y-7 py-2">
+                    <div class="relative pl-7 group">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-arcane-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors"></span>
+                        <span class="inline-block text-xs font-bold tracking-wider text-gold-400 bg-gold-500/10 px-2.5 py-0.5 rounded border border-gold-500/20 mb-1.5">
+                            09:30 – 11:00
+                        </span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-gold-300 transition-colors">Global Synergy & Product Showcase</h3>
+                        <p class="text-sm text-slate-300/90 mt-1 leading-relaxed">
+                            Live demos from international squads and cross-functional roundtable discussions.
+                        </p>
+                    </div>
+
+                    <div class="relative pl-7 group">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-arcane-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors"></span>
+                        <span class="inline-block text-xs font-bold tracking-wider text-gold-400 bg-gold-500/10 px-2.5 py-0.5 rounded border border-gold-500/20 mb-1.5">
+                            11:30 – 13:30
+                        </span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-gold-300 transition-colors">Hack-the-Future & Q&A Panel</h3>
+                        <p class="text-sm text-slate-300/90 mt-1 leading-relaxed">
+                            Open floor with leadership and technical leads. Solving key challenges together.
+                        </p>
+                    </div>
+
+                    <div class="relative pl-7 group">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-arcane-950 border-2 border-gold-400 group-hover:bg-gold-400 transition-colors"></span>
+                        <span class="inline-block text-xs font-bold tracking-wider text-gold-400 bg-gold-500/10 px-2.5 py-0.5 rounded border border-gold-500/20 mb-1.5">
+                            13:30 – 15:00
+                        </span>
+                        <h3 class="text-lg font-semibold text-gold-300">Farewell Lunch & Safe Travels</h3>
+                        <p class="text-sm text-slate-300/90 mt-1 leading-relaxed">
+                            Closing remarks, group photo, and airport transfer coordination.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRAWA STRONA: PODSTAWOWE INFORMACJE (5 kolumn na dużych ekranach) -->
+            <aside class="reveal-content lg:col-span-5 space-y-6">
+
+                <!-- 1. POLSKI NUMER ALARMOWY -->
+                <div class="magic-card rounded-2xl p-6 border-l-4 border-l-gold-500 relative overflow-hidden">
+                    <div class="flex items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-11 h-11 rounded-xl bg-red-500/15 border border-red-400/40 flex items-center justify-center text-red-400 shrink-0 mt-0.5">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-wider text-gold-400">Emergency in Poland</span>
+                                <h3 class="font-magic text-xl font-bold text-white mt-0.5">Emergency Number</h3>
+                                <p class="text-xs text-slate-300 mt-1">24/7 Police, Ambulance & Fire Service (English-speaking operators)</p>
+                            </div>
+                        </div>
+
+                        <a href="tel:112" class="shrink-0 bg-gradient-to-br from-gold-400 to-gold-600 hover:from-gold-300 hover:to-gold-500 text-arcane-950 font-magic font-extrabold text-2xl px-4 py-2.5 rounded-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-transform active:scale-95">
+                            112
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. LOKALIZACJA BIURA + MINIATURA MAPY -->
+                <div class="magic-card rounded-2xl p-6">
+                    <div class="flex items-start gap-3.5 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400 shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-gold-400">Summit Venue • DAT Office</span>
+                            <h3 class="font-magic text-xl font-bold text-white mt-0.5">Office Location</h3>
+                            <p class="text-sm text-slate-200 font-medium mt-1">
+                                Aleja Powstańców Wielkopolskich 13C
+                            </p>
+                            <p class="text-xs text-slate-400">30-707 Kraków, Poland</p>
+                        </div>
+                    </div>
+
+                    <!-- Miniatura mapy (OpenStreetMap / Google Maps Embed z ciemnym filtrem dopasowanym do motywu) -->
+                    <div class="relative rounded-xl overflow-hidden border border-gold-500/30 h-44 w-full group">
+                        <iframe 
+                            title="DAT Office Map"
+                            class="w-full h-full border-0 filter invert-[90%] hue-rotate-180 contrast-[95%] opacity-90 group-hover:opacity-100 transition-opacity"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="https://maps.google.com/maps?q=Aleja%20Powsta%C5%84c%C3%B3w%20Wielkopolskich%2013C,%20Krak%C3%B3w&t=&z=15&ie=UTF8&iwloc=&output=embed">
+                        </iframe>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Aleja+Powstańców+Wielkopolskich+13C,+Kraków" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="absolute bottom-2.5 right-2.5 bg-arcane-950/90 hover:bg-gold-500 text-gold-300 hover:text-arcane-950 border border-gold-500/50 text-xs font-semibold px-3 py-1.5 rounded-lg backdrop-blur-md transition-all flex items-center gap-1.5 shadow-lg">
+                            <span>Open Full Map</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. HOTEL SHERATON GRAND KRAKÓW -->
+                <div class="magic-card rounded-2xl p-6 relative overflow-hidden">
+                    <!-- Subtelny złoty blask w rogu -->
+                    <div class="absolute -right-8 -top-8 w-28 h-28 bg-gold-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <div class="flex items-start gap-3.5 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400 shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-gold-400">Guest Accommodation</span>
+                            <h3 class="font-magic text-xl font-bold text-white mt-0.5">Sheraton Grand Krakow</h3>
+                            <p class="text-sm text-slate-300 mt-1">
+                                ul. Powiśle 7, 31-101 Kraków
+                            </p>
+                            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                                Located right next to the Royal Wawel Castle & Vistula River (~12 min drive to DAT Office).
+                            </p>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/search/?api=1&query=Sheraton+Grand+Krakow+Powiśle+7" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full mt-2 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-500 via-gold-400 to-gold-500 hover:from-gold-400 hover:to-gold-300 text-arcane-950 font-bold text-sm py-3 px-5 rounded-xl shadow-[0_4px_20px_rgba(212,175,55,0.3)] transition-all transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                        </svg>
+                        <span>Navigate to Sheraton Grand Krakow</span>
+                    </a>
+                </div>
+
+            </aside>
+        </main>
+
+        <!-- STOPKA -->
+        <footer class="reveal-content mt-16 pt-8 border-t border-gold-500/15 text-center text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="font-magic text-gold-400/80 tracking-widest">DAT TECH SUMMIT • KRAKÓW</p>
+            <p>Need assistance? Contact your local Kraków host team anytime.</p>
+        </footer>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SKRYPTY: ANIMACJA OTWIERANIA, CZĄSTECZKI, UI -->
+    <!-- ========================================== -->
+    <script>
+        // 1. Obsługa kurtyny otwierającej stronę
+        window.addEventListener('DOMContentLoaded', () => {
+            const curtain = document.getElementById('intro-curtain');
+            const revealElements = document.querySelectorAll('.reveal-content');
+
+            // Po 1.6 sekundy magiczny portal otwiera stronę
+            setTimeout(() => {
+                curtain.classList.add('opened');
+                
+                // Stopniowe odkrywanie sekcji strony
+                revealElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, 200 + (index * 150));
+                });
+            }, 1600);
+        });
+
+        // 2. Przełączanie dni w Agendzie
+        function switchDay(day) {
+            const day1 = document.getElementById('agenda-day-1');
+            const day2 = document.getElementById('agenda-day-2');
+            const btn1 = document.getElementById('btn-day-1');
+            const btn2 = document.getElementById('btn-day-2');
+
+            if (day === 1) {
+                day1.classList.remove('hidden');
+                day2.classList.add('hidden');
+                btn1.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-gold-500 text-arcane-950 shadow';
+                btn2.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition-all text-slate-300 hover:text-gold-300';
+            } else {
+                day1.classList.add('hidden');
+                day2.classList.remove('hidden');
+                btn2.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-gold-500 text-arcane-950 shadow';
+                btn1.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition-all text-slate-300 hover:text-gold-300';
+            }
+        }
+
+        // 3. Subtelne złote cząsteczki (iskry magii) w tle
+        const canvas = document.getElementById('magic-particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedY = -(Math.random() * 0.4 + 0.1);
+                this.speedX = (Math.random() - 0.5) * 0.2;
+                this.opacity = Math.random() * 0.7 + 0.2;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = '#d4af37';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
