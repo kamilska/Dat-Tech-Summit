@@ -13,6 +13,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Tailwind Custom Palette & Fonts -->
     <script>
         tailwind.config = {
             theme: {
@@ -47,13 +48,13 @@
             color: #f8fafc;
         }
 
-        /* Tło z motywem królewskiego błękitu i złotego horyzontu */
+        /* Original Royal Dark Blue & Gold Horizon Theme */
         .bg-summit-theme {
-            background: 
+            background:
                 radial-gradient(ellipse at 50% 0%, rgba(21, 61, 148, 0.55) 0%, rgba(6, 18, 46, 0.92) 55%, #020714 100%);
         }
 
-        /* Metaliczny złoty napis FY 27 DAT */
+        /* Metallic 3D Gold Title */
         .text-3d-gold {
             background: linear-gradient(180deg, #fff6cf 0%, #f5c953 45%, #c78614 85%, #8f5c08 100%);
             -webkit-background-clip: text;
@@ -61,7 +62,7 @@
             filter: drop-shadow(0 3px 10px rgba(234, 182, 66, 0.35));
         }
 
-        /* Szklane panele dashboardu */
+        /* Frosted Royal Glass Dashboard Panels */
         .dashboard-panel {
             background: linear-gradient(160deg, rgba(10, 30, 77, 0.65) 0%, rgba(4, 12, 32, 0.85) 100%);
             backdrop-filter: blur(16px);
@@ -70,123 +71,79 @@
             box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 248, 219, 0.14);
         }
 
-        /* Animacja 3D otwierającej się magicznej księgi */
-        #book-intro-overlay {
-            perspective: 2200px;
-            transition: opacity 0.85s ease-out, visibility 0.85s;
+        /* Original Mystical Rotating Portal Opening Animations */
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-        #book-intro-overlay.fade-out {
+        @keyframes spinReverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.65; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.06); }
+        }
+
+        .ring-outer { animation: spinSlow 18s linear infinite; }
+        .ring-inner { animation: spinReverse 12s linear infinite; }
+        .portal-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+        #intro-curtain {
+            transition: opacity 0.95s cubic-bezier(0.77, 0, 0.175, 1), transform 1.15s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.15s;
+        }
+        #intro-curtain.opened {
             opacity: 0;
+            transform: scale(1.14);
             visibility: hidden;
             pointer-events: none;
         }
 
-        .book-half {
-            transform-style: preserve-3d;
-            transition: transform 1.45s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 1.45s ease;
-            backface-visibility: hidden;
-        }
-
-        .book-left {
-            transform-origin: left center;
-            background: radial-gradient(circle at 100% 50%, #0d2763 0%, #050f29 65%, #020714 100%);
-        }
-        .book-right {
-            transform-origin: right center;
-            background: radial-gradient(circle at 0% 50%, #0d2763 0%, #050f29 65%, #020714 100%);
-        }
-
-        #book-intro-overlay.book-open .book-left {
-            transform: rotateY(-112deg);
-            box-shadow: 25px 0 60px rgba(0, 0, 0, 0.85);
-        }
-        #book-intro-overlay.book-open .book-right {
-            transform: rotateY(112deg);
-            box-shadow: -25px 0 60px rgba(0, 0, 0, 0.85);
-        }
-
-        .book-crest {
-            transition: opacity 0.55s ease, transform 0.7s ease;
-        }
-        #book-intro-overlay.book-open .book-crest {
-            opacity: 0;
-            transform: scale(0.92);
-        }
-
-        /* Dyskretny pasek przewijania wewnątrz agendy */
+        /* Subtle Custom Scrollbar for Inner Schedule */
         .custom-scroll::-webkit-scrollbar { width: 5px; }
         .custom-scroll::-webkit-scrollbar-track { background: rgba(2, 7, 20, 0.4); border-radius: 999px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(234, 182, 66, 0.35); border-radius: 999px; }
-        .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(234, 182, 66, 0.65); }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(234, 182, 66, 0.38); border-radius: 999px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(234, 182, 66, 0.7); }
     </style>
 </head>
-<body class="bg-summit-theme min-h-screen lg:h-screen lg:overflow-hidden flex flex-col relative selection:bg-gold-400 selection:text-royal-950">
+<body class="bg-summit-theme min-h-screen xl:h-screen xl:overflow-hidden flex flex-col relative selection:bg-gold-400 selection:text-royal-950">
 
     <!-- ========================================== -->
-    <!-- ANIMACJA OTWIERAJĄCEJ SIĘ KSIĘGI + PYŁ     -->
+    <!-- ORIGINAL OPENING ANIMATION (MAGIC PORTAL)  -->
     <!-- ========================================== -->
-    <div id="book-intro-overlay" class="fixed inset-0 z-50 flex overflow-hidden">
-        <!-- Lewa okładka księgi -->
-        <div class="book-half book-left relative w-1/2 h-full border-r border-gold-400/50 flex items-center justify-end overflow-hidden">
-            <!-- Ozdobna złota ramka wewnętrzna -->
-            <div class="absolute inset-4 sm:inset-8 border-2 border-gold-400/35 border-r-0 rounded-l-2xl pointer-events-none"></div>
-            <div class="absolute inset-6 sm:inset-11 border border-gold-300/20 border-r-0 rounded-l-xl pointer-events-none"></div>
-            <!-- Złote narożniki -->
-            <svg class="absolute top-5 left-5 sm:top-9 sm:left-9 w-12 h-12 text-gold-400/70" viewBox="0 0 60 60" fill="none">
-                <path d="M2 58V14C2 7.37258 7.37258 2 14 2H58" stroke="currentColor" stroke-width="2"/>
-                <circle cx="14" cy="14" r="3" fill="currentColor"/>
+    <div id="intro-curtain" class="fixed inset-0 z-50 bg-royal-950 flex flex-col items-center justify-center overflow-hidden">
+        <!-- Golden Ambient Glow -->
+        <div class="absolute w-96 h-96 bg-gold-500/15 rounded-full blur-3xl portal-glow"></div>
+        
+        <!-- Concentric Rotating Runic Rings -->
+        <div class="relative w-60 h-60 sm:w-64 sm:h-64 flex items-center justify-center mb-6">
+            <svg class="absolute inset-0 w-full h-full ring-outer text-gold-400/75" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="92" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4"/>
+                <circle cx="100" cy="100" r="84" stroke="currentColor" stroke-width="1.5"/>
+                <polygon points="100,12 188,100 100,188 12,100" stroke="currentColor" stroke-width="0.75" opacity="0.65"/>
+                <polygon points="38,38 162,38 162,162 38,162" stroke="currentColor" stroke-width="0.75" opacity="0.65"/>
             </svg>
-            <svg class="absolute bottom-5 left-5 sm:bottom-9 sm:left-9 w-12 h-12 text-gold-400/70 -rotate-90" viewBox="0 0 60 60" fill="none">
-                <path d="M2 58V14C2 7.37258 7.37258 2 14 2H58" stroke="currentColor" stroke-width="2"/>
-                <circle cx="14" cy="14" r="3" fill="currentColor"/>
+            <svg class="absolute inset-6 w-48 h-48 sm:w-52 sm:h-52 ring-inner text-gold-300/85" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="1" stroke-dasharray="10 5 2 5"/>
+                <circle cx="100" cy="100" r="55" stroke="currentColor" stroke-width="1.5"/>
             </svg>
-            <!-- Złoty grzbiet na środku -->
-            <div class="w-4 sm:w-6 h-full bg-gradient-to-l from-gold-500/30 via-gold-400/10 to-transparent"></div>
-        </div>
-
-        <!-- Prawa okładka księgi -->
-        <div class="book-half book-right relative w-1/2 h-full border-l border-gold-400/50 flex items-center justify-start overflow-hidden">
-            <!-- Ozdobna złota ramka wewnętrzna -->
-            <div class="absolute inset-4 sm:inset-8 border-2 border-gold-400/35 border-l-0 rounded-r-2xl pointer-events-none"></div>
-            <div class="absolute inset-6 sm:inset-11 border border-gold-300/20 border-l-0 rounded-r-xl pointer-events-none"></div>
-            <!-- Złote narożniki -->
-            <svg class="absolute top-5 right-5 sm:top-9 sm:right-9 w-12 h-12 text-gold-400/70 rotate-90" viewBox="0 0 60 60" fill="none">
-                <path d="M2 58V14C2 7.37258 7.37258 2 14 2H58" stroke="currentColor" stroke-width="2"/>
-                <circle cx="14" cy="14" r="3" fill="currentColor"/>
-            </svg>
-            <svg class="absolute bottom-5 right-5 sm:bottom-9 sm:right-9 w-12 h-12 text-gold-400/70 rotate-180" viewBox="0 0 60 60" fill="none">
-                <path d="M2 58V14C2 7.37258 7.37258 2 14 2H58" stroke="currentColor" stroke-width="2"/>
-                <circle cx="14" cy="14" r="3" fill="currentColor"/>
-            </svg>
-            <!-- Złoty grzbiet na środku -->
-            <div class="w-4 sm:w-6 h-full bg-gradient-to-r from-gold-500/30 via-gold-400/10 to-transparent"></div>
-        </div>
-
-        <!-- Centralny złoty emblemat na styku okładek -->
-        <div class="book-crest absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 px-4">
-            <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-royal-950/90 border-2 border-gold-400/70 shadow-[0_0_60px_rgba(234,182,66,0.45)] flex flex-col items-center justify-center text-center p-6">
-                <div class="absolute inset-2 rounded-full border border-dashed border-gold-300/40"></div>
-                <span class="font-display text-[11px] font-bold tracking-[0.3em] uppercase text-gold-300 mb-1">Kraków Edition</span>
-                <span class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-3d-gold">FY 27 DAT</span>
-                <span class="font-display text-lg sm:text-xl font-bold text-white tracking-wide mt-0.5">Tech Summit</span>
-                <div class="w-16 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent my-3"></div>
-                <span class="font-sans text-[11px] text-gold-100/80 tracking-widest uppercase">Opening Chronicle...</span>
+            <div class="relative z-10 text-center">
+                <span class="font-display text-2xl sm:text-3xl font-extrabold tracking-widest text-3d-gold block">FY 27</span>
+                <span class="font-display text-xs font-bold tracking-[0.28em] text-gold-100 mt-0.5 block">DAT SUMMIT</span>
             </div>
         </div>
+        <p class="font-display text-gold-300 tracking-[0.3em] text-xs uppercase animate-pulse">Unlocking the Summit...</p>
     </div>
 
-    <!-- Canvas dla gwiezdnego pyłu (Stardust Burst na wierzchu przy otwieraniu) -->
-    <canvas id="stardust-canvas" class="fixed inset-0 pointer-events-none z-[60]"></canvas>
-
-    <!-- Konstelacje gwiazd w tle (Canvas) -->
+    <!-- Interactive Golden Constellation Starfield Canvas -->
     <canvas id="constellation-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
-    <!-- Dekoracyjne złote wstęgi w rogach -->
+    <!-- Decorative Corner Gold Ribbons -->
     <svg class="fixed top-0 left-0 w-72 h-40 pointer-events-none z-0 opacity-75" viewBox="0 0 300 160" fill="none">
-        <path d="M-20,120 C70,115 150,65 260,-10" stroke="url(#goldRibbon)" stroke-width="3"/>
-        <path d="M-20,145 C90,130 180,80 295,-10" stroke="url(#goldRibbon)" stroke-width="1.2" opacity="0.7"/>
+        <path d="M-20,120 C70,115 150,65 260,-10" stroke="url(#goldRibbonTop)" stroke-width="3"/>
+        <path d="M-20,145 C90,130 180,80 295,-10" stroke="url(#goldRibbonTop)" stroke-width="1.2" opacity="0.7"/>
         <defs>
-            <linearGradient id="goldRibbon" x1="0" y1="0" x2="1" y2="1">
+            <linearGradient id="goldRibbonTop" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#fff6cf"/>
                 <stop offset="50%" stop-color="#eab642"/>
                 <stop offset="100%" stop-color="#8f5c08" stop-opacity="0"/>
@@ -194,17 +151,58 @@
         </defs>
     </svg>
     <svg class="fixed bottom-0 right-0 w-80 h-44 pointer-events-none z-0 opacity-75 rotate-180" viewBox="0 0 300 160" fill="none">
-        <path d="M-20,120 C70,115 150,65 260,-10" stroke="url(#goldRibbon2)" stroke-width="3"/>
+        <path d="M-20,120 C70,115 150,65 260,-10" stroke="url(#goldRibbonBottom)" stroke-width="3"/>
         <defs>
-            <linearGradient id="goldRibbon2" x1="0" y1="0" x2="1" y2="1">
+            <linearGradient id="goldRibbonBottom" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#fff6cf"/>
                 <stop offset="50%" stop-color="#eab642"/>
-                <!-- Prawa strona nagłówka: Powitanie po angielsku + przycisk Replay -->
-                <div class="flex items-center justify-center gap-2.5 text-xs font-medium text-gold-100/95">
-                    <span class="px-3 py-1 rounded-full bg-royal-950/75 border border-gold-400/30 font-sans tracking-wide text-gold-100">
+                <stop offset="100%" stop-color="#8f5c08" stop-opacity="0"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- ========================================== -->
+    <!-- MAIN WIDE DASHBOARD CONTAINER              -->
+    <!-- ========================================== -->
+    <div class="relative z-10 flex-1 flex flex-col max-w-[1680px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-3 sm:py-4 xl:h-full">
+
+        <!-- HEADER WITH KRAKÓW SKYLINE & ENGLISH-ONLY WELCOME -->
+        <header class="shrink-0 relative rounded-2xl border border-gold-400/30 bg-royal-900/65 backdrop-blur-md px-5 sm:px-7 py-3 mb-4 overflow-hidden shadow-lg">
+            <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent"></div>
+            <div class="absolute left-1/2 -translate-x-1/2 bottom-0 w-96 h-10 bg-gold-400/15 blur-xl pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <!-- Left: Title & Dates -->
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 text-center sm:text-left">
+                    <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-3d-gold">
+                        FY 27 DAT
+                    </h1>
+                    <span class="font-display text-xl sm:text-2xl font-bold text-white tracking-wide">
+                        Tech Summit
+                    </span>
+                    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-semibold bg-gold-400/15 text-gold-300 border border-gold-400/30">
+                        16–17 Dec 2026 • Kraków
+                    </span>
+                </div>
+
+                <!-- Center: Gold Vector Skyline of Kraków Main Square (Sukiennice & St. Mary's Basilica) -->
+                <div class="hidden lg:block w-80 xl:w-96 h-10 opacity-90">
+                    <svg viewBox="0 0 360 46" fill="none" class="w-full h-full">
+                        <line x1="0" y1="44" x2="360" y2="44" stroke="#eab642" stroke-width="1.2"/>
+                        <!-- Cloth Hall (Sukiennice) -->
+                        <path d="M45,44 V26 L55,18 L65,26 V44 M65,44 V28 H195 V44 M72,44 V35 A4,4 0 0 1 80,35 V44 M88,44 V35 A4,4 0 0 1 96,35 V44 M104,44 V35 A4,4 0 0 1 112,35 V44 M120,44 V35 A4,4 0 0 1 128,35 V44 M136,44 V35 A4,4 0 0 1 144,35 V44 M152,44 V35 A4,4 0 0 1 160,35 V44 M168,44 V35 A4,4 0 0 1 176,35 V44 M184,44 V35 A4,4 0 0 1 192,35 V44" stroke="#f7d87c" stroke-width="1.15"/>
+                        <path d="M122,28 V21 L130,14 L138,21 V28" stroke="#f7d87c" stroke-width="1.15"/>
+                        <!-- St. Mary's Basilica -->
+                        <path d="M215,44 V14 L222,3 L229,14 V44 M229,44 V20 L235,11 L241,20 V44 M241,44 V28 H268 V44" stroke="#f7d87c" stroke-width="1.25"/>
+                    </svg>
+                </div>
+
+                <!-- Right: English-Only Welcome & Replay Portal Button -->
+                <div class="flex items-center justify-center gap-2.5">
+                    <span class="px-3 py-1 rounded-full bg-royal-950/75 border border-gold-400/25 text-xs font-medium text-gold-100">
                         Welcome to Kraków
                     </span>
-                    <button onclick="replayBookIntro()" title="Replay Opening Animation" class="px-3 py-1 rounded-full bg-gold-400/15 hover:bg-gold-400 hover:text-royal-950 text-gold-300 border border-gold-400/40 font-display font-bold transition-colors cursor-pointer">
+                    <button onclick="replayPortalIntro()" class="px-3.5 py-1.5 rounded-full bg-gold-400/15 hover:bg-gold-400 hover:text-royal-950 text-gold-300 border border-gold-400/40 font-display text-xs font-bold transition-all cursor-pointer shadow-sm">
                         ✨ Replay Intro
                     </button>
                 </div>
@@ -212,107 +210,62 @@
         </header>
 
         <!-- ========================================== -->
-        <!-- GŁÓWNA PRZESTRZEŃ ROBOCZA: LEWA vs PRAWA   -->
+        <!-- HORIZONTAL SPLIT-SCREEN WORKSPACE          -->
         <!-- ========================================== -->
-        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-0">
+        <main class="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-5 lg:gap-6 min-h-0">
 
             <!-- ====================================== -->
-            <!-- LEWA KOLUMNA: 4-DNIOWY KALENDARZ       -->
+            <!-- LEFT COLUMN: 4-DAY SUMMIT PLANNER      -->
             <!-- ====================================== -->
-            <section class="lg:col-span-7 dashboard-panel rounded-2xl p-4 sm:p-5 flex flex-col min-h-[460px] lg:min-h-0">
+            <section class="xl:col-span-7 dashboard-panel rounded-2xl p-4 sm:p-6 flex flex-col min-h-[480px] xl:min-h-0">
                 
-                <!-- Nagłówek karty kalendarza + Zakładki 4 dni -->
+                <!-- Card Header & 4-Day Selector -->
                 <div class="shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 mb-3 border-b border-gold-400/20">
                     <div>
                         <h2 class="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2">
                             <span class="w-2 h-2 rounded-full bg-gold-400 shadow-[0_0_8px_#eab642]"></span>
                             4-Day Summit Planner
                         </h2>
-                        <p id="day-subtitle" class="text-xs text-gold-300/80 mt-0.5">Wednesday • DAT TECH SUMMIT Day 1 & Arcade Bee</p>
-                    </div>
-                    </div>
-                </div>
-
-                <!-- Środek: Złota wektorowa panorama krakowskiego Rynku -->
-                <div class="hidden xl:block w-72 h-9 opacity-90">
-                    <svg viewBox="0 0 360 46" fill="none" class="w-full h-full">
-                        <line x1="0" y1="44" x2="360" y2="44" stroke="#eab642" stroke-width="1.2"/>
-                        <path d="M45,44 V26 L55,18 L65,26 V44 M65,44 V28 H195 V44 M72,44 V35 A4,4 0 0 1 80,35 V44 M88,44 V35 A4,4 0 0 1 96,35 V44 M104,44 V35 A4,4 0 0 1 112,35 V44 M120,44 V35 A4,4 0 0 1 128,35 V44 M136,44 V35 A4,4 0 0 1 144,35 V44 M152,44 V35 A4,4 0 0 1 160,35 V44 M168,44 V35 A4,4 0 0 1 176,35 V44 M184,44 V35 A4,4 0 0 1 192,35 V44" stroke="#f7d87c" stroke-width="1.1"/>
-                        <path d="M122,28 V21 L130,14 L138,21 V28" stroke="#f7d87c" stroke-width="1.1"/>
-                        <path d="M215,44 V14 L222,3 L229,14 V44 M229,44 V20 L235,11 L241,20 V44 M241,44 V28 H268 V44" stroke="#f7d87c" stroke-width="1.2"/>
-                    </svg>
-                </div>
-
-                <!-- Prawa strona nagłówka: Powitanie delegacji + przycisk Replay -->
-                <div class="flex flex-wrap items-center justify-center gap-1.5 text-[11px] font-medium text-gold-100/90">
-                    <span class="px-2 py-0.5 rounded bg-royal-950/70 border border-gold-400/20" title="USA & UK">🇺🇸🇬🇧 Welcome</span>
-                    <span class="px-2 py-0.5 rounded bg-royal-950/70 border border-gold-400/20" title="Portugal">🇵🇹 Bem-vindo</span>
-                    <span class="px-2 py-0.5 rounded bg-royal-950/70 border border-gold-400/20" title="Turkey">🇹🇷 Hoş Geldiniz</span>
-                    <span class="px-2 py-0.5 rounded bg-royal-950/70 border border-gold-400/20" title="Germany">🇩🇪 Willkommen</span>
-                    <button onclick="replayPortal()" title="Replay Portal Intro" class="ml-1 px-2.5 py-0.5 rounded bg-gold-400/15 hover:bg-gold-400 hover:text-royal-950 text-gold-300 border border-gold-400/40 font-display font-bold transition-colors cursor-pointer">
-                        ✨ Portal
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <!-- ========================================== -->
-        <!-- GŁÓWNA PRZESTRZEŃ ROBOCZA: LEWA vs PRAWA   -->
-        <!-- ========================================== -->
-        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-0">
-
-            <!-- ====================================== -->
-            <!-- LEWA KOLUMNA: 4-DNIOWY KALENDARZ       -->
-            <!-- ====================================== -->
-            <section class="lg:col-span-7 dashboard-panel rounded-2xl p-4 sm:p-5 flex flex-col min-h-[460px] lg:min-h-0">
-                
-                <!-- Nagłówek karty kalendarza + Zakładki 4 dni -->
-                <div class="shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 mb-3 border-b border-gold-400/20">
-                    <div>
-                        <h2 class="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-gold-400 shadow-[0_0_8px_#eab642]"></span>
-                            4-Day Summit Planner
-                        </h2>
-                        <p id="day-subtitle" class="text-xs text-gold-300/80 mt-0.5">Main Summit Day • Office 3rd Floor</p>
+                        <p id="day-subtitle" class="text-xs text-gold-300/85 mt-0.5">Wednesday • DAT TECH SUMMIT Day 1 & Arcade Bee</p>
                     </div>
 
-                    <!-- Przyciski przełączające dni (Mon - Thu) -->
-                    <div class="grid grid-cols-4 gap-1 bg-royal-950/80 p-1 rounded-xl border border-gold-400/25">
-                        <button onclick="selectDay('mon')" id="tab-mon" class="day-tab px-3 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">
+                    <!-- MON - THU Tabs -->
+                    <div class="grid grid-cols-4 gap-1.5 bg-royal-950/85 p-1 rounded-xl border border-gold-400/25">
+                        <button onclick="selectDay('mon')" id="tab-mon" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">
                             MON
                         </button>
-                        <button onclick="selectDay('tue')" id="tab-tue" class="day-tab px-3 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        <button onclick="selectDay('tue')" id="tab-tue" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">
                             TUE
                         </button>
-                        <button onclick="selectDay('wed')" id="tab-wed" class="day-tab px-3 py-1.5 rounded-lg font-display text-xs font-bold transition-all bg-gradient-to-r from-gold-400 to-gold-500 text-royal-950 shadow cursor-pointer">
+                        <button onclick="selectDay('wed')" id="tab-wed" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all bg-gradient-to-r from-gold-400 to-gold-500 text-royal-950 shadow cursor-pointer">
                             WED
                         </button>
-                        <button onclick="selectDay('thu')" id="tab-thu" class="day-tab px-3 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        <button onclick="selectDay('thu')" id="tab-thu" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">
                             THU
                         </button>
                     </div>
                 </div>
 
-                <!-- Nagłówki kolumn tabeli kalendarza -->
-                <div class="shrink-0 grid grid-cols-12 gap-2 px-3 py-1.5 text-[11px] font-display font-bold uppercase tracking-wider text-gold-300/80 bg-royal-950/50 rounded-lg mb-2">
-                    <div class="col-span-3 sm:col-span-2">Time</div>
-                    <div class="col-span-5 sm:col-span-6">Activity</div>
-                    <div class="col-span-4 sm:col-span-4 text-right sm:text-left">Place</div>
+                <!-- Column Headers (Hidden on mobile where stacked card rows prevent any text overlap) -->
+                <div class="hidden sm:grid shrink-0 grid-cols-12 gap-4 px-4 py-2 text-[11px] font-display font-bold uppercase tracking-wider text-gold-300/85 bg-royal-950/55 rounded-xl mb-2">
+                    <div class="col-span-3">Time</div>
+                    <div class="col-span-5">Activity</div>
+                    <div class="col-span-4">Room / Place</div>
                 </div>
 
-                <!-- Lista wydarzeń wybranego dnia (przewijana wewnętrznie) -->
-                <div id="schedule-container" class="flex-1 overflow-y-auto custom-scroll pr-1 space-y-1.5">
-                    <!-- Wypełniane dynamicznie przez JavaScript -->
+                <!-- Scrollable Day Events Container -->
+                <div id="schedule-container" class="flex-1 overflow-y-auto custom-scroll pr-1 space-y-2">
+                    <!-- Populated dynamically via JavaScript -->
                 </div>
             </section>
 
             <!-- ====================================== -->
-            <!-- PRAWA KOLUMNA: INFO, MAPY, HOTEL, 112  -->
+            <!-- RIGHT COLUMN: ESSENTIAL INFO & KRAKÓW  -->
             <!-- ====================================== -->
-            <aside class="lg:col-span-5 flex flex-col gap-3.5 min-h-0">
+            <aside class="xl:col-span-5 flex flex-col gap-3.5 min-h-0 overflow-y-auto xl:overflow-visible custom-scroll">
 
-                <!-- 1. POLSKI NUMER ALARMOWY 112 -->
-                <div class="shrink-0 dashboard-panel rounded-2xl px-4 py-3 border-l-4 border-l-gold-400 flex items-center justify-between gap-3">
+                <!-- 1. POLISH EMERGENCY NUMBER 112 -->
+                <div class="shrink-0 dashboard-panel rounded-2xl px-4 sm:px-5 py-3 border-l-4 border-l-gold-400 flex items-center justify-between gap-3">
                     <div class="flex items-center gap-3">
                         <div class="w-9 h-9 rounded-xl bg-red-500/15 border border-red-400/40 flex items-center justify-center text-red-400 shrink-0">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -320,7 +273,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="font-display text-sm font-bold text-white">Emergency Number (Poland)</h3>
+                            <h3 class="font-display text-sm font-bold text-white">Emergency Number in Poland</h3>
                             <p class="text-[11px] text-slate-300">24/7 Police, Medical & Fire • English-speaking operators</p>
                         </div>
                     </div>
@@ -329,27 +282,26 @@
                     </a>
                 </div>
 
-                <!-- 2. LOKALIZACJA BIURA + MINIATURA MAPY -->
-                <div class="flex-1 dashboard-panel rounded-2xl p-4 flex flex-col min-h-[210px]">
-                    <div class="shrink-0 flex items-start justify-between gap-2 mb-2.5">
+                <!-- 2. SUMMIT VENUE (SIMPLIFIED: ONLY LABEL + ADDRESS + MAP) -->
+                <div class="flex-1 dashboard-panel rounded-2xl p-4 sm:p-5 flex flex-col min-h-[180px]">
+                    <div class="shrink-0 flex items-center justify-between gap-3 mb-2.5">
                         <div>
-                            <span class="text-[10px] font-display font-bold uppercase tracking-widest text-gold-400">Summit Venue • DAT Office</span>
-                            <h3 class="font-display text-base font-bold text-white leading-tight">Aleja Powstańców Wielkopolskich 13C</h3>
-                            <p class="text-xs text-slate-300">30-707 Kraków • <span class="text-gold-300">Camomile + Hibiscus + Ginger + Garlic</span></p>
+                            <span class="text-[10px] font-display font-bold uppercase tracking-widest text-gold-400">Summit Venue</span>
+                            <h3 class="font-display text-base font-bold text-white leading-tight mt-0.5">Aleja Powstańców Wielkopolskich 13C</h3>
                         </div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Aleja+Powstańców+Wielkopolskich+13C,+Kraków" 
                            target="_blank" 
                            rel="noopener noreferrer"
-                           class="shrink-0 bg-royal-950/90 hover:bg-gold-400 text-gold-300 hover:text-royal-950 border border-gold-400/40 text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition-colors flex items-center gap-1">
-                            <span>Google Maps</span>
+                           class="shrink-0 bg-royal-950/90 hover:bg-gold-400 text-gold-300 hover:text-royal-950 border border-gold-400/40 text-[11px] font-semibold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                            <span>Maps</span>
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
                         </a>
                     </div>
 
-                    <!-- Miniatura mapy dopasowana kolorystycznie -->
-                    <div class="relative flex-1 rounded-xl overflow-hidden border border-gold-400/30 min-h-[120px]">
+                    <!-- Dark-Styled Embedded Map Thumbnail -->
+                    <div class="relative flex-1 rounded-xl overflow-hidden border border-gold-400/30 min-h-[100px]">
                         <iframe 
-                            title="DAT Office Kraków Map"
+                            title="Summit Venue Kraków Map"
                             class="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[95%] opacity-90 hover:opacity-100 transition-opacity"
                             loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"
@@ -358,8 +310,8 @@
                     </div>
                 </div>
 
-                <!-- 3. HOTEL SHERATON GRAND KRAKÓW -->
-                <div class="shrink-0 dashboard-panel rounded-2xl p-4 relative overflow-hidden">
+                <!-- 3. SHERATON GRAND KRAKOW HOTEL -->
+                <div class="shrink-0 dashboard-panel rounded-2xl p-4 sm:px-5 relative overflow-hidden">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="flex items-start gap-3">
                             <div class="w-9 h-9 rounded-xl bg-gold-400/15 border border-gold-400/40 flex items-center justify-center text-gold-300 shrink-0 mt-0.5">
@@ -387,15 +339,51 @@
                     </div>
                 </div>
 
+                <!-- 4. DISCOVER KRAKÓW (4 HIGHLIGHTS FOR FIRST-TIME VISITORS) -->
+                <div class="shrink-0 dashboard-panel rounded-2xl p-4 sm:px-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-display text-sm font-bold text-gold-300 flex items-center gap-2 uppercase tracking-wider">
+                            <span>✦</span> Discover Kraków • First-Timer Guide
+                        </h3>
+                        <span class="text-[10px] text-slate-400">Local Tips</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <!-- Fact 1 -->
+                        <div class="bg-royal-950/60 border border-gold-400/15 rounded-xl p-2.5">
+                            <p class="font-display font-bold text-gold-100 mb-0.5">🐉 Wawel Dragon</p>
+                            <p class="text-[11px] text-slate-300 leading-relaxed">Right next to Sheraton Grand stands Wawel Castle—and a fire-breathing dragon statue at its foot.</p>
+                        </div>
+
+                        <!-- Fact 2 -->
+                        <div class="bg-royal-950/60 border border-gold-400/15 rounded-xl p-2.5">
+                            <p class="font-display font-bold text-gold-100 mb-0.5">🎺 St. Mary's Trumpet Call</p>
+                            <p class="text-[11px] text-slate-300 leading-relaxed">Every hour on the Main Square, a live bugler plays the <em>Hejnał</em> melody from the higher tower.</p>
+                        </div>
+
+                        <!-- Fact 3 -->
+                        <div class="bg-royal-950/60 border border-gold-400/15 rounded-xl p-2.5">
+                            <p class="font-display font-bold text-gold-100 mb-0.5">💳 Cashless & PLN</p>
+                            <p class="text-[11px] text-slate-300 leading-relaxed">Currency is Polish Złoty (PLN), not Euro. Contactless cards, Apple Pay & Google Pay work everywhere.</p>
+                        </div>
+
+                        <!-- Fact 4 -->
+                        <div class="bg-royal-950/60 border border-gold-400/15 rounded-xl p-2.5">
+                            <p class="font-display font-bold text-gold-100 mb-0.5">🥨 Local Flavors</p>
+                            <p class="text-[11px] text-slate-300 leading-relaxed">Try a fresh braided <em>Obwarzanek</em> bagel from a street cart and traditional handmade <em>Pierogi</em>.</p>
+                        </div>
+                    </div>
+                </div>
+
             </aside>
         </main>
     </div>
 
     <!-- ========================================== -->
-    <!-- SKRYPTY: 4-DNIOWY PLANER, PORTAL, GWIAZDY  -->
+    <!-- SCRIPTS: 4-DAY PLANNER, PORTAL, STARS      -->
     <!-- ========================================== -->
     <script>
-        // Dane 4-dniowego harmonogramu (Monday - Thursday) — wyłącznie nazwy sal bez numerów pięter
+        // Complete 4-Day Schedule (Room names only, no floor numbers)
         const summitSchedule = {
             mon: {
                 subtitle: "Monday • Leadership Arrival & Welcome Dinner",
@@ -416,11 +404,11 @@
                 events: [
                     { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", type: "hotel" },
                     { time: "07:45 – 08:15", activity: "Transport to the office (12–14 ppl)", place: "Bus", type: "transport" },
-                    { time: "08:15 – 09:00", activity: "Morning Coffee & Prep", place: "DAT Office", type: "food" },
-                    { time: "09:00 – 12:30", activity: "Leaders Meeting", place: "Sofia Conference Room", type: "meeting" },
+                    { time: "08:15 – 09:00", activity: "Morning Coffee & Prep", place: "Coffee Area", type: "food" },
+                    { time: "09:00 – 12:30", activity: "Leaders Meeting", place: "KR-3-24-2 (18) – Sofia Conference Room", type: "meeting" },
                     { time: "12:30 – 14:00", activity: "Lunch", place: "Ciao Bella Restaurant", type: "food" },
                     { time: "14:00 – 17:30", activity: "Dry Run + Decoration", place: "Camomile + Hibiscus + Ginger + Garlic", type: "meeting" },
-                    { time: "17:30 – 18:00", activity: "Transport to the hotel (12–14 ppl)", place: "Bus", type: "transport" },
+                    { time: "17:30", activity: "Transport to the hotel (12–14 ppl)", place: "Bus", type: "transport" },
                     { time: "18:30 – 19:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus", type: "transport" },
                     { time: "19:00 – 22:00", activity: "Dinner", place: "Ziyad Castle", type: "social" },
                     { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", type: "transport" }
@@ -437,10 +425,10 @@
                     { time: "11:30 – 13:00", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", type: "highlight" },
                     { time: "13:00 – 14:00", activity: "Lunch Terrace", place: "Camomile + Hibiscus + Ginger + Garlic", type: "food" },
                     { time: "14:00 – 16:30", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", type: "highlight" },
-                    { time: "14:00", activity: "Cake for participants • Photo booth", place: "Camomile + Hibiscus + Ginger + Garlic", type: "social" },
+                    { time: "14:00", activity: "Cake for participants • Photo booth", place: "Main Hall", type: "social" },
                     { time: "16:30 – 17:00", activity: "Group Photo", place: "Camomile + Hibiscus + Ginger + Garlic", type: "social" },
                     { time: "17:30 – 18:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus", type: "transport" },
-                    { time: "19:00 – 22:00", activity: "Dinner & Team Activity", place: "Arcade Bee (games, arcade, darts)", type: "social" },
+                    { time: "19:00 – 22:00", activity: "Dinner & Team Activity", place: "Arcade Bee - games, arcade, darts", type: "social" },
                     { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", type: "transport" }
                 ]
             },
@@ -466,10 +454,10 @@
 
         function selectDay(dayKey) {
             document.querySelectorAll('.day-tab').forEach(btn => {
-                btn.className = 'day-tab px-3 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer';
+                btn.className = 'day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer';
             });
             const activeBtn = document.getElementById(`tab-${dayKey}`);
-            activeBtn.className = 'day-tab px-3 py-1.5 rounded-lg font-display text-xs font-bold transition-all bg-gradient-to-r from-gold-400 to-gold-500 text-royal-950 shadow cursor-pointer';
+            activeBtn.className = 'day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all bg-gradient-to-r from-gold-400 to-gold-500 text-royal-950 shadow cursor-pointer';
 
             const dayData = summitSchedule[dayKey];
             document.getElementById('day-subtitle').textContent = dayData.subtitle;
@@ -477,20 +465,25 @@
             const container = document.getElementById('schedule-container');
             container.innerHTML = dayData.events.map(item => {
                 const isHighlight = item.type === 'highlight';
-                const rowBg = isHighlight 
-                    ? 'bg-gradient-to-r from-gold-400/15 to-royal-800/40 border-gold-400/40' 
-                    : 'bg-royal-950/45 border-white/5 hover:border-gold-400/25';
-                const titleColor = isHighlight ? 'text-gold-300 font-bold' : 'text-white font-medium';
+                const rowBg = isHighlight
+                    ? 'bg-gradient-to-r from-gold-400/15 to-royal-800/45 border-gold-400/40'
+                    : 'bg-royal-950/50 border-white/5 hover:border-gold-400/25';
+                const titleColor = isHighlight ? 'text-gold-300 font-bold' : 'text-white font-semibold';
 
                 return `
-                    <div class="grid grid-cols-12 gap-2 items-center px-3 py-2 rounded-xl border ${rowBg} transition-colors">
-                        <div class="col-span-3 sm:col-span-2 text-xs font-semibold text-gold-400 whitespace-nowrap">
-                            ${item.time}
+                    <div class="flex flex-col sm:grid sm:grid-cols-12 gap-1.5 sm:gap-4 sm:items-center px-3.5 sm:px-4 py-2.5 rounded-xl border ${rowBg} transition-colors">
+                        <div class="sm:col-span-3 flex items-center justify-between sm:block">
+                            <span class="inline-block text-xs font-bold text-gold-400 bg-gold-400/10 sm:bg-transparent px-2 py-0.5 sm:p-0 rounded-md tracking-wide whitespace-nowrap">
+                                ${item.time}
+                            </span>
+                            <span class="sm:hidden text-[11px] text-gold-100/80 font-medium text-right ml-3">
+                                ${item.place}
+                            </span>
                         </div>
-                        <div class="col-span-5 sm:col-span-6 text-xs sm:text-sm ${titleColor} leading-snug">
+                        <div class="sm:col-span-5 text-sm ${titleColor} leading-snug">
                             ${item.activity}
                         </div>
-                        <div class="col-span-4 sm:col-span-4 text-[11px] sm:text-xs text-slate-300 text-right sm:text-left leading-tight">
+                        <div class="hidden sm:block sm:col-span-4 text-xs text-slate-300 leading-snug">
                             ${item.place}
                         </div>
                     </div>
@@ -500,134 +493,41 @@
             container.scrollTop = 0;
         }
 
-        // System gwiezdnego pyłu (Stardust Burst przy otwieraniu księgi)
-        const stardustCanvas = document.getElementById('stardust-canvas');
-        const sdCtx = stardustCanvas.getContext('2d');
-        let stardustParticles = [];
-        let stardustAnimId = null;
+        // Original Mystical Portal Curtain Open / Replay
+        let portalTimer = null;
 
-        function resizeStardust() {
-            stardustCanvas.width = window.innerWidth;
-            stardustCanvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeStardust);
-        resizeStardust();
-
-        function spawnStardustBurst() {
-            stardustParticles = [];
-            const centerX = stardustCanvas.width / 2;
-            const centerY = stardustCanvas.height / 2;
-
-            for (let i = 0; i < 160; i++) {
-                // Cząsteczki rozchodzą się ze środkowego grzbietu księgi na boki
-                const spreadY = (Math.random() - 0.5) * stardustCanvas.height * 0.85;
-                const angle = (Math.random() - 0.5) * Math.PI * 0.9 + (Math.random() < 0.5 ? 0 : Math.PI);
-                const speed = Math.random() * 7 + 1.8;
-
-                stardustParticles.push({
-                    x: centerX + (Math.random() - 0.5) * 24,
-                    y: centerY + spreadY,
-                    vx: Math.cos(angle) * speed,
-                    vy: Math.sin(angle) * speed - (Math.random() * 1.5),
-                    size: Math.random() * 3.2 + 1,
-                    alpha: 1,
-                    decay: Math.random() * 0.012 + 0.007,
-                    twinkle: Math.random() * Math.PI * 2,
-                    isStar: Math.random() > 0.65
-                });
-            }
-
-            if (!stardustAnimId) {
-                animateStardust();
-            }
+        function playPortalIntro() {
+            if (portalTimer) clearTimeout(portalTimer);
+            const curtain = document.getElementById('intro-curtain');
+            curtain.classList.remove('opened');
+            portalTimer = setTimeout(() => {
+                curtain.classList.add('opened');
+            }, 1350);
         }
 
-        function animateStardust() {
-            sdCtx.clearRect(0, 0, stardustCanvas.width, stardustCanvas.height);
-
-            for (let i = stardustParticles.length - 1; i >= 0; i--) {
-                const p = stardustParticles[i];
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vx *= 0.975;
-                p.vy *= 0.975;
-                p.vy += 0.03; // delikatne opadanie pyłu
-                p.alpha -= p.decay;
-                p.twinkle += 0.18;
-
-                if (p.alpha <= 0) {
-                    stardustParticles.splice(i, 1);
-                    continue;
-                }
-
-                const currentAlpha = Math.max(0, p.alpha * (0.65 + 0.35 * Math.sin(p.twinkle)));
-                sdCtx.save();
-                sdCtx.globalAlpha = currentAlpha;
-                sdCtx.shadowBlur = 12;
-                sdCtx.shadowColor = '#eab642';
-
-                if (p.isStar) {
-                    // Czteroramienna iskra gwiazdy
-                    sdCtx.fillStyle = '#fff8db';
-                    sdCtx.beginPath();
-                    const s = p.size * 1.9;
-                    sdCtx.moveTo(p.x, p.y - s);
-                    sdCtx.quadraticCurveTo(p.x, p.y, p.x + s, p.y);
-                    sdCtx.quadraticCurveTo(p.x, p.y, p.x, p.y + s);
-                    sdCtx.quadraticCurveTo(p.x, p.y, p.x - s, p.y);
-                    sdCtx.quadraticCurveTo(p.x, p.y, p.x, p.y - s);
-                    sdCtx.fill();
-                } else {
-                    // Złota drobinka pyłu
-                    sdCtx.fillStyle = '#f7d87c';
-                    sdCtx.beginPath();
-                    sdCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    sdCtx.fill();
-                }
-                sdCtx.restore();
-            }
-
-            if (stardustParticles.length > 0) {
-                stardustAnimId = requestAnimationFrame(animateStardust);
-            } else {
-                stardustAnimId = null;
-            }
-        }
-
-        let introTimers = [];
-
-        function playBookIntro() {
-            introTimers.forEach(t => clearTimeout(t));
-            introTimers = [];
-
-            const overlay = document.getElementById('book-intro-overlay');
-            overlay.classList.remove('fade-out', 'book-open');
-
-            // Chwila na prezentację zamkniętej okładki, następnie otwarcie 3D + wyrzut gwiezdnego pyłu
-            introTimers.push(setTimeout(() => {
-                overlay.classList.add('book-open');
-                spawnStardustBurst();
-            }, 650));
-
-            // Płynne odsłonięcie głównego dashboardu po rozwarciu okładek
-            introTimers.push(setTimeout(() => {
-                overlay.classList.add('fade-out');
-            }, 1750));
-        }
-
-        function replayBookIntro() {
-            playBookIntro();
+        function replayPortalIntro() {
+            playPortalIntro();
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             selectDay('wed');
-            playBookIntro();
+            playPortalIntro();
         });
 
-        // Tło z siecią konstelacji gwiazd
+        // Interactive Constellation Starfield Background
         const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
         let stars = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -636,7 +536,7 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        for (let i = 0; i < 65; i++) {
+        for (let i = 0; i < 75; i++) {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -657,22 +557,37 @@
                 if (s1.x < 0 || s1.x > canvas.width) s1.vx *= -1;
                 if (s1.y < 0 || s1.y > canvas.height) s1.vy *= -1;
 
+                // Connect nearby stars with golden constellation lines
                 for (let j = i + 1; j < stars.length; j++) {
                     const s2 = stars[j];
                     const dist = Math.hypot(s1.x - s2.x, s1.y - s2.y);
-                    if (dist < 135) {
+                    if (dist < 140) {
                         ctx.beginPath();
                         ctx.moveTo(s1.x, s1.y);
                         ctx.lineTo(s2.x, s2.y);
-                        ctx.strokeStyle = `rgba(234, 182, 66, ${(1 - dist / 135) * 0.22})`;
+                        ctx.strokeStyle = `rgba(234, 182, 66, ${(1 - dist / 140) * 0.22})`;
                         ctx.lineWidth = 0.7;
                         ctx.stroke();
                     }
                 }
 
+                // Subtle cursor constellation interaction
+                if (mouse.x !== null && mouse.y !== null) {
+                    const mDist = Math.hypot(s1.x - mouse.x, s1.y - mouse.y);
+                    if (mDist < 170) {
+                        ctx.beginPath();
+                        ctx.moveTo(s1.x, s1.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(247, 216, 124, ${(1 - mDist / 170) * 0.35})`;
+                        ctx.lineWidth = 0.85;
+                        ctx.stroke();
+                    }
+                }
+
+                // Draw star particle
                 ctx.beginPath();
                 ctx.arc(s1.x, s1.y, s1.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 246, 207, 0.75)';
+                ctx.fillStyle = 'rgba(255, 246, 207, 0.78)';
                 ctx.fill();
             }
 
