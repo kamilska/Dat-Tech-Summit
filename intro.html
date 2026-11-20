@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FY 27 DAT Tech Summit | Kraków</title>
+
+    <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Custom Palette & Typography -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        abyss: {
+                            950: '#030816',
+                            900: '#07112b',
+                            800: '#0c1c42',
+                            700: '#132a61',
+                        },
+                        gold: {
+                            100: '#fff9e6',
+                            200: '#fcedbd',
+                            300: '#f5d782',
+                            400: '#eab642',
+                            500: '#cf951d',
+                            600: '#9e6d0b',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            background-color: #030816;
+            color: #f8fafc;
+        }
+
+        /* Deep royal night-blue background with subtle champagne-gold glow */
+        .bg-editorial-cosmos {
+            background:
+                radial-gradient(circle at 18% 12%, rgba(19, 42, 97, 0.55) 0%, transparent 48%),
+                radial-gradient(circle at 85% 88%, rgba(234, 182, 66, 0.08) 0%, transparent 45%),
+                #030816;
+        }
+
+        /* Metallic champagne-gold foil gradient for main title */
+        .text-gold-foil {
+            background: linear-gradient(180deg, #fff9e6 0%, #f5d782 48%, #cf951d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Architectural editorial hairline-grid frames */
+        .editorial-frame {
+            border: 1px solid rgba(234, 182, 66, 0.22);
+            background: rgba(7, 17, 43, 0.62);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .editorial-cell {
+            border-color: rgba(234, 182, 66, 0.18);
+        }
+
+        /* Concentric rotating ring portal opening animation */
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes spinReverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.65; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.06); }
+        }
+
+        .ring-outer { animation: spinSlow 18s linear infinite; }
+        .ring-inner { animation: spinReverse 12s linear infinite; }
+        .portal-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+        /* Fairy-tale twinkling stars, glowing firefly orbs, and floating halos */
+        @keyframes fairyTwinkle {
+            0%, 100% {
+                opacity: 0.22;
+                transform: scale(0.75) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.25) rotate(22deg);
+            }
+        }
+
+        @keyframes fireflyDrift {
+            0%, 100% {
+                transform: translate3d(0px, 0px, 0px) scale(0.85);
+                opacity: 0.35;
+            }
+            33% {
+                transform: translate3d(8px, -12px, 0px) scale(1.18);
+                opacity: 0.95;
+            }
+            66% {
+                transform: translate3d(-7px, -6px, 0px) scale(0.95);
+                opacity: 0.65;
+            }
+        }
+
+        @keyframes haloPulse {
+            0%, 100% {
+                transform: scale(0.94);
+                opacity: 0.25;
+            }
+            50% {
+                transform: scale(1.08);
+                opacity: 0.65;
+            }
+        }
+
+        @keyframes orbitSparkle {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .fairy-star {
+            animation: fairyTwinkle var(--twinkle-dur, 2.8s) ease-in-out var(--twinkle-delay, 0s) infinite;
+        }
+
+        .fairy-orb {
+            animation: fireflyDrift var(--drift-dur, 5.5s) ease-in-out var(--drift-delay, 0s) infinite;
+        }
+
+        .fairy-halo {
+            animation: haloPulse var(--halo-dur, 4.8s) ease-in-out var(--halo-delay, 0s) infinite;
+        }
+
+        .sparkle-orbit {
+            animation: orbitSparkle var(--orbit-dur, 22s) linear infinite;
+            transform-origin: center;
+        }
+
+        #intro-curtain {
+            transition: opacity 0.95s cubic-bezier(0.77, 0, 0.175, 1), transform 1.15s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.15s;
+        }
+
+        #intro-curtain.opened {
+            opacity: 0;
+            transform: scale(1.14);
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Animated audio equalizer bars */
+        @keyframes eqPulse {
+            0%, 100% { height: 4px; }
+            50% { height: 14px; }
+        }
+
+        .eq-bar {
+            width: 2.5px;
+            background-color: #eab642;
+            border-radius: 99px;
+            height: 4px;
+        }
+
+        .eq-playing .eq-bar:nth-child(1) { animation: eqPulse 0.65s ease-in-out infinite; }
+        .eq-playing .eq-bar:nth-child(2) { animation: eqPulse 0.45s ease-in-out infinite 0.15s; }
+        .eq-playing .eq-bar:nth-child(3) { animation: eqPulse 0.75s ease-in-out infinite 0.3s; }
+        .eq-playing .eq-bar:nth-child(4) { animation: eqPulse 0.55s ease-in-out infinite 0.1s; }
+
+        /* Subtle custom scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(234, 182, 66, 0.3); border-radius: 999px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(234, 182, 66, 0.6); }
+    </style>
+</head>
+<body class="bg-editorial-cosmos min-h-screen lg:h-screen lg:overflow-hidden flex flex-col relative selection:bg-gold-400 selection:text-abyss-950">
+
+    <!-- Concentric Rotating Ring Portal Intro Curtain with Fairy-Tale Starlight & Golden Dust -->
+    <div id="intro-curtain" onclick="enterSummitWithAudio()" class="fixed inset-0 z-50 bg-abyss-950 flex flex-col items-center justify-center overflow-hidden p-4 cursor-pointer">
+        <!-- Shimmering Golden Stardust & Fairy Dust Canvas -->
+        <canvas id="fairy-dust-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+        <!-- Golden ambient glow & floating golden halos -->
+        <div class="absolute w-96 h-96 bg-gold-500/15 rounded-full blur-3xl portal-glow pointer-events-none z-10"></div>
+        <div class="fairy-halo absolute w-[26rem] h-[26rem] sm:w-[34rem] sm:h-[34rem] rounded-full border border-gold-300/20 pointer-events-none z-10" style="--halo-dur: 5.2s; --halo-delay: 0s;"></div>
+        <div class="fairy-halo absolute w-[32rem] h-[32rem] sm:w-[44rem] sm:h-[44rem] rounded-full border border-dashed border-gold-400/15 pointer-events-none z-10" style="--halo-dur: 6.4s; --halo-delay: 1.4s;"></div>
+
+        <!-- Delicate Fairy-Tale Filigree Starlight Accents & Orbiting Sparkles -->
+        <div class="relative z-10 w-[330px] h-[330px] sm:w-[460px] sm:h-[460px] md:w-[540px] md:h-[540px] flex items-center justify-center pointer-events-none">
+            <svg class="w-full h-full overflow-visible" viewBox="0 0 560 560" fill="none">
+                <!-- Orbiting ring of tiny fairy sparkles & star dots -->
+                <g class="sparkle-orbit" style="--orbit-dur: 28s;">
+                    <circle cx="280" cy="36" r="2.2" fill="#fff9e6" opacity="0.85"/>
+                    <circle cx="524" cy="280" r="2.5" fill="#f5d782" opacity="0.8"/>
+                    <circle cx="280" cy="524" r="2.2" fill="#fff9e6" opacity="0.85"/>
+                    <circle cx="36" cy="280" r="2.5" fill="#f5d782" opacity="0.8"/>
+
+                    <path d="M452,108 L454,113 L459,115 L454,117 L452,122 L450,117 L445,115 L450,113 Z" fill="#fff9e6" opacity="0.85"/>
+                    <path d="M108,452 L110,457 L115,459 L110,461 L108,466 L106,461 L101,459 L106,457 Z" fill="#fff9e6" opacity="0.85"/>
+                    <path d="M452,452 L453.5,455.5 L457,457 L453.5,458.5 L452,462 L450.5,458.5 L447,457 L450.5,455.5 Z" fill="#eab642" opacity="0.9"/>
+                    <path d="M108,108 L109.5,111.5 L113,113 L109.5,114.5 L108,118 L106.5,114.5 L103,113 L106.5,111.5 Z" fill="#eab642" opacity="0.9"/>
+                </g>
+
+                <!-- Delicate static filigree star bursts around the portal -->
+                <g class="fairy-star" style="--twinkle-dur: 2.6s; --twinkle-delay: 0.2s; transform-origin: 120px 140px;">
+                    <path d="M120,128 L122.5,137.5 L132,140 L122.5,142.5 L120,152 L117.5,142.5 L108,140 L117.5,137.5 Z" fill="#fff9e6"/>
+                </g>
+                <g class="fairy-star" style="--twinkle-dur: 3.2s; --twinkle-delay: 0.9s; transform-origin: 445px 150px;">
+                    <path d="M445,139 L447,148 L456,150 L447,152 L445,161 L443,152 L434,150 L443,148 Z" fill="#f5d782"/>
+                </g>
+                <g class="fairy-star" style="--twinkle-dur: 2.9s; --twinkle-delay: 1.5s; transform-origin: 135px 420px;">
+                    <path d="M135,410 L137,418 L145,420 L137,422 L135,430 L133,422 L125,420 L133,418 Z" fill="#f5d782"/>
+                </g>
+                <g class="fairy-star" style="--twinkle-dur: 3.5s; --twinkle-delay: 0.5s; transform-origin: 430px 415px;">
+                    <path d="M430,403 L432.5,412.5 L442,415 L432.5,417.5 L430,427 L427.5,417.5 L418,415 L427.5,412.5 Z" fill="#fff9e6"/>
+                </g>
+                <g class="fairy-star" style="--twinkle-dur: 2.3s; --twinkle-delay: 1.2s; transform-origin: 280px 76px;">
+                    <path d="M280,68 L281.8,74.2 L288,76 L281.8,77.8 L280,84 L278.2,77.8 L272,76 L278.2,74.2 Z" fill="#fff9e6"/>
+                </g>
+                <g class="fairy-star" style="--twinkle-dur: 3.1s; --twinkle-delay: 1.8s; transform-origin: 280px 484px;">
+                    <path d="M280,476 L281.8,482.2 L288,484 L281.8,485.8 L280,492 L278.2,485.8 L272,484 L278.2,482.2 Z" fill="#f5d782"/>
+                </g>
+            </svg>
+
+            <!-- Glowing Fairy Firefly Orbs around the portal -->
+            <span class="fairy-orb absolute top-10 left-12 w-2.5 h-2.5 rounded-full bg-gold-200 shadow-[0_0_12px_#f5d782]" style="--drift-dur: 4.8s; --drift-delay: 0.2s;"></span>
+            <span class="fairy-orb absolute top-20 right-10 w-2 h-2 rounded-full bg-gold-100 shadow-[0_0_10px_#fff9e6]" style="--drift-dur: 5.6s; --drift-delay: 1.1s;"></span>
+            <span class="fairy-orb absolute bottom-14 left-16 w-2 h-2 rounded-full bg-gold-300 shadow-[0_0_12px_#eab642]" style="--drift-dur: 6.1s; --drift-delay: 0.7s;"></span>
+            <span class="fairy-orb absolute bottom-20 right-14 w-3 h-3 rounded-full bg-gold-200 shadow-[0_0_14px_#f5d782]" style="--drift-dur: 5.1s; --drift-delay: 1.7s;"></span>
+            <span class="fairy-orb hidden sm:block absolute top-6 left-1/2 w-2 h-2 rounded-full bg-gold-100 shadow-[0_0_10px_#fff9e6]" style="--drift-dur: 4.5s; --drift-delay: 0.4s;"></span>
+            <span class="fairy-orb hidden sm:block absolute bottom-6 left-1/3 w-2.5 h-2.5 rounded-full bg-gold-300 shadow-[0_0_12px_#eab642]" style="--drift-dur: 5.9s; --drift-delay: 1.3s;"></span>
+            <span class="fairy-orb hidden sm:block absolute left-8 top-1/2 w-2 h-2 rounded-full bg-gold-200 shadow-[0_0_10px_#f5d782]" style="--drift-dur: 5.3s; --drift-delay: 0.8s;"></span>
+            <span class="fairy-orb hidden sm:block absolute right-8 top-1/2 w-2 h-2 rounded-full bg-gold-100 shadow-[0_0_10px_#fff9e6]" style="--drift-dur: 4.9s; --drift-delay: 1.9s;"></span>
+
+            <!-- Core Concentric Rotating Rings with Inscribed Polygons -->
+            <div class="absolute w-60 h-60 sm:w-64 sm:h-64 flex items-center justify-center">
+                <svg class="absolute inset-0 w-full h-full ring-outer text-gold-400/75" viewBox="0 0 200 200" fill="none">
+                    <circle cx="100" cy="100" r="92" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4"/>
+                    <circle cx="100" cy="100" r="84" stroke="currentColor" stroke-width="1.5"/>
+                    <polygon points="100,12 188,100 100,188 12,100" stroke="currentColor" stroke-width="0.75" opacity="0.65"/>
+                    <polygon points="38,38 162,38 162,162 38,162" stroke="currentColor" stroke-width="0.75" opacity="0.65"/>
+                </svg>
+                <svg class="absolute inset-6 w-48 h-48 sm:w-52 sm:h-52 ring-inner text-gold-300/85" viewBox="0 0 200 200" fill="none">
+                    <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="1" stroke-dasharray="10 5 2 5"/>
+                    <circle cx="100" cy="100" r="55" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <div class="relative z-10 text-center">
+                    <span class="font-display text-2xl sm:text-3xl font-extrabold tracking-widest text-gold-foil block">FY 27</span>
+                    <span class="font-display text-xs font-bold tracking-[0.28em] text-gold-100 mt-0.5 block">DAT SUMMIT</span>
+                </div>
+            </div>
+        </div>
+
+        <p class="relative z-10 font-display text-gold-300 tracking-[0.3em] text-xs uppercase animate-pulse mb-4 -mt-4 sm:-mt-8">
+            Unlocking the Summit...
+        </p>
+
+        <button type="button" onclick="event.stopPropagation(); enterSummitWithAudio();" class="relative z-10 px-5 py-2 rounded-full bg-gold-400/20 hover:bg-gold-400 text-gold-100 hover:text-abyss-950 border border-gold-400/50 font-display text-xs font-bold tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(234,182,66,0.3)] cursor-pointer">
+            Enter Summit &amp; Enable Audio
+        </button>
+    </div>
+
+    <!-- Interactive Golden Constellation Starfield Canvas -->
+    <canvas id="constellation-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-75"></canvas>
+
+    <!-- Hidden YouTube Audio Player (Adidas Originals - Star Wars Collection Imperial March Remix) -->
+    <div id="yt-audio-wrapper" class="fixed -left-[9999px] -top-[9999px] w-1 h-1 opacity-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div id="yt-player"></div>
+    </div>
+
+    <!-- Editorial Hairline-Grid Single-Screen Workspace -->
+    <div class="relative z-10 flex-1 flex flex-col max-w-[1640px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4 lg:h-full">
+
+        <!-- Top Header Bar -->
+        <header class="shrink-0 editorial-frame rounded-2xl px-4 sm:px-6 py-3 mb-3.5 flex flex-col md:flex-row items-center justify-between gap-3">
+
+            <!-- Left: Title + Date & Location -->
+            <div class="flex items-center gap-4 text-center md:text-left">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+                    <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-gold-foil">
+                        FY 27 DAT
+                    </h1>
+                    <span class="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+                        Tech Summit
+                    </span>
+                    <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-gold-300/90 border-l border-gold-400/30 pl-2.5">
+                        16–17 Dec 2026 • Kraków
+                    </span>
+                </div>
+            </div>
+
+            <!-- Center: Minimalist Gold Vector Skyline of Kraków Main Square -->
+            <div class="hidden xl:block w-64 h-8 opacity-85">
+                <svg viewBox="0 0 360 46" fill="none" class="w-full h-full">
+                    <line x1="0" y1="44" x2="360" y2="44" stroke="#eab642" stroke-width="1"/>
+                    <path d="M45,44 V26 L55,18 L65,26 V44 M65,44 V28 H195 V44 M72,44 V35 A4,4 0 0 1 80,35 V44 M88,44 V35 A4,4 0 0 1 96,35 V44 M104,44 V35 A4,4 0 0 1 112,35 V44 M120,44 V35 A4,4 0 0 1 128,35 V44 M136,44 V35 A4,4 0 0 1 144,35 V44 M152,44 V35 A4,4 0 0 1 160,35 V44 M168,44 V35 A4,4 0 0 1 176,35 V44 M184,44 V35 A4,4 0 0 1 192,35 V44" stroke="#f5d782" stroke-width="1"/>
+                    <path d="M122,28 V21 L130,14 L138,21 V28" stroke="#f5d782" stroke-width="1"/>
+                    <path d="M215,44 V14 L222,3 L229,14 V44 M229,44 V20 L235,11 L241,20 V44 M241,44 V28 H268 V44" stroke="#f5d782" stroke-width="1.1"/>
+                </svg>
+            </div>
+
+            <!-- Right: Audio Toggle with Equalizer + Replay Intro -->
+            <div class="flex items-center gap-2.5">
+                <button id="audio-toggle-btn" onclick="toggleAudio()" title="Adidas Originals - Star Wars Collection Imperial March Remix" class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-abyss-950/80 hover:bg-abyss-800 border border-gold-400/40 text-xs font-medium text-gold-200 transition-all cursor-pointer">
+                    <span id="audio-icon" class="text-gold-400 font-bold">▶</span>
+                    <span id="audio-label" class="hidden sm:inline tracking-wide">Imperial March</span>
+                    <span id="eq-indicator" class="flex items-end gap-0.5 h-3.5">
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                    </span>
+                </button>
+
+                <button onclick="replayPortal()" class="px-3.5 py-1.5 rounded-full bg-gold-400/15 hover:bg-gold-400 text-gold-300 hover:text-abyss-950 border border-gold-400/40 font-display text-xs font-bold tracking-wider transition-all cursor-pointer">
+                    ✨ Replay Intro
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Split-Screen Workspace (Left 7/12 vs Right 5/12) -->
+        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3.5 min-h-0">
+
+            <!-- Left Column (7/12): Schedule — 4-Day Summit Planner -->
+            <section class="lg:col-span-7 editorial-frame rounded-2xl flex flex-col min-h-[480px] lg:min-h-0 overflow-hidden">
+
+                <!-- Section Header + MON/TUE/WED/THU Tabs -->
+                <div class="shrink-0 px-4 sm:px-6 py-3.5 border-b editorial-cell flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <span class="font-display text-[11px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Schedule</span>
+                        <h2 class="font-display text-lg sm:text-xl font-bold text-white mt-0.5">4-Day Summit Planner</h2>
+                        <p id="day-subtitle" class="text-xs text-slate-300 mt-0.5">Wednesday • DAT TECH SUMMIT Day 1 &amp; Arcade Bee</p>
+                    </div>
+
+                    <!-- Day Switcher Tabs -->
+                    <div class="grid grid-cols-4 gap-1 bg-abyss-950/90 p-1 rounded-xl border border-gold-400/25">
+                        <button onclick="selectDay('mon')" id="tab-mon" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">MON</button>
+                        <button onclick="selectDay('tue')" id="tab-tue" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">TUE</button>
+                        <button onclick="selectDay('wed')" id="tab-wed" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all bg-gold-400 text-abyss-950 shadow cursor-pointer">WED</button>
+                        <button onclick="selectDay('thu')" id="tab-thu" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">THU</button>
+                    </div>
+                </div>
+
+                <!-- Desktop Column Headers -->
+                <div class="hidden sm:grid shrink-0 grid-cols-12 gap-4 px-6 py-2 text-[11px] font-display font-bold uppercase tracking-[0.18em] text-gold-300/80 border-b editorial-cell bg-abyss-950/40">
+                    <div class="col-span-3">Time</div>
+                    <div class="col-span-5">Activity</div>
+                    <div class="col-span-4">Room / Place</div>
+                </div>
+
+                <!-- Scrollable Itinerary Rows -->
+                <div id="schedule-container" class="flex-1 overflow-y-auto custom-scroll divide-y divide-gold-400/15">
+                    <!-- Populated dynamically via JavaScript -->
+                </div>
+            </section>
+
+            <!-- Right Column (5/12): Guest Compendium -->
+            <aside class="lg:col-span-5 flex flex-col gap-3.5 min-h-0">
+
+                <!-- Emergency in Poland (112) -->
+                <div class="shrink-0 editorial-frame rounded-2xl px-4 sm:px-5 py-3 flex items-center justify-between gap-3">
+                    <div>
+                        <span class="font-display text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Emergency in Poland</span>
+                        <h3 class="font-display text-sm sm:text-base font-bold text-white">Universal Emergency Line</h3>
+                        <p class="text-[11px] text-slate-300">24/7 Police, Ambulance &amp; Fire • English operators</p>
+                    </div>
+                    <a href="tel:112" class="shrink-0 bg-gold-400 hover:bg-gold-300 text-abyss-950 font-display font-extrabold text-xl px-4 py-1.5 rounded-xl transition-transform active:scale-95 shadow-[0_0_20px_rgba(234,182,66,0.3)]">
+                        112
+                    </a>
+                </div>
+
+                <!-- Summit Venue + Embedded Map -->
+                <div class="flex-1 editorial-frame rounded-2xl p-4 sm:p-5 flex flex-col min-h-[195px]">
+                    <div class="shrink-0 flex items-start justify-between gap-2 mb-2.5">
+                        <div>
+                            <span class="font-display text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Venue</span>
+                            <h3 class="font-display text-base font-bold text-white">Summit Venue</h3>
+                            <p class="text-xs text-slate-300 mt-0.5">Aleja Powstańców Wielkopolskich 13C</p>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Aleja+Powstańców+Wielkopolskich+13C,+Kraków"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="shrink-0 px-3 py-1.5 rounded-lg bg-abyss-950/90 hover:bg-gold-400 text-gold-300 hover:text-abyss-950 border border-gold-400/35 text-[11px] font-display font-bold tracking-wider transition-colors">
+                            Maps ↗
+                        </a>
+                    </div>
+
+                    <div class="relative flex-1 rounded-xl overflow-hidden border border-gold-400/25 min-h-[110px]">
+                        <iframe
+                            title="Summit Venue Map"
+                            class="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[95%] opacity-90 hover:opacity-100 transition-opacity"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="https://maps.google.com/maps?q=Aleja%20Powsta%C5%84c%C3%B3w%20Wielkopolskich%2013C,%20Krak%C3%B3w&t=&z=15&ie=UTF8&iwloc=&output=embed">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Accommodation (Sheraton Grand Krakow) -->
+                <div class="shrink-0 editorial-frame rounded-2xl px-4 sm:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <span class="font-display text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Accommodation</span>
+                        <h3 class="font-display text-base font-bold text-white">Sheraton Grand Krakow</h3>
+                        <p class="text-xs text-slate-300">ul. Powiśle 7 • Morning bus departs <strong class="text-gold-300">07:45</strong></p>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Sheraton+Grand+Krakow+Powiśle+7"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="shrink-0 inline-flex items-center justify-center px-3.5 py-2 rounded-xl bg-gold-400 hover:bg-gold-300 text-abyss-950 font-display font-bold text-xs tracking-wide transition-colors">
+                        Hotel Map ↗
+                    </a>
+                </div>
+
+                <!-- First Time in Kraków (4 Highlights) -->
+                <div class="shrink-0 editorial-frame rounded-2xl p-4 sm:px-5 sm:py-3.5">
+                    <span class="font-display text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase block mb-2">First Time in Kraków</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                        <div class="p-2.5 rounded-xl bg-abyss-950/60 border border-gold-400/15">
+                            <p class="font-display font-bold text-gold-300">🐉 Wawel Dragon</p>
+                            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Right next to Sheraton! Breathes real fire every few minutes by the Vistula River.</p>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-abyss-950/60 border border-gold-400/15">
+                            <p class="font-display font-bold text-gold-300">🎺 Hourly Bugle Call</p>
+                            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Played live every hour from St. Mary’s Basilica tower on Europe’s largest medieval square.</p>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-abyss-950/60 border border-gold-400/15">
+                            <p class="font-display font-bold text-gold-300">💳 Currency &amp; Cards</p>
+                            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Polish Złoty (PLN). Apple Pay, Google Pay &amp; cards work everywhere—no cash needed.</p>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-abyss-950/60 border border-gold-400/15">
+                            <p class="font-display font-bold text-gold-300">🥨 Local Must-Tries</p>
+                            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Grab a warm <em>Obwarzanek</em> bagel from blue street carts and traditional <em>Pierogi</em>.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts: 4-Day Planner, Fairy Stardust Portal, Auto-Audio, Constellation Canvas -->
+    <script>
+        // 1. 4-Day Summit Schedule (Room names only, no floor numbers)
+        const summitSchedule = {
+            mon: {
+                subtitle: "Monday • Leadership Arrival & Welcome Dinner",
+                events: [
+                    { time: "Morning", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
+                    { time: "10:00 – 12:30", activity: "Andy leadership meeting", place: "Stockholm + London", highlight: false },
+                    { time: "12:30 – 14:00", activity: "Lunch", place: "Ciao Bella Restaurant", highlight: false },
+                    { time: "14:00 – 17:00", activity: "Andy leadership meeting", place: "Stockholm + London", highlight: false },
+                    { time: "17:00", activity: "Transport to the hotel", place: "Taxi / Uber", highlight: false },
+                    { time: "18:00 – 18:30", activity: "Welcome drink", place: "Sheraton – Lobby Bar", highlight: false },
+                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (12 ppl)", place: "Dedicated Transfer", highlight: false },
+                    { time: "19:00 – 22:00", activity: "Dinner", place: "Unity Tower", highlight: true },
+                    { time: "22:00", activity: "Transport to the hotel (12 ppl)", place: "Dedicated Transfer", highlight: false }
+                ]
+            },
+            tue: {
+                subtitle: "Tuesday • Leaders Meeting, Dry Run & Ziyad Castle Dinner",
+                events: [
+                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
+                    { time: "07:45 – 08:15", activity: "Transport to the office (12–14 ppl)", place: "Bus", highlight: false },
+                    { time: "08:15 – 09:00", activity: "Morning Coffee & Prep", place: "Coffee Lounge", highlight: false },
+                    { time: "09:00 – 12:30", activity: "Leaders Meeting", place: "Sofia Conference Room", highlight: false },
+                    { time: "12:30 – 14:00", activity: "Lunch", place: "Ciao Bella Restaurant", highlight: false },
+                    { time: "14:00 – 17:30", activity: "Dry Run + Decoration", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "17:30", activity: "Transport to the hotel (12–14 ppl)", place: "Bus", highlight: false },
+                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus", highlight: false },
+                    { time: "19:00 – 22:00", activity: "Dinner", place: "Ziyad Castle", highlight: true },
+                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false }
+                ]
+            },
+            wed: {
+                subtitle: "Wednesday • DAT TECH SUMMIT Day 1 & Arcade Bee",
+                events: [
+                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
+                    { time: "07:45 – 08:15", activity: "Transport to the office (21–23 ppl)", place: "Bus", highlight: false },
+                    { time: "08:15 – 09:00", activity: "Gifts sharing (t-shirts, mugs, etc.)", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
+                    { time: "09:00 – 11:15", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
+                    { time: "11:15 – 11:30", activity: "Coffee Break", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "11:30 – 13:00", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
+                    { time: "13:00 – 14:00", activity: "Lunch Terrace", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "14:00 – 16:30", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
+                    { time: "14:00", activity: "Cake for participants • Photo booth", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "16:30 – 17:00", activity: "Group Photo", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "17:30 – 18:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus", highlight: false },
+                    { time: "19:00 – 22:00", activity: "Dinner & Team Activity", place: "Arcade Bee (games, arcade, darts)", highlight: true },
+                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false }
+                ]
+            },
+            thu: {
+                subtitle: "Thursday • DAT TECH SUMMIT Day 2 & Forum Dinner",
+                events: [
+                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
+                    { time: "07:45 – 08:15", activity: "Transport to the office (21–23 ppl)", place: "Bus", highlight: false },
+                    { time: "08:15 – 09:00", activity: "Morning Coffee", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "09:00 – 11:15", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
+                    { time: "11:15 – 11:30", activity: "Coffee Break", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "11:30 – 13:00", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
+                    { time: "13:00 – 14:00", activity: "Lunch Terrace", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "14:00 – 16:30", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
+                    { time: "16:30 – 17:00", activity: "Gift distribution (pens)", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "17:30 – 18:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false },
+                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus / walking distance", highlight: false },
+                    { time: "19:00 – 22:00", activity: "Closing Dinner", place: "Forum", highlight: true },
+                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus / walking distance", highlight: false }
+                ]
+            }
+        };
+
+        // Switch active schedule tab and render rows with mobile-safe spacing
+        function selectDay(dayKey) {
+            try {
+                document.querySelectorAll('.day-tab').forEach(btn => {
+                    btn.className = 'day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer';
+                });
+                const activeTab = document.getElementById(`tab-${dayKey}`);
+                if (activeTab) {
+                    activeTab.className = 'day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all bg-gold-400 text-abyss-950 shadow cursor-pointer';
+                }
+
+                const dayData = summitSchedule[dayKey];
+                if (!dayData) return;
+
+                document.getElementById('day-subtitle').textContent = dayData.subtitle;
+
+                const container = document.getElementById('schedule-container');
+                container.innerHTML = dayData.events.map(item => {
+                    const bgClass = item.highlight ? 'bg-gold-400/10' : 'hover:bg-abyss-800/40';
+                    const titleClass = item.highlight ? 'text-gold-200 font-bold' : 'text-white font-medium';
+
+                    return `
+                        <div class="flex flex-col sm:grid sm:grid-cols-12 gap-1.5 sm:gap-4 px-4 sm:px-6 py-3 ${bgClass} transition-colors">
+                            <div class="sm:col-span-3 flex items-center">
+                                <span class="inline-block text-xs font-bold tracking-wide text-gold-400 bg-abyss-950/75 sm:bg-transparent px-2.5 py-0.5 sm:p-0 rounded border border-gold-400/25 sm:border-0 whitespace-nowrap">
+                                    ${item.time}
+                                </span>
+                            </div>
+                            <div class="sm:col-span-5 text-sm ${titleClass} leading-snug">
+                                ${item.activity}
+                            </div>
+                            <div class="sm:col-span-4 text-xs text-slate-300 leading-snug">
+                                ${item.place}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                container.scrollTop = 0;
+            } catch (err) {
+                console.error('Error switching day:', err);
+            }
+        }
+
+        // 2. Fairy-Tale Golden Stardust, Sparkle Crosses & Drifting Dust Canvas
+        const fairyCanvas = document.getElementById('fairy-dust-canvas');
+        const fairyCtx = fairyCanvas.getContext('2d');
+        let fairyMotes = [];
+        let fairyBurstBoost = 1;
+
+        function resizeFairyCanvas() {
+            fairyCanvas.width = window.innerWidth;
+            fairyCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeFairyCanvas);
+        resizeFairyCanvas();
+
+        function initFairyDust() {
+            const count = Math.min(190, Math.max(105, Math.floor((window.innerWidth * window.innerHeight) / 8500)));
+            fairyMotes = [];
+            for (let i = 0; i < count; i++) {
+                fairyMotes.push({
+                    x: Math.random() * fairyCanvas.width,
+                    y: Math.random() * fairyCanvas.height,
+                    size: Math.random() * 2.4 + 0.6,
+                    vx: (Math.random() - 0.5) * 0.55,
+                    vy: -(Math.random() * 0.65 + 0.15),
+                    phase: Math.random() * Math.PI * 2,
+                    speed: Math.random() * 0.05 + 0.015,
+                    isStarSparkle: i % 5 === 0,
+                    warmTone: Math.random() > 0.22
+                });
+            }
+        }
+        initFairyDust();
+
+        function drawFourPointSparkle(ctx2d, x, y, r, alpha) {
+            ctx2d.save();
+            ctx2d.translate(x, y);
+            ctx2d.beginPath();
+            const inner = r * 0.28;
+            for (let i = 0; i < 8; i++) {
+                const rad = i % 2 === 0 ? r * 2.1 : inner;
+                const ang = (i * Math.PI) / 4;
+                const px = Math.cos(ang) * rad;
+                const py = Math.sin(ang) * rad;
+                if (i === 0) ctx2d.moveTo(px, py);
+                else ctx2d.lineTo(px, py);
+            }
+            ctx2d.closePath();
+            ctx2d.fillStyle = `rgba(255, 249, 230, ${alpha.toFixed(2)})`;
+            ctx2d.shadowBlur = 8;
+            ctx2d.shadowColor = '#eab642';
+            ctx2d.fill();
+            ctx2d.restore();
+        }
+
+        function triggerFairyBurst() {
+            fairyBurstBoost = 2.5;
+            const cx = fairyCanvas.width / 2;
+            const cy = fairyCanvas.height / 2;
+            fairyMotes.forEach(m => {
+                const dx = m.x - cx;
+                const dy = m.y - cy;
+                const dist = Math.hypot(dx, dy) || 1;
+                m.vx += (dx / dist) * 1.6 - (dy / dist) * 1.1;
+                m.vy += (dy / dist) * 1.6 + (dx / dist) * 1.1;
+            });
+            setTimeout(() => {
+                fairyBurstBoost = 1;
+            }, 850);
+        }
+
+        function animateFairyDust() {
+            fairyCtx.clearRect(0, 0, fairyCanvas.width, fairyCanvas.height);
+            const cx = fairyCanvas.width / 2;
+            const cy = fairyCanvas.height / 2;
+
+            for (let i = 0; i < fairyMotes.length; i++) {
+                const m = fairyMotes[i];
+                m.phase += m.speed * fairyBurstBoost;
+
+                const dx = m.x - cx;
+                const dy = m.y - cy;
+                const dist = Math.hypot(dx, dy) || 1;
+                const swirl = fairyBurstBoost > 1.2 ? 0.03 : 0.004;
+                m.vx += (-dy / dist) * swirl + Math.sin(m.phase * 0.5) * 0.008;
+                m.vy += (dx / dist) * swirl;
+
+                m.x += m.vx;
+                m.y += m.vy;
+                m.vx *= 0.992;
+                m.vy = m.vy * 0.992 - 0.0025;
+
+                if (m.x < -25) m.x = fairyCanvas.width + 25;
+                if (m.x > fairyCanvas.width + 25) m.x = -25;
+                if (m.y < -25) m.y = fairyCanvas.height + 25;
+                if (m.y > fairyCanvas.height + 25) m.y = -25;
+
+                const twinkle = 0.25 + 0.75 * (0.5 + 0.5 * Math.sin(m.phase));
+                if (m.isStarSparkle) {
+                    drawFourPointSparkle(fairyCtx, m.x, m.y, m.size, twinkle);
+                } else {
+                    fairyCtx.beginPath();
+                    fairyCtx.arc(m.x, m.y, m.size, 0, Math.PI * 2);
+                    fairyCtx.fillStyle = m.warmTone
+                        ? `rgba(245, 215, 130, ${twinkle.toFixed(2)})`
+                        : `rgba(255, 249, 230, ${(twinkle * 0.9).toFixed(2)})`;
+                    fairyCtx.shadowBlur = m.size * 5;
+                    fairyCtx.shadowColor = '#eab642';
+                    fairyCtx.fill();
+                }
+            }
+            fairyCtx.shadowBlur = 0;
+            requestAnimationFrame(animateFairyDust);
+        }
+        animateFairyDust();
+
+        // 3. Concentric Ring Portal Curtain Open / Replay
+        let portalTimer = null;
+        let burstTimer = null;
+
+        function enterSummitWithAudio() {
+            if (portalTimer) clearTimeout(portalTimer);
+            if (burstTimer) clearTimeout(burstTimer);
+            triggerFairyBurst();
+            const curtain = document.getElementById('intro-curtain');
+            curtain.classList.add('opened');
+            if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                userManuallyPaused = false;
+                ytPlayer.unMute();
+                ytPlayer.playVideo();
+            }
+        }
+
+        function playPortal() {
+            if (portalTimer) clearTimeout(portalTimer);
+            if (burstTimer) clearTimeout(burstTimer);
+            initFairyDust();
+            const curtain = document.getElementById('intro-curtain');
+            curtain.classList.remove('opened');
+            burstTimer = setTimeout(() => {
+                triggerFairyBurst();
+            }, 1250);
+            portalTimer = setTimeout(() => {
+                curtain.classList.add('opened');
+            }, 1600);
+        }
+
+        function replayPortal() {
+            playPortal();
+        }
+
+        // 4. YouTube IFrame Player API (Adidas Originals - Star Wars Collection Imperial March Remix)
+        let ytPlayer = null;
+        let isAudioPlaying = false;
+        let userManuallyPaused = false;
+
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+
+        function onYouTubeIframeAPIReady() {
+            try {
+                ytPlayer = new YT.Player('yt-player', {
+                    videoId: 'PLzczFV5994',
+                    playerVars: {
+                        autoplay: 1,
+                        loop: 1,
+                        playlist: 'PLzczFV5994',
+                        controls: 0,
+                        disablekb: 1,
+                        fs: 0,
+                        modestbranding: 1,
+                        playsinline: 1
+                    },
+                    events: {
+                        onReady: (event) => {
+                            event.target.setVolume(45);
+                            event.target.playVideo();
+                        },
+                        onStateChange: (event) => {
+                            if (event.data === YT.PlayerState.PLAYING) {
+                                isAudioPlaying = true;
+                                updateAudioUI(true);
+                            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                                isAudioPlaying = false;
+                                updateAudioUI(false);
+                            }
+                        }
+                    }
+                });
+            } catch (err) {
+                console.error('YouTube Player initialization error:', err);
+            }
+        }
+
+        function updateAudioUI(playing) {
+            const icon = document.getElementById('audio-icon');
+            const label = document.getElementById('audio-label');
+            const eq = document.getElementById('eq-indicator');
+            if (playing) {
+                icon.textContent = '❚❚';
+                label.textContent = 'Imperial March';
+                eq.classList.add('eq-playing');
+            } else {
+                icon.textContent = '▶';
+                label.textContent = userManuallyPaused ? 'Paused' : 'Enable Sound';
+                eq.classList.remove('eq-playing');
+            }
+        }
+
+        function toggleAudio() {
+            if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
+            if (isAudioPlaying) {
+                userManuallyPaused = true;
+                ytPlayer.pauseVideo();
+            } else {
+                userManuallyPaused = false;
+                ytPlayer.unMute();
+                ytPlayer.playVideo();
+            }
+        }
+
+        ['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+            window.addEventListener(evt, () => {
+                if (!userManuallyPaused && !isAudioPlaying && ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                    ytPlayer.unMute();
+                    ytPlayer.playVideo();
+                }
+            }, { passive: true });
+        });
+
+        // 5. Interactive Golden Constellation Starfield Canvas
+        const canvas = document.getElementById('constellation-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        }, { passive: true });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 65; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
+                r: Math.random() * 1.5 + 0.5
+            });
+        }
+
+        function drawConstellations() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < stars.length; i++) {
+                const s1 = stars[i];
+                s1.x += s1.vx;
+                s1.y += s1.vy;
+                if (s1.x < 0 || s1.x > canvas.width) s1.vx *= -1;
+                if (s1.y < 0 || s1.y > canvas.height) s1.vy *= -1;
+
+                for (let j = i + 1; j < stars.length; j++) {
+                    const s2 = stars[j];
+                    const dist = Math.hypot(s1.x - s2.x, s1.y - s2.y);
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(s1.x, s1.y);
+                        ctx.lineTo(s2.x, s2.y);
+                        ctx.strokeStyle = `rgba(234, 182, 66, ${(1 - dist / 140) * 0.2})`;
+                        ctx.lineWidth = 0.65;
+                        ctx.stroke();
+                    }
+                }
+
+                if (mouse.x !== null && mouse.y !== null) {
+                    const mDist = Math.hypot(s1.x - mouse.x, s1.y - mouse.y);
+                    if (mDist < 165) {
+                        ctx.beginPath();
+                        ctx.moveTo(s1.x, s1.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(245, 215, 130, ${(1 - mDist / 165) * 0.3})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+
+                ctx.beginPath();
+                ctx.arc(s1.x, s1.y, s1.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 249, 230, 0.72)';
+                ctx.fill();
+            }
+            requestAnimationFrame(drawConstellations);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            selectDay('wed');
+            playPortal();
+            drawConstellations();
+        });
+    </script>
+</body>
+</html>
