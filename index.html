@@ -276,6 +276,7 @@
             transform: scale(1.14);
             visibility: hidden;
             pointer-events: none;
+            display: none;
         }
 
         /* Animated audio equalizer bars */
@@ -465,7 +466,7 @@
             <section data-tilt-card data-tilt-max="1.5" class="lg:col-span-7 editorial-frame rounded-2xl flex flex-col min-h-[480px] lg:min-h-0 overflow-hidden">
 
                 <!-- Section Header + Attendee Mode Switcher + Day Tabs -->
-                <div class="shrink-0 px-4 sm:px-6 py-3.5 border-b editorial-cell flex flex-col gap-3">
+                <div class="relative z-20 shrink-0 px-4 sm:px-6 py-3.5 border-b editorial-cell flex flex-col gap-3">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                         <div>
                             <span class="font-display text-[11px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Schedule</span>
@@ -474,18 +475,18 @@
                         </div>
 
                         <!-- Attendee Profile Toggle: Flying In (MON–THU) first, Summit Only (WED/THU) second -->
-                        <div class="inline-flex rounded-xl bg-abyss-950/90 p-1 border border-gold-400/25 self-start sm:self-auto shadow-[inset_0_2px_8px_rgba(0,0,0,0.75)]">
-                            <button type="button" id="mode-flying" onclick="selectAttendeeMode('flying')" class="px-3 py-1.5 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all text-slate-300 hover:text-white cursor-pointer">
+                        <div role="group" aria-label="Schedule attendee mode" class="relative z-20 flex flex-wrap sm:inline-flex rounded-xl bg-abyss-950/95 p-1 border border-gold-400/25 gap-1 self-stretch sm:self-auto shadow-[inset_0_2px_8px_rgba(0,0,0,0.75)]">
+                            <button type="button" id="mode-flying" data-attendee-mode="flying" class="touch-manipulation select-none flex-1 sm:flex-initial min-h-[38px] px-3.5 py-2 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all text-slate-300 hover:text-white cursor-pointer">
                                 Flying In (MON–THU)
                             </button>
-                            <button type="button" id="mode-local" onclick="selectAttendeeMode('local')" class="px-3 py-1.5 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all bg-gold-400 text-abyss-950 shadow-[0_4px_14px_rgba(234,182,66,0.4)] cursor-pointer">
+                            <button type="button" id="mode-local" data-attendee-mode="local" class="touch-manipulation select-none flex-1 sm:flex-initial min-h-[38px] px-3.5 py-2 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all bg-gold-400 text-abyss-950 shadow-[0_4px_14px_rgba(234,182,66,0.4)] cursor-pointer">
                                 Summit Only (WED/THU)
                             </button>
                         </div>
                     </div>
 
                     <!-- Day Switcher Tabs (Dynamically shows WED–THU for Summit Only or MON–THU for Flying In) -->
-                    <div id="day-tabs-container" class="grid grid-cols-2 gap-1 bg-abyss-950/90 p-1 rounded-xl border border-gold-400/25">
+                    <div id="day-tabs-container" role="tablist" aria-label="Schedule days" class="relative z-20 grid grid-cols-2 gap-1.5 bg-abyss-950/95 p-1 rounded-xl border border-gold-400/25">
                         <!-- Populated dynamically via JavaScript -->
                     </div>
                 </div>
@@ -674,29 +675,40 @@
             if (!tabsContainer) return;
 
             tabsContainer.className = daysList.length === 4
-                ? 'grid grid-cols-4 gap-1 bg-abyss-950/90 p-1 rounded-xl border border-gold-400/25'
-                : 'grid grid-cols-2 gap-1 bg-abyss-950/90 p-1 rounded-xl border border-gold-400/25';
+                ? 'relative z-20 grid grid-cols-4 gap-1.5 bg-abyss-950/95 p-1 rounded-xl border border-gold-400/25'
+                : 'relative z-20 grid grid-cols-2 gap-1.5 bg-abyss-950/95 p-1 rounded-xl border border-gold-400/25';
 
             tabsContainer.innerHTML = daysList.map(key => {
                 const isActive = key === activeDay;
                 const activeClasses = 'bg-gold-400 text-abyss-950 shadow-[0_4px_14px_rgba(234,182,66,0.45)]';
-                const inactiveClasses = 'text-slate-300 hover:text-white';
+                const inactiveClasses = 'bg-abyss-900/50 text-slate-300 hover:text-white active:bg-abyss-800';
                 return `
-                    <button type="button" onclick="selectDay('${key}')" id="tab-${key}" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all ${isActive ? activeClasses : inactiveClasses} cursor-pointer">
+                    <button type="button" role="tab" aria-selected="${isActive}" data-day-key="${key}" id="tab-${key}" class="day-tab touch-manipulation select-none min-h-[38px] px-2.5 sm:px-3.5 py-2 rounded-lg font-display text-xs font-bold transition-all ${isActive ? activeClasses : inactiveClasses} cursor-pointer">
                         ${summitSchedule[key].label}
                     </button>
                 `;
             }).join('');
+
+            tabsContainer.querySelectorAll('[data-day-key]').forEach(btn => {
+                const targetKey = btn.getAttribute('data-day-key');
+                btn.onclick = () => selectDay(targetKey);
+            });
         }
 
         function updateModeButtonsUI(mode) {
             const localBtn = document.getElementById('mode-local');
             const flyingBtn = document.getElementById('mode-flying');
-            const activeCls = 'px-3 py-1.5 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all bg-gold-400 text-abyss-950 shadow-[0_4px_14px_rgba(234,182,66,0.4)] cursor-pointer';
-            const inactiveCls = 'px-3 py-1.5 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all text-slate-300 hover:text-white cursor-pointer';
+            const activeCls = 'touch-manipulation select-none flex-1 sm:flex-initial min-h-[38px] px-3.5 py-2 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all bg-gold-400 text-abyss-950 shadow-[0_4px_14px_rgba(234,182,66,0.4)] cursor-pointer';
+            const inactiveCls = 'touch-manipulation select-none flex-1 sm:flex-initial min-h-[38px] px-3.5 py-2 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all bg-abyss-900/40 text-slate-300 hover:text-white active:bg-abyss-800 cursor-pointer';
 
-            if (localBtn) localBtn.className = mode === 'local' ? activeCls : inactiveCls;
-            if (flyingBtn) flyingBtn.className = mode === 'flying' ? activeCls : inactiveCls;
+            if (localBtn) {
+                localBtn.className = mode === 'local' ? activeCls : inactiveCls;
+                localBtn.setAttribute('aria-pressed', mode === 'local' ? 'true' : 'false');
+            }
+            if (flyingBtn) {
+                flyingBtn.className = mode === 'flying' ? activeCls : inactiveCls;
+                flyingBtn.setAttribute('aria-pressed', mode === 'flying' ? 'true' : 'false');
+            }
         }
 
         function selectAttendeeMode(mode) {
@@ -706,7 +718,13 @@
                 updateModeButtonsUI(mode);
 
                 const allowedDays = attendeeModes[mode];
-                const nextDay = mode === 'flying' ? 'mon' : 'wed';
+                let nextDay = currentDayKey;
+                if (mode === 'flying') {
+                    nextDay = 'mon';
+                } else if (!allowedDays.includes(currentDayKey)) {
+                    nextDay = 'wed';
+                }
+
                 renderDayTabs(allowedDays, nextDay);
                 selectDay(nextDay);
             } catch (err) {
@@ -1208,6 +1226,8 @@
             const curtain = document.getElementById('intro-curtain');
             if (curtain) {
                 curtain.classList.add('opened');
+                curtain.style.pointerEvents = 'none';
+                curtain.style.visibility = 'hidden';
             }
             userManuallyPaused = false;
             startSummitAudioImmediately();
@@ -1220,6 +1240,9 @@
                 intro3dRig.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }
             if (curtain) {
+                curtain.style.display = '';
+                curtain.style.pointerEvents = '';
+                curtain.style.visibility = '';
                 curtain.classList.remove('opened');
             }
             startSummitAudioImmediately();
@@ -1230,6 +1253,8 @@
             portalTimer = setTimeout(() => {
                 if (curtain) {
                     curtain.classList.add('opened');
+                    curtain.style.pointerEvents = 'none';
+                    curtain.style.visibility = 'hidden';
                 }
                 startSummitAudioImmediately();
             }, 1900);
@@ -1412,6 +1437,11 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            const flyingBtn = document.getElementById('mode-flying');
+            const localBtn = document.getElementById('mode-local');
+            if (flyingBtn) flyingBtn.addEventListener('click', () => selectAttendeeMode('flying'));
+            if (localBtn) localBtn.addEventListener('click', () => selectAttendeeMode('local'));
+
             selectAttendeeMode('local');
             playPortal();
             startSummitAudioImmediately();
