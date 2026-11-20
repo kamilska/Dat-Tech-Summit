@@ -13,7 +13,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind Custom Palette & Typography -->
+    <!-- Custom Tailwind Color Palette & Typography -->
     <script>
         tailwind.config = {
             theme: {
@@ -57,7 +57,7 @@
                 #030816;
         }
 
-        /* Metallic champagne-gold foil gradient for main title */
+        /* Metallic champagne-gold foil gradient for main title and emblem */
         .text-gold-foil {
             background: linear-gradient(180deg, #fff9e6 0%, #f5d782 48%, #cf951d 100%);
             -webkit-background-clip: text;
@@ -169,7 +169,7 @@
     <!-- Interactive Golden Constellation Starfield Canvas -->
     <canvas id="constellation-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-75"></canvas>
 
-    <!-- Hidden YouTube Audio Player (Adidas Originals - Star Wars Collection Imperial March Remix) -->
+    <!-- Hidden YouTube IFrame Audio Player -->
     <div id="yt-audio-wrapper" class="fixed -left-[9999px] -top-[9999px] w-1 h-1 opacity-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div id="yt-player"></div>
     </div>
@@ -207,9 +207,9 @@
 
             <!-- Right: Audio Toggle with Equalizer + Replay Intro -->
             <div class="flex items-center gap-2.5">
-                <button id="audio-toggle-btn" onclick="toggleAudio()" title="Adidas Originals - Star Wars Collection Imperial March Remix" class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-abyss-950/80 hover:bg-abyss-800 border border-gold-400/40 text-xs font-medium text-gold-200 transition-all cursor-pointer">
+                <button type="button" id="audio-toggle-btn" onclick="toggleAudio()" title="Summit Background Audio" class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-abyss-950/80 hover:bg-abyss-800 border border-gold-400/40 text-xs font-medium text-gold-200 transition-all cursor-pointer">
                     <span id="audio-icon" class="text-gold-400 font-bold">▶</span>
-                    <span id="audio-label" class="hidden sm:inline tracking-wide">Imperial March</span>
+                    <span id="audio-label" class="hidden sm:inline tracking-wide">Summit Audio</span>
                     <span id="eq-indicator" class="flex items-end gap-0.5 h-3.5">
                         <span class="eq-bar"></span>
                         <span class="eq-bar"></span>
@@ -218,13 +218,13 @@
                     </span>
                 </button>
 
-                <button onclick="replayPortal()" class="px-3.5 py-1.5 rounded-full bg-gold-400/15 hover:bg-gold-400 text-gold-300 hover:text-abyss-950 border border-gold-400/40 font-display text-xs font-bold tracking-wider transition-all cursor-pointer">
+                <button type="button" onclick="replayPortal()" class="px-3.5 py-1.5 rounded-full bg-gold-400/15 hover:bg-gold-400 text-gold-300 hover:text-abyss-950 border border-gold-400/40 font-display text-xs font-bold tracking-wider transition-all cursor-pointer">
                     ✨ Replay Intro
                 </button>
             </div>
         </header>
 
-        <!-- Main Split-Screen Workspace (Left 7/12 vs Right 5/12) -->
+        <!-- Main 12-Column Split-Screen Workspace (Left 7/12 vs Right 5/12) -->
         <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3.5 min-h-0">
 
             <!-- Left Column (7/12): Schedule — 4-Day Summit Planner -->
@@ -240,10 +240,10 @@
 
                     <!-- Day Switcher Tabs -->
                     <div class="grid grid-cols-4 gap-1 bg-abyss-950/90 p-1 rounded-xl border border-gold-400/25">
-                        <button onclick="selectDay('mon')" id="tab-mon" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">MON</button>
-                        <button onclick="selectDay('tue')" id="tab-tue" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">TUE</button>
-                        <button onclick="selectDay('wed')" id="tab-wed" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all bg-gold-400 text-abyss-950 shadow cursor-pointer">WED</button>
-                        <button onclick="selectDay('thu')" id="tab-thu" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">THU</button>
+                        <button type="button" onclick="selectDay('mon')" id="tab-mon" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">MON</button>
+                        <button type="button" onclick="selectDay('tue')" id="tab-tue" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">TUE</button>
+                        <button type="button" onclick="selectDay('wed')" id="tab-wed" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all bg-gold-400 text-abyss-950 shadow cursor-pointer">WED</button>
+                        <button type="button" onclick="selectDay('thu')" id="tab-thu" class="day-tab px-3.5 py-1.5 rounded-lg font-display text-xs font-bold transition-all text-slate-300 hover:text-white cursor-pointer">THU</button>
                     </div>
                 </div>
 
@@ -344,9 +344,9 @@
         </main>
     </div>
 
-    <!-- Scripts: 4-Day Planner, Ring Portal, Auto-Audio, Constellation Canvas -->
+    <!-- Scripts: 4-Day Schedule, Ring Portal, YouTube Audio Controller, Constellation Canvas -->
     <script>
-        // 1. 4-Day Summit Schedule (Room names only, no floor numbers)
+        // 1. 4-Day Summit Schedule (room names only, no floor numbers)
         const summitSchedule = {
             mon: {
                 subtitle: "Monday • Leadership Arrival & Welcome Dinner",
@@ -415,7 +415,7 @@
             }
         };
 
-        // Switch active schedule tab and render rows with mobile-safe spacing
+        // Renders the selected day's schedule with mobile-safe spacing
         function selectDay(dayKey) {
             try {
                 document.querySelectorAll('.day-tab').forEach(btn => {
@@ -455,17 +455,19 @@
 
                 container.scrollTop = 0;
             } catch (err) {
-                console.error('Error switching day:', err);
+                console.error('Failed to render schedule day:', err);
             }
         }
 
-        // 2. Concentric Ring Portal Curtain Open / Replay
+        // 2. Concentric Ring Portal Curtain Controls
         let portalTimer = null;
 
         function enterSummitWithAudio() {
             if (portalTimer) clearTimeout(portalTimer);
             const curtain = document.getElementById('intro-curtain');
-            curtain.classList.add('opened');
+            if (curtain) {
+                curtain.classList.add('opened');
+            }
             if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
                 userManuallyPaused = false;
                 ytPlayer.unMute();
@@ -476,6 +478,7 @@
         function playPortal() {
             if (portalTimer) clearTimeout(portalTimer);
             const curtain = document.getElementById('intro-curtain');
+            if (!curtain) return;
             curtain.classList.remove('opened');
             portalTimer = setTimeout(() => {
                 curtain.classList.add('opened');
@@ -486,23 +489,23 @@
             playPortal();
         }
 
-        // 3. Automatic YouTube IFrame Player API (Adidas Originals - Star Wars Collection Imperial March Remix)
+        // 3. YouTube IFrame Player API Controller
         let ytPlayer = null;
         let isAudioPlaying = false;
         let userManuallyPaused = false;
 
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(tag);
+        const ytScript = document.createElement('script');
+        ytScript.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(ytScript);
 
         function onYouTubeIframeAPIReady() {
             try {
                 ytPlayer = new YT.Player('yt-player', {
-                    videoId: 'PLzczFV5994',
+                    videoId: 'LYTbGh99bYA',
                     playerVars: {
                         autoplay: 1,
                         loop: 1,
-                        playlist: 'PLzczFV5994',
+                        playlist: 'LYTbGh99bYA',
                         controls: 0,
                         disablekb: 1,
                         fs: 0,
@@ -526,7 +529,7 @@
                     }
                 });
             } catch (err) {
-                console.error('YouTube Player initialization error:', err);
+                console.error('YouTube IFrame Player error:', err);
             }
         }
 
@@ -534,9 +537,11 @@
             const icon = document.getElementById('audio-icon');
             const label = document.getElementById('audio-label');
             const eq = document.getElementById('eq-indicator');
+            if (!icon || !label || !eq) return;
+
             if (playing) {
                 icon.textContent = '❚❚';
-                label.textContent = 'Imperial March';
+                label.textContent = 'Summit Audio';
                 eq.classList.add('eq-playing');
             } else {
                 icon.textContent = '▶';
@@ -557,7 +562,7 @@
             }
         }
 
-        // Automatically unlock/play audio on first user interaction if browser blocks autoplay with sound
+        // Unlock playback on first user interaction if browser autoplay policy blocks sound
         ['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
             window.addEventListener(evt, () => {
                 if (!userManuallyPaused && !isAudioPlaying && ytPlayer && typeof ytPlayer.playVideo === 'function') {
@@ -601,45 +606,49 @@
         }
 
         function drawConstellations() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < stars.length; i++) {
-                const s1 = stars[i];
-                s1.x += s1.vx;
-                s1.y += s1.vy;
-                if (s1.x < 0 || s1.x > canvas.width) s1.vx *= -1;
-                if (s1.y < 0 || s1.y > canvas.height) s1.vy *= -1;
+            try {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < stars.length; i++) {
+                    const s1 = stars[i];
+                    s1.x += s1.vx;
+                    s1.y += s1.vy;
+                    if (s1.x < 0 || s1.x > canvas.width) s1.vx *= -1;
+                    if (s1.y < 0 || s1.y > canvas.height) s1.vy *= -1;
 
-                for (let j = i + 1; j < stars.length; j++) {
-                    const s2 = stars[j];
-                    const dist = Math.hypot(s1.x - s2.x, s1.y - s2.y);
-                    if (dist < 140) {
-                        ctx.beginPath();
-                        ctx.moveTo(s1.x, s1.y);
-                        ctx.lineTo(s2.x, s2.y);
-                        ctx.strokeStyle = `rgba(234, 182, 66, ${(1 - dist / 140) * 0.2})`;
-                        ctx.lineWidth = 0.65;
-                        ctx.stroke();
+                    for (let j = i + 1; j < stars.length; j++) {
+                        const s2 = stars[j];
+                        const dist = Math.hypot(s1.x - s2.x, s1.y - s2.y);
+                        if (dist < 140) {
+                            ctx.beginPath();
+                            ctx.moveTo(s1.x, s1.y);
+                            ctx.lineTo(s2.x, s2.y);
+                            ctx.strokeStyle = `rgba(234, 182, 66, ${(1 - dist / 140) * 0.2})`;
+                            ctx.lineWidth = 0.65;
+                            ctx.stroke();
+                        }
                     }
-                }
 
-                if (mouse.x !== null && mouse.y !== null) {
-                    const mDist = Math.hypot(s1.x - mouse.x, s1.y - mouse.y);
-                    if (mDist < 165) {
-                        ctx.beginPath();
-                        ctx.moveTo(s1.x, s1.y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.strokeStyle = `rgba(245, 215, 130, ${(1 - mDist / 165) * 0.3})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.stroke();
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mDist = Math.hypot(s1.x - mouse.x, s1.y - mouse.y);
+                        if (mDist < 165) {
+                            ctx.beginPath();
+                            ctx.moveTo(s1.x, s1.y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(245, 215, 130, ${(1 - mDist / 165) * 0.3})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.stroke();
+                        }
                     }
-                }
 
-                ctx.beginPath();
-                ctx.arc(s1.x, s1.y, s1.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 249, 230, 0.72)';
-                ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(s1.x, s1.y, s1.r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 249, 230, 0.72)';
+                    ctx.fill();
+                }
+                requestAnimationFrame(drawConstellations);
+            } catch (err) {
+                console.error('Constellation animation error:', err);
             }
-            requestAnimationFrame(drawConstellations);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
