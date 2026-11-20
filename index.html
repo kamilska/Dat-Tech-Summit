@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FY 27 DAT Tech Summit | Kraków</title>
+    <title>Dat Tech Summit 2027 | Kraków</title>
 
     <!-- Google Fonts: Syne & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom Tailwind Color Palette & Typography -->
+    <!-- Tailwind Custom Palette & Typography -->
     <script>
         tailwind.config = {
             theme: {
@@ -57,7 +57,16 @@
                 #030816;
         }
 
-        /* Metallic champagne-gold foil gradient for main title and emblem */
+        /* Deep, rich royal-night celestial backdrop for the intro curtain */
+        .bg-intro-royal-cosmos {
+            background:
+                radial-gradient(circle at 50% 47%, rgba(234, 182, 66, 0.16) 0%, rgba(19, 42, 97, 0.58) 28%, rgba(7, 17, 43, 0.94) 58%, #020510 100%),
+                radial-gradient(ellipse at 20% 18%, rgba(19, 42, 97, 0.45) 0%, transparent 50%),
+                radial-gradient(ellipse at 82% 80%, rgba(207, 149, 29, 0.12) 0%, transparent 48%),
+                #030816;
+        }
+
+        /* Metallic champagne-gold foil gradient for main title & portal emblem */
         .text-gold-foil {
             background: linear-gradient(180deg, #fff9e6 0%, #f5d782 48%, #cf951d 100%);
             -webkit-background-clip: text;
@@ -76,7 +85,7 @@
             border-color: rgba(234, 182, 66, 0.18);
         }
 
-        /* Concentric rotating ring portal opening animation */
+        /* Concentric rotating ring & cosmic stardust portal opening animations */
         @keyframes spinSlow {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -89,12 +98,22 @@
 
         @keyframes pulseGlow {
             0%, 100% { opacity: 0.65; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.06); }
+            50% { opacity: 1; transform: scale(1.07); }
         }
 
+        @keyframes cosmicRipple {
+            0% { transform: scale(0.86); opacity: 0.55; }
+            70% { opacity: 0.18; }
+            100% { transform: scale(1.42); opacity: 0; }
+        }
+
+        .ring-stardust-outer { animation: spinSlow 38s linear infinite; }
+        .ring-stardust-mid { animation: spinReverse 26s linear infinite; }
         .ring-outer { animation: spinSlow 18s linear infinite; }
         .ring-inner { animation: spinReverse 12s linear infinite; }
-        .portal-glow { animation: pulseGlow 3s ease-in-out infinite; }
+        .portal-glow { animation: pulseGlow 3.2s ease-in-out infinite; }
+        .cosmic-ripple-1 { animation: cosmicRipple 4.4s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+        .cosmic-ripple-2 { animation: cosmicRipple 4.4s cubic-bezier(0.22, 1, 0.36, 1) infinite 2.2s; }
 
         #intro-curtain {
             transition: opacity 0.95s cubic-bezier(0.77, 0, 0.175, 1), transform 1.15s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.15s;
@@ -134,34 +153,69 @@
 </head>
 <body class="bg-editorial-cosmos min-h-screen lg:h-screen lg:overflow-hidden flex flex-col relative selection:bg-gold-400 selection:text-abyss-950">
 
-    <!-- Concentric Rotating Ring Portal Intro Curtain -->
-    <div id="intro-curtain" onclick="enterSummitWithAudio()" class="fixed inset-0 z-50 bg-abyss-950 flex flex-col items-center justify-center overflow-hidden p-4 cursor-pointer">
-        <!-- Golden ambient glow -->
-        <div class="absolute w-96 h-96 bg-gold-500/15 rounded-full blur-3xl portal-glow pointer-events-none"></div>
+    <!-- Concentric Rotating Ring Portal Intro Curtain with Royal-Night Celestial Backdrop & Orbiting Golden Glitter -->
+    <div id="intro-curtain" onclick="enterSummitWithAudio()" class="fixed inset-0 z-50 bg-intro-royal-cosmos flex flex-col items-center justify-center overflow-hidden p-4 cursor-pointer">
+        <!-- Dedicated Full-Screen Canvas: Twinkling Stars, Orbiting Golden Glitter & Shimmer Motes -->
+        <canvas id="intro-cosmos-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
-        <!-- Concentric rotating rings with inscribed polygons -->
-        <div class="relative w-60 h-60 sm:w-64 sm:h-64 flex items-center justify-center mb-6">
-            <svg class="absolute inset-0 w-full h-full ring-outer text-gold-400/75" viewBox="0 0 200 200" fill="none">
-                <circle cx="100" cy="100" r="92" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4"/>
-                <circle cx="100" cy="100" r="84" stroke="currentColor" stroke-width="1.5"/>
-                <polygon points="100,12 188,100 100,188 12,100" stroke="currentColor" stroke-width="0.75" opacity="0.65"/>
-                <polygon points="38,38 162,38 162,162 38,162" stroke="currentColor" stroke-width="0.75" opacity="0.65"/>
+        <!-- Layered golden ambient glows -->
+        <div class="absolute w-[34rem] h-[34rem] bg-gold-500/15 rounded-full blur-3xl portal-glow pointer-events-none z-0"></div>
+        <div class="absolute w-72 h-72 bg-gold-300/15 rounded-full blur-2xl portal-glow pointer-events-none z-0"></div>
+
+        <!-- Concentric Cosmic Stardust Rings & Rotating Portal Assembly -->
+        <div class="relative z-10 w-[21rem] h-[21rem] sm:w-[27rem] sm:h-[27rem] flex items-center justify-center mb-4">
+            <!-- Expanding cosmic stardust ripple rings -->
+            <div class="absolute inset-3 rounded-full border border-gold-300/35 cosmic-ripple-1 pointer-events-none"></div>
+            <div class="absolute inset-3 rounded-full border border-gold-400/25 cosmic-ripple-2 pointer-events-none"></div>
+
+            <!-- Outermost cosmic stardust & star-node ring -->
+            <svg class="absolute inset-0 w-full h-full ring-stardust-outer text-gold-400/45 pointer-events-none" viewBox="0 0 320 320" fill="none">
+                <circle cx="160" cy="160" r="154" stroke="currentColor" stroke-width="0.8" stroke-dasharray="1.5 6.5"/>
+                <circle cx="160" cy="160" r="144" stroke="currentColor" stroke-width="0.6" stroke-dasharray="16 8 2 8"/>
+                <circle cx="160" cy="6" r="2.4" fill="#fff9e6"/>
+                <circle cx="160" cy="314" r="2.4" fill="#fff9e6"/>
+                <circle cx="6" cy="160" r="2.4" fill="#fff9e6"/>
+                <circle cx="314" cy="160" r="2.4" fill="#fff9e6"/>
+                <circle cx="51" cy="51" r="1.8" fill="#f5d782"/>
+                <circle cx="269" cy="51" r="1.8" fill="#f5d782"/>
+                <circle cx="51" cy="269" r="1.8" fill="#f5d782"/>
+                <circle cx="269" cy="269" r="1.8" fill="#f5d782"/>
             </svg>
-            <svg class="absolute inset-6 w-48 h-48 sm:w-52 sm:h-52 ring-inner text-gold-300/85" viewBox="0 0 200 200" fill="none">
-                <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="1" stroke-dasharray="10 5 2 5"/>
-                <circle cx="100" cy="100" r="55" stroke="currentColor" stroke-width="1.5"/>
+
+            <!-- Secondary counter-rotating stardust orbital ring -->
+            <svg class="absolute inset-5 sm:inset-7 w-[calc(100%-2.5rem)] sm:w-[calc(100%-3.5rem)] h-[calc(100%-2.5rem)] sm:h-[calc(100%-3.5rem)] ring-stardust-mid text-gold-300/50 pointer-events-none" viewBox="0 0 260 260" fill="none">
+                <circle cx="130" cy="130" r="124" stroke="currentColor" stroke-width="0.8" stroke-dasharray="10 5 1.5 5"/>
+                <polygon points="130,6 254,130 130,254 6,130" stroke="currentColor" stroke-width="0.55" opacity="0.48"/>
             </svg>
-            <div class="relative z-10 text-center">
-                <span class="font-display text-2xl sm:text-3xl font-extrabold tracking-widest text-gold-foil block">FY 27</span>
-                <span class="font-display text-xs font-bold tracking-[0.28em] text-gold-100 mt-0.5 block">DAT SUMMIT</span>
+
+            <!-- Core Concentric Rotating Rings with Inscribed Polygons & Central Emblem -->
+            <div class="relative w-60 h-60 sm:w-64 sm:h-64 flex items-center justify-center">
+                <svg class="absolute inset-0 w-full h-full ring-outer text-gold-400/80" viewBox="0 0 200 200" fill="none">
+                    <circle cx="100" cy="100" r="92" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4"/>
+                    <circle cx="100" cy="100" r="84" stroke="currentColor" stroke-width="1.5"/>
+                    <polygon points="100,12 188,100 100,188 12,100" stroke="currentColor" stroke-width="0.75" opacity="0.65"/>
+                    <polygon points="38,38 162,38 162,162 38,162" stroke="currentColor" stroke-width="0.75" opacity="0.65"/>
+                </svg>
+                <svg class="absolute inset-6 w-48 h-48 sm:w-52 sm:h-52 ring-inner text-gold-300/90" viewBox="0 0 200 200" fill="none">
+                    <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="1" stroke-dasharray="10 5 2 5"/>
+                    <circle cx="100" cy="100" r="56" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <div class="relative z-10 text-center px-4 max-w-[138px] sm:max-w-[148px]">
+                    <span class="font-display text-sm sm:text-base font-extrabold uppercase tracking-[0.14em] leading-tight text-gold-foil block drop-shadow-[0_0_12px_rgba(234,182,66,0.35)]">
+                        Dat Tech
+                    </span>
+                    <span class="font-display text-xs sm:text-sm font-bold uppercase tracking-[0.18em] leading-tight text-gold-100 mt-0.5 block">
+                        Summit 27
+                    </span>
+                </div>
             </div>
         </div>
 
-        <p class="font-display text-gold-300 tracking-[0.3em] text-xs uppercase animate-pulse mb-4">
+        <p class="relative z-10 font-display text-gold-300 tracking-[0.3em] text-xs uppercase animate-pulse mb-4">
             Unlocking the Summit...
         </p>
 
-        <button type="button" onclick="event.stopPropagation(); enterSummitWithAudio();" class="px-5 py-2 rounded-full bg-gold-400/20 hover:bg-gold-400 text-gold-100 hover:text-abyss-950 border border-gold-400/50 font-display text-xs font-bold tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(234,182,66,0.3)] cursor-pointer">
+        <button type="button" onclick="event.stopPropagation(); enterSummitWithAudio();" class="relative z-10 px-5 py-2 rounded-full bg-gold-400/20 hover:bg-gold-400 text-gold-100 hover:text-abyss-950 border border-gold-400/50 font-display text-xs font-bold tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(234,182,66,0.3)] cursor-pointer">
             Enter Summit &amp; Enable Audio
         </button>
     </div>
@@ -169,7 +223,7 @@
     <!-- Interactive Golden Constellation Starfield Canvas -->
     <canvas id="constellation-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-75"></canvas>
 
-    <!-- Hidden YouTube IFrame Audio Player -->
+    <!-- Hidden YouTube Audio Player ("Magical Fantasy" by Dmitriy Sevostyanov - LYTbGh99bYA) -->
     <div id="yt-audio-wrapper" class="fixed -left-[9999px] -top-[9999px] w-1 h-1 opacity-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div id="yt-player"></div>
     </div>
@@ -180,15 +234,12 @@
         <!-- Top Header Bar -->
         <header class="shrink-0 editorial-frame rounded-2xl px-4 sm:px-6 py-3 mb-3.5 flex flex-col md:flex-row items-center justify-between gap-3">
 
-            <!-- Left: Title + Date & Location (no circle badge before FY 27 DAT) -->
+            <!-- Left: Title ("Dat Tech Summit 2027") + Date & Location -->
             <div class="flex items-center gap-4 text-center md:text-left">
                 <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
                     <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-gold-foil">
-                        FY 27 DAT
+                        Dat Tech Summit 2027
                     </h1>
-                    <span class="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
-                        Tech Summit
-                    </span>
                     <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-gold-300/90 border-l border-gold-400/30 pl-2.5">
                         16–17 Dec 2026 • Kraków
                     </span>
@@ -207,7 +258,7 @@
 
             <!-- Right: Audio Toggle with Equalizer + Replay Intro -->
             <div class="flex items-center gap-2.5">
-                <button type="button" id="audio-toggle-btn" onclick="toggleAudio()" title="Summit Background Audio" class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-abyss-950/80 hover:bg-abyss-800 border border-gold-400/40 text-xs font-medium text-gold-200 transition-all cursor-pointer">
+                <button type="button" id="audio-toggle-btn" onclick="toggleAudio()" title="Magical Fantasy — Dmitriy Sevostyanov" class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-abyss-950/80 hover:bg-abyss-800 border border-gold-400/40 text-xs font-medium text-gold-200 transition-all cursor-pointer">
                     <span id="audio-icon" class="text-gold-400 font-bold">▶</span>
                     <span id="audio-label" class="hidden sm:inline tracking-wide">Summit Audio</span>
                     <span id="eq-indicator" class="flex items-end gap-0.5 h-3.5">
@@ -224,7 +275,7 @@
             </div>
         </header>
 
-        <!-- Main 12-Column Split-Screen Workspace (Left 7/12 vs Right 5/12) -->
+        <!-- Main Split-Screen Workspace (Left 7/12 vs Right 5/12) -->
         <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3.5 min-h-0">
 
             <!-- Left Column (7/12): Schedule — 4-Day Summit Planner -->
@@ -344,62 +395,62 @@
         </main>
     </div>
 
-    <!-- Scripts: 4-Day Schedule, Ring Portal, YouTube Audio Controller, Constellation Canvas -->
+    <!-- Scripts: 4-Day Planner, Intro Cosmos Canvas (Orbiting Golden Glitter & Twinkling Stars), Ring Portal, Auto-Audio, Constellation Canvas -->
     <script>
-        // 1. 4-Day Summit Schedule (room names only, no floor numbers)
+        // 1. 4-Day Summit Schedule (Room names only, no floor numbers)
         const summitSchedule = {
             mon: {
                 subtitle: "Monday • Leadership Arrival & Welcome Dinner",
                 events: [
-                    { time: "Morning", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
-                    { time: "10:00 – 12:30", activity: "Andy leadership meeting", place: "Stockholm + London", highlight: false },
+                    { time: "Morning", activity: "Breakfast", place: "Sheraton Grand Hotel", highlight: false },
+                    { time: "10:00 – 12:30", activity: "Andy's leadership meeting", place: "Stockholm + London", highlight: false },
                     { time: "12:30 – 14:00", activity: "Lunch", place: "Ciao Bella Restaurant", highlight: false },
                     { time: "14:00 – 17:00", activity: "Andy leadership meeting", place: "Stockholm + London", highlight: false },
                     { time: "17:00", activity: "Transport to the hotel", place: "Taxi / Uber", highlight: false },
                     { time: "18:00 – 18:30", activity: "Welcome drink", place: "Sheraton – Lobby Bar", highlight: false },
-                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (12 ppl)", place: "Dedicated Transfer", highlight: false },
+                    { time: "18:30 – 19:00", activity: "Transport to the restaurant", place: "Dedicated Transfer", highlight: false },
                     { time: "19:00 – 22:00", activity: "Dinner", place: "Unity Tower", highlight: true },
-                    { time: "22:00", activity: "Transport to the hotel (12 ppl)", place: "Dedicated Transfer", highlight: false }
+                    { time: "22:00", activity: "Transport to the hotel", place: "Dedicated Transfer", highlight: false }
                 ]
             },
             tue: {
                 subtitle: "Tuesday • Leaders Meeting, Dry Run & Ziyad Castle Dinner",
                 events: [
-                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
-                    { time: "07:45 – 08:15", activity: "Transport to the office (12–14 ppl)", place: "Bus", highlight: false },
+                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand Hotel", highlight: false },
+                    { time: "07:45 – 08:15", activity: "Transport to the office", place: "Bus", highlight: false },
                     { time: "08:15 – 09:00", activity: "Morning Coffee & Prep", place: "Coffee Lounge", highlight: false },
                     { time: "09:00 – 12:30", activity: "Leaders Meeting", place: "Sofia Conference Room", highlight: false },
                     { time: "12:30 – 14:00", activity: "Lunch", place: "Ciao Bella Restaurant", highlight: false },
                     { time: "14:00 – 17:30", activity: "Dry Run + Decoration", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
-                    { time: "17:30", activity: "Transport to the hotel (12–14 ppl)", place: "Bus", highlight: false },
-                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus", highlight: false },
+                    { time: "17:30", activity: "Transport to the hotel", place: "Bus", highlight: false },
+                    { time: "18:30 – 19:00", activity: "Transport to the restaurant", place: "Bus", highlight: false },
                     { time: "19:00 – 22:00", activity: "Dinner", place: "Ziyad Castle", highlight: true },
-                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false }
+                    { time: "22:00", activity: "Transport to the hotel", place: "Bus", highlight: false }
                 ]
             },
             wed: {
                 subtitle: "Wednesday • DAT TECH SUMMIT Day 1 & Arcade Bee",
                 events: [
-                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
-                    { time: "07:45 – 08:15", activity: "Transport to the office (21–23 ppl)", place: "Bus", highlight: false },
-                    { time: "08:15 – 09:00", activity: "Gifts sharing (t-shirts, mugs, etc.)", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
+                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand Hotel", highlight: false },
+                    { time: "07:45 – 08:15", activity: "Transport to the office", place: "Bus", highlight: false },
+                    { time: "08:15 – 09:00", activity: "Gifts sharing", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
                     { time: "09:00 – 11:15", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
                     { time: "11:15 – 11:30", activity: "Coffee Break", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
                     { time: "11:30 – 13:00", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
                     { time: "13:00 – 14:00", activity: "Lunch Terrace", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
                     { time: "14:00 – 16:30", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
-                    { time: "14:00", activity: "Cake for participants • Photo booth", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
+                    { time: "14:00", activity: "Cake for participants and Photo booth", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
                     { time: "16:30 – 17:00", activity: "Group Photo", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
-                    { time: "17:30 – 18:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus", highlight: false },
+                    { time: "17:30 – 18:00", activity: "Transport to the restaurant", place: "Bus", highlight: false },
                     { time: "19:00 – 22:00", activity: "Dinner & Team Activity", place: "Arcade Bee (games, arcade, darts)", highlight: true },
-                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false }
+                    { time: "22:00", activity: "Transport to the hotel", place: "Bus", highlight: false }
                 ]
             },
             thu: {
                 subtitle: "Thursday • DAT TECH SUMMIT Day 2 & Forum Dinner",
                 events: [
                     { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
-                    { time: "07:45 – 08:15", activity: "Transport to the office (21–23 ppl)", place: "Bus", highlight: false },
+                    { time: "07:45 – 08:15", activity: "Transport to the office", place: "Bus", highlight: false },
                     { time: "08:15 – 09:00", activity: "Morning Coffee", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
                     { time: "09:00 – 11:15", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
                     { time: "11:15 – 11:30", activity: "Coffee Break", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
@@ -407,15 +458,15 @@
                     { time: "13:00 – 14:00", activity: "Lunch Terrace", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
                     { time: "14:00 – 16:30", activity: "DAT TECH SUMMIT", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: true },
                     { time: "16:30 – 17:00", activity: "Gift distribution (pens)", place: "Camomile + Hibiscus + Ginger + Garlic", highlight: false },
-                    { time: "17:30 – 18:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false },
-                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus / walking distance", highlight: false },
+                    { time: "17:30 – 18:00", activity: "Transport to the hotel", place: "Bus", highlight: false },
+                    { time: "18:30 – 19:00", activity: "Transport to the restaurant", place: "Bus / walking distance", highlight: false },
                     { time: "19:00 – 22:00", activity: "Closing Dinner", place: "Forum", highlight: true },
-                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus / walking distance", highlight: false }
+                    { time: "22:00", activity: "Transport to the hotel", place: "Bus / walking distance", highlight: false }
                 ]
             }
         };
 
-        // Renders the selected day's schedule with mobile-safe spacing
+        // Switch active schedule tab and render rows with mobile-safe spacing
         function selectDay(dayKey) {
             try {
                 document.querySelectorAll('.day-tab').forEach(btn => {
@@ -455,19 +506,193 @@
 
                 container.scrollTop = 0;
             } catch (err) {
-                console.error('Failed to render schedule day:', err);
+                console.error('Error switching day:', err);
             }
         }
 
-        // 2. Concentric Ring Portal Curtain Controls
+        // 2. Intro Cosmos Canvas: Twinkling Stars, Orbiting Golden Glitter & Shimmer Motes
+        const introCosmosCanvas = document.getElementById('intro-cosmos-canvas');
+        const introCosmosCtx = introCosmosCanvas.getContext('2d');
+        let bgTwinkleStars = [];
+        let orbitingGlitter = [];
+        let floatingShimmerMotes = [];
+        let introAnimFrame = null;
+
+        function resizeIntroCosmosCanvas() {
+            if (!introCosmosCanvas) return;
+            introCosmosCanvas.width = window.innerWidth;
+            introCosmosCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeIntroCosmosCanvas);
+        resizeIntroCosmosCanvas();
+
+        function initIntroCosmosScene() {
+            const w = introCosmosCanvas.width;
+            const h = introCosmosCanvas.height;
+            const maxDim = Math.max(w, h);
+
+            // Twinkling celestial background stars
+            bgTwinkleStars = Array.from({ length: 145 }, () => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: Math.random() * 1.45 + 0.35,
+                phase: Math.random() * Math.PI * 2,
+                speed: Math.random() * 0.045 + 0.015,
+                isFourPoint: Math.random() > 0.82
+            }));
+
+            // Golden glitter particles orbiting gracefully around the central portal point
+            orbitingGlitter = Array.from({ length: 165 }, () => {
+                const band = Math.random();
+                const radius = band < 0.55
+                    ? 105 + Math.random() * 145
+                    : 250 + Math.random() * (maxDim * 0.38);
+                return {
+                    angle: Math.random() * Math.PI * 2,
+                    radius: radius,
+                    radialBreathAmp: Math.random() * 12 + 3,
+                    radialBreathPhase: Math.random() * Math.PI * 2,
+                    angularSpeed: (Math.random() * 0.0065 + 0.0022) * (Math.random() > 0.18 ? 1 : -0.7),
+                    size: Math.random() * 2.1 + 0.55,
+                    sparklePhase: Math.random() * Math.PI * 2,
+                    sparkleSpeed: Math.random() * 0.09 + 0.03,
+                    tiltRatio: 0.92 + Math.random() * 0.14,
+                    isBrightSparkle: Math.random() > 0.78
+                };
+            });
+
+            // Subtle floating golden shimmer motes
+            floatingShimmerMotes = Array.from({ length: 42 }, () => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: Math.random() * 14 + 4,
+                vx: (Math.random() - 0.5) * 0.25,
+                vy: -Math.random() * 0.22 - 0.05,
+                phase: Math.random() * Math.PI * 2,
+                speed: Math.random() * 0.025 + 0.01,
+                maxAlpha: Math.random() * 0.16 + 0.05
+            }));
+        }
+
+        function drawMiniSparkle(ctx, x, y, size, alpha) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.beginPath();
+            const inner = size * 0.22;
+            for (let i = 0; i < 4; i++) {
+                const a1 = (i * Math.PI) / 2;
+                const a2 = a1 + Math.PI / 4;
+                if (i === 0) {
+                    ctx.moveTo(Math.cos(a1) * size, Math.sin(a1) * size);
+                } else {
+                    ctx.lineTo(Math.cos(a1) * size, Math.sin(a1) * size);
+                }
+                ctx.lineTo(Math.cos(a2) * inner, Math.sin(a2) * inner);
+            }
+            ctx.closePath();
+            ctx.fillStyle = `rgba(255, 249, 230, ${alpha})`;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function renderIntroCosmos() {
+            const curtain = document.getElementById('intro-curtain');
+            if (!curtain || curtain.classList.contains('opened')) {
+                introAnimFrame = null;
+                return;
+            }
+
+            const w = introCosmosCanvas.width;
+            const h = introCosmosCanvas.height;
+            const cx = w / 2;
+            const cy = h * 0.46;
+
+            introCosmosCtx.clearRect(0, 0, w, h);
+
+            // 1. Subtle floating golden shimmer motes
+            for (let i = 0; i < floatingShimmerMotes.length; i++) {
+                const m = floatingShimmerMotes[i];
+                m.x += m.vx;
+                m.y += m.vy;
+                m.phase += m.speed;
+                if (m.y < -m.r) m.y = h + m.r;
+                if (m.x < -m.r) m.x = w + m.r;
+                if (m.x > w + m.r) m.x = -m.r;
+
+                const alpha = (Math.sin(m.phase) * 0.5 + 0.5) * m.maxAlpha;
+                const grad = introCosmosCtx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r);
+                grad.addColorStop(0, `rgba(245, 215, 130, ${alpha})`);
+                grad.addColorStop(0.55, `rgba(234, 182, 66, ${alpha * 0.45})`);
+                grad.addColorStop(1, 'rgba(234, 182, 66, 0)');
+                introCosmosCtx.fillStyle = grad;
+                introCosmosCtx.beginPath();
+                introCosmosCtx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+                introCosmosCtx.fill();
+            }
+
+            // 2. Twinkling background stars
+            for (let i = 0; i < bgTwinkleStars.length; i++) {
+                const st = bgTwinkleStars[i];
+                st.phase += st.speed;
+                const twinkle = 0.22 + (Math.sin(st.phase) * 0.5 + 0.5) * 0.78;
+                if (st.isFourPoint && twinkle > 0.65) {
+                    drawMiniSparkle(introCosmosCtx, st.x, st.y, st.r * 3.1, twinkle * 0.85);
+                } else {
+                    introCosmosCtx.beginPath();
+                    introCosmosCtx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+                    introCosmosCtx.fillStyle = `rgba(255, 249, 230, ${twinkle * 0.85})`;
+                    introCosmosCtx.fill();
+                }
+            }
+
+            // 3. Golden glitter particles orbiting gracefully around the central portal point
+            for (let i = 0; i < orbitingGlitter.length; i++) {
+                const g = orbitingGlitter[i];
+                g.angle += g.angularSpeed;
+                g.radialBreathPhase += 0.02;
+                g.sparklePhase += g.sparkleSpeed;
+
+                const r = g.radius + Math.sin(g.radialBreathPhase) * g.radialBreathAmp;
+                const gx = cx + Math.cos(g.angle) * r;
+                const gy = cy + Math.sin(g.angle) * r * g.tiltRatio;
+                const shimmer = 0.35 + (Math.sin(g.sparklePhase) * 0.5 + 0.5) * 0.65;
+
+                // Subtle trailing glitter tail
+                const tailAngle = g.angle - g.angularSpeed * 5;
+                const tx = cx + Math.cos(tailAngle) * r;
+                const ty = cy + Math.sin(tailAngle) * r * g.tiltRatio;
+                introCosmosCtx.beginPath();
+                introCosmosCtx.moveTo(tx, ty);
+                introCosmosCtx.lineTo(gx, gy);
+                introCosmosCtx.strokeStyle = `rgba(234, 182, 66, ${shimmer * 0.28})`;
+                introCosmosCtx.lineWidth = g.size * 0.75;
+                introCosmosCtx.stroke();
+
+                if (g.isBrightSparkle && shimmer > 0.72) {
+                    drawMiniSparkle(introCosmosCtx, gx, gy, g.size * 2.8, shimmer);
+                } else {
+                    introCosmosCtx.beginPath();
+                    introCosmosCtx.arc(gx, gy, g.size, 0, Math.PI * 2);
+                    introCosmosCtx.fillStyle = shimmer > 0.75
+                        ? `rgba(255, 249, 230, ${shimmer})`
+                        : `rgba(234, 182, 66, ${shimmer})`;
+                    introCosmosCtx.shadowBlur = 8;
+                    introCosmosCtx.shadowColor = '#eab642';
+                    introCosmosCtx.fill();
+                    introCosmosCtx.shadowBlur = 0;
+                }
+            }
+
+            introAnimFrame = requestAnimationFrame(renderIntroCosmos);
+        }
+
+        // 3. Concentric Ring Portal Curtain Open / Replay
         let portalTimer = null;
 
         function enterSummitWithAudio() {
             if (portalTimer) clearTimeout(portalTimer);
             const curtain = document.getElementById('intro-curtain');
-            if (curtain) {
-                curtain.classList.add('opened');
-            }
+            curtain.classList.add('opened');
             if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
                 userManuallyPaused = false;
                 ytPlayer.unMute();
@@ -478,25 +703,28 @@
         function playPortal() {
             if (portalTimer) clearTimeout(portalTimer);
             const curtain = document.getElementById('intro-curtain');
-            if (!curtain) return;
             curtain.classList.remove('opened');
+            initIntroCosmosScene();
+            if (!introAnimFrame) {
+                renderIntroCosmos();
+            }
             portalTimer = setTimeout(() => {
                 curtain.classList.add('opened');
-            }, 1600);
+            }, 1900);
         }
 
         function replayPortal() {
             playPortal();
         }
 
-        // 3. YouTube IFrame Player API Controller
+        // 4. Automatic YouTube IFrame Player API ("Magical Fantasy" by Dmitriy Sevostyanov - LYTbGh99bYA)
         let ytPlayer = null;
         let isAudioPlaying = false;
         let userManuallyPaused = false;
 
-        const ytScript = document.createElement('script');
-        ytScript.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(ytScript);
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
 
         function onYouTubeIframeAPIReady() {
             try {
@@ -529,7 +757,7 @@
                     }
                 });
             } catch (err) {
-                console.error('YouTube IFrame Player error:', err);
+                console.error('YouTube Player initialization error:', err);
             }
         }
 
@@ -537,8 +765,6 @@
             const icon = document.getElementById('audio-icon');
             const label = document.getElementById('audio-label');
             const eq = document.getElementById('eq-indicator');
-            if (!icon || !label || !eq) return;
-
             if (playing) {
                 icon.textContent = '❚❚';
                 label.textContent = 'Summit Audio';
@@ -562,7 +788,7 @@
             }
         }
 
-        // Unlock playback on first user interaction if browser autoplay policy blocks sound
+        // Automatically unlock/play audio on first user interaction if browser blocks autoplay with sound
         ['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
             window.addEventListener(evt, () => {
                 if (!userManuallyPaused && !isAudioPlaying && ytPlayer && typeof ytPlayer.playVideo === 'function') {
@@ -572,7 +798,7 @@
             }, { passive: true });
         });
 
-        // 4. Interactive Golden Constellation Starfield Canvas
+        // 5. Interactive Golden Constellation Starfield Canvas (Main Background)
         const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
         let stars = [];
@@ -606,49 +832,45 @@
         }
 
         function drawConstellations() {
-            try {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (let i = 0; i < stars.length; i++) {
-                    const s1 = stars[i];
-                    s1.x += s1.vx;
-                    s1.y += s1.vy;
-                    if (s1.x < 0 || s1.x > canvas.width) s1.vx *= -1;
-                    if (s1.y < 0 || s1.y > canvas.height) s1.vy *= -1;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < stars.length; i++) {
+                const s1 = stars[i];
+                s1.x += s1.vx;
+                s1.y += s1.vy;
+                if (s1.x < 0 || s1.x > canvas.width) s1.vx *= -1;
+                if (s1.y < 0 || s1.y > canvas.height) s1.vy *= -1;
 
-                    for (let j = i + 1; j < stars.length; j++) {
-                        const s2 = stars[j];
-                        const dist = Math.hypot(s1.x - s2.x, s1.y - s2.y);
-                        if (dist < 140) {
-                            ctx.beginPath();
-                            ctx.moveTo(s1.x, s1.y);
-                            ctx.lineTo(s2.x, s2.y);
-                            ctx.strokeStyle = `rgba(234, 182, 66, ${(1 - dist / 140) * 0.2})`;
-                            ctx.lineWidth = 0.65;
-                            ctx.stroke();
-                        }
+                for (let j = i + 1; j < stars.length; j++) {
+                    const s2 = stars[j];
+                    const dist = Math.hypot(s1.x - s2.x, s1.y - s2.y);
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(s1.x, s1.y);
+                        ctx.lineTo(s2.x, s2.y);
+                        ctx.strokeStyle = `rgba(234, 182, 66, ${(1 - dist / 140) * 0.2})`;
+                        ctx.lineWidth = 0.65;
+                        ctx.stroke();
                     }
-
-                    if (mouse.x !== null && mouse.y !== null) {
-                        const mDist = Math.hypot(s1.x - mouse.x, s1.y - mouse.y);
-                        if (mDist < 165) {
-                            ctx.beginPath();
-                            ctx.moveTo(s1.x, s1.y);
-                            ctx.lineTo(mouse.x, mouse.y);
-                            ctx.strokeStyle = `rgba(245, 215, 130, ${(1 - mDist / 165) * 0.3})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.stroke();
-                        }
-                    }
-
-                    ctx.beginPath();
-                    ctx.arc(s1.x, s1.y, s1.r, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(255, 249, 230, 0.72)';
-                    ctx.fill();
                 }
-                requestAnimationFrame(drawConstellations);
-            } catch (err) {
-                console.error('Constellation animation error:', err);
+
+                if (mouse.x !== null && mouse.y !== null) {
+                    const mDist = Math.hypot(s1.x - mouse.x, s1.y - mouse.y);
+                    if (mDist < 165) {
+                        ctx.beginPath();
+                        ctx.moveTo(s1.x, s1.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(245, 215, 130, ${(1 - mDist / 165) * 0.3})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+
+                ctx.beginPath();
+                ctx.arc(s1.x, s1.y, s1.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 249, 230, 0.72)';
+                ctx.fill();
             }
+            requestAnimationFrame(drawConstellations);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
