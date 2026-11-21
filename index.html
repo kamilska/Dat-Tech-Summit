@@ -1,1454 +1,1406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dat Tech Summit 2027 | Kraków</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dat Tech Summit 2027 | Kraków</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Google Fonts: Syne & Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Custom Palette & Typography -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        abyss: {
-                            950: '#030816',
-                            900: '#07112b',
-                            800: '#0c1c42',
-                            700: '#132a61',
-                        },
-                        gold: {
-                            100: '#fff9e6',
-                            200: '#fcedbd',
-                            300: '#f5d782',
-                            400: '#eab642',
-                            500: '#cf951d',
-                            600: '#9e6d0b',
-                        }
-                    },
-                    fontFamily: {
-                        display: ['Syne', 'sans-serif'],
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Syne"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            royal: {
+              950: '#020612',
+              900: '#040c22',
+              850: '#071333',
+              800: '#0b1c47',
+            },
+            champagne: {
+              200: '#fff6d6',
+              300: '#f7df94',
+              400: '#eab642',
+              500: '#d49a22',
             }
-        };
-    </script>
-
-    <style>
-        body {
-            background-color: #030816;
-            color: #f8fafc;
+          }
         }
+      }
+    };
+  </script>
 
-        /* Deep royal night-blue background with multi-plane atmospheric glow */
-        .bg-editorial-cosmos {
-            background:
-                radial-gradient(circle at 18% 12%, rgba(19, 42, 97, 0.58) 0%, transparent 48%),
-                radial-gradient(circle at 85% 88%, rgba(234, 182, 66, 0.1) 0%, transparent 45%),
-                radial-gradient(circle at 50% 50%, rgba(12, 28, 66, 0.45) 0%, #030816 100%);
-        }
+  <style>
+    :root {
+      --ease-liquid: cubic-bezier(0.22, 1, 0.36, 1);
+    }
 
-        /* Multi-plane deep parallax nebula layer */
-        .nebula-depth-plane {
-            background:
-                radial-gradient(ellipse 55% 45% at 24% 28%, rgba(30, 64, 145, 0.28) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 42% at 78% 72%, rgba(234, 182, 66, 0.09) 0%, transparent 68%),
-                radial-gradient(circle at 52% 18%, rgba(245, 215, 130, 0.06) 0%, transparent 55%);
-            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform;
-        }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        /* Floating ambient 3D bokeh orbs */
-        @keyframes orbDriftSlow {
-            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(22px, -26px, 0) scale(1.08); }
-        }
+    body {
+      background-color: #020612;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 18% 12%, rgba(234, 182, 66, 0.08) 0%, transparent 42%),
+        radial-gradient(circle at 82% 24%, rgba(29, 78, 216, 0.16) 0%, transparent 48%),
+        radial-gradient(circle at 50% 95%, rgba(234, 182, 66, 0.06) 0%, transparent 45%),
+        linear-gradient(180deg, #020612 0%, #050f29 52%, #020612 100%);
+    }
 
-        @keyframes orbDriftReverse {
-            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(-24px, 20px, 0) scale(0.94); }
-        }
+    /* Gold Foil Text Gradient */
+    .gold-foil {
+      background: linear-gradient(135deg, #fff6d6 0%, #f7df94 35%, #eab642 70%, #c88a18 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        .bokeh-orb-far { animation: orbDriftSlow 16s ease-in-out infinite; }
-        .bokeh-orb-mid { animation: orbDriftReverse 12s ease-in-out infinite; }
-        .bokeh-orb-near { animation: orbDriftSlow 9s ease-in-out infinite 1.5s; }
+    /* Liquid Border Spatial Glass Card */
+    .liquid-card {
+      position: relative;
+      border-radius: 1.25rem;
+      background: linear-gradient(155deg, rgba(11, 26, 64, 0.72) 0%, rgba(4, 11, 30, 0.88) 100%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow:
+        0 20px 45px -18px rgba(0, 0, 0, 0.85),
+        inset 0 1px 0 0 rgba(255, 246, 214, 0.2);
+      transition: transform 0.35s var(--ease-liquid), box-shadow 0.35s var(--ease-liquid);
+    }
 
-        /* Deep royal-night celestial backdrop for the portal curtain */
-        .bg-intro-royal-cosmos {
-            background:
-                radial-gradient(circle at 50% 47%, rgba(234, 182, 66, 0.2) 0%, rgba(19, 42, 97, 0.62) 28%, rgba(7, 17, 43, 0.94) 58%, #020510 100%),
-                radial-gradient(ellipse at 20% 18%, rgba(19, 42, 97, 0.48) 0%, transparent 50%),
-                radial-gradient(ellipse at 82% 80%, rgba(207, 149, 29, 0.15) 0%, transparent 48%),
-                #030816;
-        }
+    .liquid-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(247, 223, 148, 0.55) 0%,
+        rgba(234, 182, 66, 0.18) 38%,
+        rgba(148, 163, 184, 0.06) 72%,
+        rgba(234, 182, 66, 0.24) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
 
-        /* Metallic champagne-gold foil gradient applied identically across every word */
-        .text-gold-foil {
-            background: linear-gradient(180deg, #fff9e6 0%, #f5d782 48%, #cf951d 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    /* Subtle Sub-Card / Tile */
+    .liquid-subcard {
+      position: relative;
+      border-radius: 0.9rem;
+      background: rgba(6, 16, 42, 0.72);
+      border: 1px solid rgba(234, 182, 66, 0.16);
+      box-shadow: inset 0 1px 0 rgba(255, 246, 214, 0.08);
+      transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s var(--ease-liquid);
+    }
 
-        /* =========================================================
-           3D PERSPECTIVE STAGE ON #INTRO-CURTAIN
-           ========================================================= */
-        .intro-3d-viewport {
-            perspective: 1300px;
-        }
+    .liquid-subcard:hover {
+      border-color: rgba(247, 223, 148, 0.38);
+      background: rgba(10, 24, 60, 0.82);
+    }
 
-        .intro-3d-rig {
-            transform-style: preserve-3d;
-            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform;
-        }
+    /* Tabular Numerals for Precision Schedule Alignment */
+    .tabular-time {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum" 1, "cv05" 1;
+    }
 
-        .portal-z-far {
-            transform-style: preserve-3d;
-            transform: translateZ(-25px);
-        }
+    /* Opening Portal Curtain with Inertia & Blur Reveal */
+    #intro-curtain {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #091942 0%, #030816 62%, #01030a 100%);
+      transition:
+        opacity 0.95s var(--ease-liquid),
+        transform 1.05s var(--ease-liquid),
+        filter 0.95s var(--ease-liquid);
+      will-change: opacity, transform, filter;
+    }
 
-        .portal-z-outer {
-            transform-style: preserve-3d;
-            transform: translateZ(20px);
-        }
+    #intro-curtain.curtain-opening {
+      opacity: 0;
+      transform: scale(1.07);
+      filter: blur(10px);
+      pointer-events: none;
+    }
 
-        .portal-z-inner {
-            transform-style: preserve-3d;
-            transform: translateZ(45px);
-        }
+    #main-shell {
+      transition: opacity 0.9s var(--ease-liquid), filter 0.95s var(--ease-liquid), transform 0.95s var(--ease-liquid);
+    }
 
-        .portal-z-polygons {
-            transform-style: preserve-3d;
-            transform: translateZ(65px);
-        }
+    body.portal-locked #main-shell {
+      opacity: 0.18;
+      filter: blur(8px);
+      transform: scale(0.985);
+    }
 
-        .portal-z-emblem {
-            transform-style: preserve-3d;
-            transform: translateZ(95px);
-            box-shadow:
-                0 22px 45px -10px rgba(2, 5, 16, 0.9),
-                0 0 38px rgba(234, 182, 66, 0.28),
-                inset 0 1px 1px rgba(255, 249, 230, 0.45);
-        }
+    body.portal-unlocked #main-shell {
+      opacity: 1;
+      filter: blur(0px);
+      transform: scale(1);
+    }
 
-        .portal-z-caption {
-            transform-style: preserve-3d;
-            transform: translateZ(55px);
-        }
+    /* Concentric Portal Rings */
+    @keyframes spinSlowCW {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinSlowCCW {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    @keyframes pulseAura {
+      0%, 100% { transform: scale(0.97); opacity: 0.55; }
+      50% { transform: scale(1.04); opacity: 0.95; }
+    }
 
-        .portal-z-cta {
-            transform-style: preserve-3d;
-            transform: translateZ(75px);
-            box-shadow:
-                0 16px 32px -6px rgba(2, 5, 16, 0.85),
-                0 0 24px rgba(234, 182, 66, 0.35),
-                inset 0 1px 0 rgba(255, 249, 230, 0.4);
-        }
+    .ring-cw-1 { animation: spinSlowCW 28s linear infinite; }
+    .ring-ccw-2 { animation: spinSlowCCW 20s linear infinite; }
+    .ring-cw-3 { animation: spinSlowCW 14s linear infinite; }
+    .portal-aura { animation: pulseAura 4s ease-in-out infinite; }
 
-        /* =========================================================
-           ELEVATED 3D EDITORIAL GLASS CARDS
-           ========================================================= */
-        .workspace-3d-scene {
-            perspective: 1800px;
-        }
+    /* Equalizer Bars */
+    @keyframes eqPulse {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+    .eq-playing .eq-bar-1 { animation: eqPulse 0.75s ease-in-out infinite; }
+    .eq-playing .eq-bar-2 { animation: eqPulse 0.55s ease-in-out infinite 0.15s; }
+    .eq-playing .eq-bar-3 { animation: eqPulse 0.85s ease-in-out infinite 0.3s; }
+    .eq-playing .eq-bar-4 { animation: eqPulse 0.65s ease-in-out infinite 0.1s; }
 
-        .editorial-frame {
-            position: relative;
-            border: 1px solid rgba(234, 182, 66, 0.26);
-            border-top-color: rgba(255, 249, 230, 0.38);
-            background: linear-gradient(155deg, rgba(12, 28, 66, 0.72) 0%, rgba(7, 17, 43, 0.76) 55%, rgba(3, 8, 22, 0.88) 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow:
-                0 24px 54px -14px rgba(1, 4, 14, 0.92),
-                0 10px 24px -8px rgba(2, 6, 20, 0.85),
-                0 0 1px 1px rgba(234, 182, 66, 0.1),
-                inset 0 1px 0 0 rgba(255, 249, 230, 0.18),
-                inset 0 -1px 0 0 rgba(234, 182, 66, 0.08);
-            transform-style: preserve-3d;
-            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
-            will-change: transform;
-        }
+    /* Custom Scrollbar for Desktop Planner */
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(2, 6, 18, 0.4);
+      border-radius: 999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(234, 182, 66, 0.35);
+      border-radius: 999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(234, 182, 66, 0.65);
+    }
 
-        .editorial-frame:hover {
-            border-color: rgba(234, 182, 66, 0.38);
-            border-top-color: rgba(255, 249, 230, 0.5);
-            box-shadow:
-                0 30px 64px -14px rgba(1, 4, 14, 0.95),
-                0 12px 28px -8px rgba(234, 182, 66, 0.12),
-                0 0 1px 1px rgba(234, 182, 66, 0.18),
-                inset 0 1px 0 0 rgba(255, 249, 230, 0.26),
-                inset 0 -1px 0 0 rgba(234, 182, 66, 0.12);
-        }
+    /* Dark Styled Map Filter */
+    .dark-gold-map {
+      filter: invert(92%) hue-rotate(185deg) saturate(135%) brightness(90%) contrast(102%);
+    }
 
-        .tile-3d {
-            background: linear-gradient(160deg, rgba(12, 28, 66, 0.58) 0%, rgba(3, 8, 22, 0.78) 100%);
-            border-top-color: rgba(255, 249, 230, 0.24);
-            box-shadow:
-                0 10px 22px -8px rgba(1, 4, 14, 0.85),
-                inset 0 1px 0 rgba(255, 249, 230, 0.14);
-            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-        }
-
-        .tile-3d:hover {
-            transform: translateY(-2px) translateZ(10px);
-            border-color: rgba(234, 182, 66, 0.42);
-            box-shadow:
-                0 16px 30px -8px rgba(1, 4, 14, 0.95),
-                0 4px 14px rgba(234, 182, 66, 0.16),
-                inset 0 1px 0 rgba(255, 249, 230, 0.26);
-        }
-
-        .btn-3d {
-            box-shadow:
-                0 8px 18px -4px rgba(2, 5, 16, 0.8),
-                inset 0 1px 0 rgba(255, 249, 230, 0.35);
-            transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-        }
-
-        .btn-3d:hover {
-            transform: translateY(-1.5px);
-            box-shadow:
-                0 12px 24px -4px rgba(2, 5, 16, 0.9),
-                0 0 18px rgba(234, 182, 66, 0.32),
-                inset 0 1px 0 rgba(255, 249, 230, 0.55);
-        }
-
-        .btn-3d:active {
-            transform: translateY(0.5px) scale(0.98);
-        }
-
-        .map-recessed-3d {
-            box-shadow:
-                inset 0 4px 16px rgba(1, 4, 14, 0.92),
-                0 1px 0 rgba(255, 249, 230, 0.16);
-        }
-
-        .editorial-cell {
-            border-color: rgba(234, 182, 66, 0.18);
-        }
-
-        /* Concentric rotating ring & cosmic stardust portal opening animations */
-        @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes spinReverse {
-            from { transform: rotate(360deg); }
-            to { transform: rotate(0deg); }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.65; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.07); }
-        }
-
-        @keyframes cosmicRipple {
-            0% { transform: scale(0.86); opacity: 0.55; }
-            70% { opacity: 0.18; }
-            100% { transform: scale(1.42); opacity: 0; }
-        }
-
-        .ring-stardust-outer { animation: spinSlow 38s linear infinite; }
-        .ring-stardust-mid { animation: spinReverse 26s linear infinite; }
-        .ring-outer { animation: spinSlow 18s linear infinite; }
-        .ring-inner { animation: spinReverse 12s linear infinite; }
-        .portal-glow { animation: pulseGlow 3.2s ease-in-out infinite; }
-        .cosmic-ripple-1 { animation: cosmicRipple 4.4s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
-        .cosmic-ripple-2 { animation: cosmicRipple 4.4s cubic-bezier(0.22, 1, 0.36, 1) infinite 2.2s; }
-
-        #intro-curtain {
-            transition: opacity 0.95s cubic-bezier(0.77, 0, 0.175, 1), transform 1.15s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.15s;
-        }
-
-        #intro-curtain.opened {
-            opacity: 0;
-            transform: scale(1.14);
-            visibility: hidden;
-            pointer-events: none;
-            display: none;
-        }
-
-        /* Animated audio equalizer bars */
-        @keyframes eqPulse {
-            0%, 100% { height: 4px; }
-            50% { height: 14px; }
-        }
-
-        .eq-bar {
-            width: 2.5px;
-            background-color: #eab642;
-            border-radius: 99px;
-            height: 4px;
-        }
-
-        .eq-playing .eq-bar:nth-child(1) { animation: eqPulse 0.65s ease-in-out infinite; }
-        .eq-playing .eq-bar:nth-child(2) { animation: eqPulse 0.45s ease-in-out infinite 0.15s; }
-        .eq-playing .eq-bar:nth-child(3) { animation: eqPulse 0.75s ease-in-out infinite 0.3s; }
-        .eq-playing .eq-bar:nth-child(4) { animation: eqPulse 0.55s ease-in-out infinite 0.1s; }
-
-        /* Subtle custom scrollbar */
-        .custom-scroll::-webkit-scrollbar { width: 4px; }
-        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(234, 182, 66, 0.3); border-radius: 999px; }
-        .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(234, 182, 66, 0.6); }
-    </style>
+    /* Live Pulse Dot */
+    @keyframes livePing {
+      0% { transform: scale(0.95); opacity: 0.9; }
+      70% { transform: scale(2.1); opacity: 0; }
+      100% { transform: scale(2.1); opacity: 0; }
+    }
+    .live-ping::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      background-color: #eab642;
+      animation: livePing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+  </style>
 </head>
-<body class="bg-editorial-cosmos min-h-screen lg:h-screen lg:overflow-hidden flex flex-col relative selection:bg-gold-400 selection:text-abyss-950">
+<body class="portal-locked min-h-screen flex flex-col selection:bg-champagne-400 selection:text-royal-950 pb-24 lg:pb-0">
 
-    <!-- Expressive Golden Stardust & Micro-Glint Cursor Trail Overlay -->
-    <canvas id="cursor-dust-canvas" class="fixed inset-0 pointer-events-none z-[60]"></canvas>
+  <!-- Ambient Starfield Canvas -->
+  <canvas id="bg-star-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-75"></canvas>
 
-    <!-- Multi-Plane Z-Depth Atmospheric Nebula & Ambient Bokeh Orbs -->
-    <div id="nebula-plane" class="nebula-depth-plane fixed -inset-12 pointer-events-none z-0"></div>
-    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div class="bokeh-orb-far absolute top-[8%] left-[12%] w-80 h-80 rounded-full bg-abyss-700/35 blur-3xl"></div>
-        <div class="bokeh-orb-far absolute bottom-[10%] right-[14%] w-96 h-96 rounded-full bg-gold-500/10 blur-3xl"></div>
-        <div class="bokeh-orb-mid absolute top-[46%] left-[44%] w-64 h-64 rounded-full bg-gold-400/10 blur-2xl"></div>
-        <div class="bokeh-orb-mid absolute top-[18%] right-[24%] w-44 h-44 rounded-full bg-abyss-700/40 blur-2xl"></div>
-        <div class="bokeh-orb-near absolute bottom-[22%] left-[26%] w-36 h-36 rounded-full bg-gold-300/10 blur-xl"></div>
+  <!-- Subtle Micro Gold Cursor Trail -->
+  <canvas id="cursor-dust-canvas" class="fixed inset-0 pointer-events-none z-30"></canvas>
+
+  <!-- Hidden YouTube Background Music Player (LYTbGh99bYA - Magical Fantasy) -->
+  <div class="fixed -left-[9999px] -top-[9999px] w-1 h-1 opacity-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div id="yt-audio-player"></div>
+  </div>
+
+  <!-- Toast Notification (for Copy Address & Calendar Download) -->
+  <div id="toast-banner" role="status" aria-live="polite"
+       class="fixed top-5 left-1/2 -translate-x-1/2 z-[100] pointer-events-none opacity-0 -translate-y-3 transition-all duration-300 ease-out">
+    <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-royal-900/95 border border-champagne-400/60 shadow-[0_12px_32px_rgba(0,0,0,0.75)] backdrop-blur-md">
+      <svg class="w-4 h-4 text-champagne-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span id="toast-message" class="text-xs font-semibold tracking-wide text-champagne-200">Copied to clipboard</span>
     </div>
+  </div>
 
-    <!-- Portal Curtain (#intro-curtain) with Royal-Night Celestial Backdrop & Orbiting Golden Glitter -->
-    <div id="intro-curtain" onclick="enterSummitWithAudio()" class="intro-3d-viewport fixed inset-0 z-50 bg-intro-royal-cosmos flex flex-col items-center justify-center overflow-hidden p-4 cursor-pointer">
-        <!-- Twinkling Stars, Floating Golden Shimmer Motes & Orbiting Golden Glitter Canvas -->
-        <canvas id="intro-cosmos-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+  <!-- OPENING PORTAL CURTAIN (#intro-curtain) -->
+  <div id="intro-curtain" role="dialog" aria-modal="true" aria-label="Dat Tech Summit 2027 Portal">
+    <canvas id="intro-cosmos-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
 
-        <!-- Golden ambient glows -->
-        <div class="absolute w-[36rem] h-[36rem] bg-gold-500/15 rounded-full blur-3xl portal-glow pointer-events-none z-0"></div>
-        <div class="absolute w-72 h-72 bg-gold-300/15 rounded-full blur-2xl portal-glow pointer-events-none z-0"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center px-6 text-center select-none">
+      <!-- Concentric Rotating Rings Portal -->
+      <div class="relative w-[290px] h-[290px] sm:w-[370px] sm:h-[370px] flex items-center justify-center">
+        <!-- Soft Golden Aura -->
+        <div class="portal-aura absolute inset-3 rounded-full bg-gradient-to-tr from-champagne-500/20 via-champagne-300/15 to-blue-500/20 blur-2xl"></div>
 
-        <!-- 3D Pointer-Reactive Portal Rig -->
-        <div id="intro-3d-rig" class="intro-3d-rig relative z-10 flex flex-col items-center justify-center">
-            <div class="relative w-[21rem] h-[21rem] sm:w-[27rem] sm:h-[27rem] flex items-center justify-center mb-4" style="transform-style: preserve-3d;">
-                <!-- Concentric Cosmic Stardust Ripples -->
-                <div class="portal-z-far absolute inset-3 rounded-full border border-gold-300/35 cosmic-ripple-1 pointer-events-none"></div>
-                <div class="portal-z-far absolute inset-3 rounded-full border border-gold-400/25 cosmic-ripple-2 pointer-events-none"></div>
+        <!-- Outer Dotted Astrolabe Ring -->
+        <svg class="ring-cw-1 absolute inset-0 w-full h-full text-champagne-400/55" viewBox="0 0 400 400" fill="none">
+          <circle cx="200" cy="200" r="192" stroke="currentColor" stroke-width="1" stroke-dasharray="3 7" />
+          <circle cx="200" cy="200" r="182" stroke="currentColor" stroke-width="0.75" stroke-opacity="0.45" />
+          <g fill="currentColor">
+            <circle cx="200" cy="8" r="3" />
+            <circle cx="392" cy="200" r="3" />
+            <circle cx="200" cy="392" r="3" />
+            <circle cx="8" cy="200" r="3" />
+          </g>
+        </svg>
 
-                <!-- Outermost Cosmic Stardust Ring -->
-                <div class="portal-z-far absolute inset-0 pointer-events-none">
-                    <svg class="w-full h-full ring-stardust-outer text-gold-400/45" viewBox="0 0 320 320" fill="none">
-                        <circle cx="160" cy="160" r="154" stroke="currentColor" stroke-width="0.8" stroke-dasharray="1.5 6.5"/>
-                        <circle cx="160" cy="160" r="144" stroke="currentColor" stroke-width="0.6" stroke-dasharray="16 8 2 8"/>
-                        <circle cx="160" cy="6" r="2.4" fill="#fff9e6"/>
-                        <circle cx="160" cy="314" r="2.4" fill="#fff9e6"/>
-                        <circle cx="6" cy="160" r="2.4" fill="#fff9e6"/>
-                        <circle cx="314" cy="160" r="2.4" fill="#fff9e6"/>
-                        <circle cx="51" cy="51" r="1.8" fill="#f5d782"/>
-                        <circle cx="269" cy="51" r="1.8" fill="#f5d782"/>
-                        <circle cx="51" cy="269" r="1.8" fill="#f5d782"/>
-                        <circle cx="269" cy="269" r="1.8" fill="#f5d782"/>
-                    </svg>
-                </div>
+        <!-- Middle Geometric Sacred Polygon Ring -->
+        <svg class="ring-ccw-2 absolute inset-6 w-[calc(100%-3rem)] h-[calc(100%-3rem)] text-champagne-300/65" viewBox="0 0 340 340" fill="none">
+          <circle cx="170" cy="170" r="162" stroke="currentColor" stroke-width="1.1" stroke-dasharray="22 10 4 10" />
+          <polygon points="170,12 307,91 307,249 170,328 33,249 33,91" stroke="currentColor" stroke-width="0.85" stroke-opacity="0.5" />
+          <polygon points="170,328 33,91 307,91" stroke="currentColor" stroke-width="0.65" stroke-opacity="0.35" />
+          <polygon points="170,12 307,249 33,249" stroke="currentColor" stroke-width="0.65" stroke-opacity="0.35" />
+        </svg>
 
-                <!-- Secondary Counter-Rotating Cosmic Stardust Ring -->
-                <div class="portal-z-outer absolute inset-5 sm:inset-7 w-[calc(100%-2.5rem)] sm:w-[calc(100%-3.5rem)] h-[calc(100%-2.5rem)] sm:h-[calc(100%-3.5rem)] pointer-events-none">
-                    <svg class="w-full h-full ring-stardust-mid text-gold-300/50" viewBox="0 0 260 260" fill="none">
-                        <circle cx="130" cy="130" r="124" stroke="currentColor" stroke-width="0.8" stroke-dasharray="10 5 1.5 5"/>
-                        <polygon points="130,6 254,130 130,254 6,130" stroke="currentColor" stroke-width="0.55" opacity="0.48"/>
-                    </svg>
-                </div>
+        <!-- Inner Fine Shimmer Ring -->
+        <svg class="ring-cw-3 absolute inset-12 w-[calc(100%-6rem)] h-[calc(100%-6rem)] text-champagne-400/80" viewBox="0 0 280 280" fill="none">
+          <circle cx="140" cy="140" r="132" stroke="currentColor" stroke-width="1.25" stroke-dasharray="48 14 8 14" />
+          <circle cx="140" cy="140" r="122" stroke="currentColor" stroke-width="0.6" stroke-opacity="0.55" />
+        </svg>
 
-                <!-- Concentric Rotating Rings with Inscribed Polygons & Central Emblem -->
-                <div class="relative w-60 h-60 sm:w-64 sm:h-64 flex items-center justify-center" style="transform-style: preserve-3d;">
-                    <div class="portal-z-outer absolute inset-0 pointer-events-none">
-                        <svg class="w-full h-full ring-outer text-gold-400/80 drop-shadow-[0_10px_18px_rgba(0,0,0,0.65)]" viewBox="0 0 200 200" fill="none">
-                            <circle cx="100" cy="100" r="92" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4"/>
-                            <circle cx="100" cy="100" r="84" stroke="currentColor" stroke-width="1.5"/>
-                        </svg>
-                    </div>
-
-                    <div class="portal-z-polygons absolute inset-0 pointer-events-none">
-                        <svg class="w-full h-full ring-outer text-gold-300/80 drop-shadow-[0_12px_20px_rgba(234,182,66,0.25)]" viewBox="0 0 200 200" fill="none">
-                            <polygon points="100,12 188,100 100,188 12,100" stroke="currentColor" stroke-width="0.85" opacity="0.78"/>
-                            <polygon points="38,38 162,38 162,162 38,162" stroke="currentColor" stroke-width="0.85" opacity="0.78"/>
-                        </svg>
-                    </div>
-
-                    <div class="portal-z-inner absolute inset-6 w-48 h-48 sm:w-52 sm:h-52 pointer-events-none">
-                        <svg class="w-full h-full ring-inner text-gold-300/90 drop-shadow-[0_10px_18px_rgba(0,0,0,0.7)]" viewBox="0 0 200 200" fill="none">
-                            <circle cx="100" cy="100" r="75" stroke="currentColor" stroke-width="1" stroke-dasharray="10 5 2 5"/>
-                            <circle cx="100" cy="100" r="56" stroke="currentColor" stroke-width="1.5"/>
-                        </svg>
-                    </div>
-
-                    <!-- Central Emblem: Dat Tech Summit 2027 -->
-                    <div class="portal-z-emblem relative z-10 w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-abyss-950/85 backdrop-blur-md border border-gold-400/55 flex flex-col items-center justify-center text-center px-3">
-                        <span class="font-display text-sm sm:text-base font-extrabold tracking-wide leading-tight text-gold-foil block">
-                            Dat Tech
-                        </span>
-                        <span class="font-display text-xs sm:text-sm font-extrabold tracking-wide leading-tight text-gold-foil mt-0.5 block">
-                            Summit 2027
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <p class="portal-z-caption relative z-10 font-display text-gold-300 tracking-[0.3em] text-xs uppercase animate-pulse mb-4 drop-shadow-[0_6px_14px_rgba(0,0,0,0.85)]">
-                Unlocking the Summit...
-            </p>
-
-            <button type="button" onclick="event.stopPropagation(); enterSummitWithAudio();" class="portal-z-cta relative z-10 px-5 py-2 rounded-full bg-gold-400/20 hover:bg-gold-400 text-gold-100 hover:text-abyss-950 border border-gold-400/50 font-display text-xs font-bold tracking-widest uppercase transition-all cursor-pointer">
-                Enter Summit &amp; Enable Audio
-            </button>
+        <!-- Center Emblem Medallion -->
+        <div class="relative z-10 w-[195px] h-[195px] sm:w-[232px] sm:h-[232px] rounded-full bg-royal-950/90 border border-champagne-400/50 shadow-[0_0_55px_rgba(234,182,66,0.28),inset_0_1px_12px_rgba(255,246,214,0.2)] flex flex-col items-center justify-center px-4 backdrop-blur-md">
+          <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-champagne-300/85 font-semibold mb-1.5">
+            Kraków • Poland
+          </span>
+          <h2 class="font-display font-extrabold text-2xl sm:text-[28px] leading-[1.08] tracking-tight gold-foil">
+            Dat Tech<br/>Summit 27
+          </h2>
+          <div class="mt-2.5 flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-slate-300/90 font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-champagne-400"></span>
+            <span>16–17 Dec 2026</span>
+          </div>
         </div>
+      </div>
+
+      <!-- Enter Portal Button -->
+      <button id="enter-portal-btn" type="button"
+              class="touch-manipulation mt-7 group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-champagne-300 via-champagne-400 to-champagne-500 text-royal-950 font-display font-bold text-xs sm:text-sm uppercase tracking-[0.18em] shadow-[0_10px_35px_rgba(234,182,66,0.42)] hover:shadow-[0_14px_45px_rgba(234,182,66,0.65)] active:scale-95 transition-all duration-300 cursor-pointer">
+        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v3m0 12v3M3 12h3m12 0h3m-2.6-6.4-2.1 2.1m-8.6 8.6-2.1 2.1m0-12.8 2.1 2.1m8.6 8.6 2.1 2.1"/>
+        </svg>
+        <span>Enter Summit Guide</span>
+      </button>
+      <p class="mt-3 text-[11px] tracking-widest uppercase text-slate-400/80">
+        Opening automatically in a moment...
+      </p>
     </div>
+  </div>
 
-    <!-- Interactive Multi-Depth 3D Golden Constellation Starfield Canvas -->
-    <canvas id="constellation-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-85"></canvas>
+  <!-- MAIN APPLICATION SHELL -->
+  <div id="main-shell" class="relative z-10 flex-1 flex flex-col max-w-[1440px] w-full mx-auto px-3.5 sm:px-6 lg:px-8 pt-3.5 sm:pt-5 pb-6">
 
-    <!-- Hidden YouTube Audio Player ("Magical Fantasy - ✨ Extended Version of Magical Music by Dmitriy Sevostyanov @dspromusic" - LYTbGh99bYA) -->
-    <div id="yt-audio-wrapper" class="fixed -left-[9999px] -top-[9999px] w-1 h-1 opacity-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div id="yt-player"></div>
-    </div>
+    <!-- COMPACT EDITORIAL HEADER WITH KRAKÓW SKYLINE & LIVE UTILITIES -->
+    <header class="liquid-card px-4 sm:px-6 py-3.5 sm:py-4 mb-4 sm:mb-5 overflow-hidden">
+      <!-- Decorative Gold Kraków Main Square Skyline Silhouette -->
+      <svg class="pointer-events-none absolute right-0 bottom-0 h-20 sm:h-24 w-auto opacity-20 text-champagne-400" viewBox="0 0 520 110" fill="none" aria-hidden="true">
+        <path d="M0 108 H115 V82 H125 V68 H148 V82 H160 V108 H178 V52 L186 24 L194 52 V108 H212 V74 H265 V62 H282 V74 H335 V108 H355 V44 L362 12 L367 6 L372 12 L379 44 V65 L387 28 L395 65 V108 H420 V78 H452 V108 H520" stroke="currentColor" stroke-width="1.35"/>
+        <circle cx="367" cy="24" r="3" fill="currentColor"/>
+      </svg>
 
-    <!-- Editorial Hairline-Grid Single-Screen 3D Workspace -->
-    <div class="workspace-3d-scene relative z-10 flex-1 flex flex-col max-w-[1640px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4 lg:h-full">
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-3.5">
+        <!-- Brand & International Welcome -->
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-[0.2em] bg-champagne-400/15 text-champagne-300 border border-champagne-400/30">
+              <span class="w-1.5 h-1.5 rounded-full bg-champagne-400"></span>
+              Kraków • 16–17 Dec 2026
+            </span>
+            <span class="text-[11px] text-slate-300/80 hidden sm:inline">
+              Welcome USA • UK • Portugal • Türkiye • Germany
+            </span>
+          </div>
+          <h1 class="font-display font-extrabold text-2xl sm:text-3xl lg:text-[34px] tracking-tight leading-none gold-foil">
+            Dat Tech Summit 2027
+          </h1>
+        </div>
 
-        <!-- Top Header Bar -->
-        <header data-tilt-card data-tilt-max="1.6" class="shrink-0 editorial-frame rounded-2xl px-4 sm:px-6 py-3 mb-3.5 flex flex-col md:flex-row items-center justify-between gap-3">
+        <!-- Live Utility Bar: Kraków Weather Pill + Calendar .ics + Audio + Replay Intro -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+          <!-- Live Kraków Weather Pill -->
+          <div id="weather-pill" title="Live weather in Kraków, Poland"
+               class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-royal-950/75 border border-champagne-400/25 text-xs text-slate-200">
+            <svg class="w-3.5 h-3.5 text-champagne-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+            </svg>
+            <span class="text-slate-400 text-[11px] uppercase tracking-wider font-semibold">KRK</span>
+            <span id="krk-weather-text" class="tabular-time font-semibold text-champagne-200">2°C • Crisp</span>
+          </div>
 
-            <!-- Left: Title ("Dat Tech Summit 2027" with identical gold foil on every word, no circle badge) + Date & Location -->
-            <div class="flex items-center gap-4 text-center md:text-left">
-                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
-                    <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-gold-foil drop-shadow-[0_4px_14px_rgba(234,182,66,0.2)]">
-                        Dat Tech Summit 2027
-                    </h1>
-                    <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-gold-300/90 border-l border-gold-400/30 pl-2.5">
-                        16–17 Dec 2026 • Kraków
-                    </span>
-                </div>
-            </div>
+          <!-- Download .ics Calendar Button -->
+          <button id="download-ics-btn" type="button"
+                  class="touch-manipulation inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-royal-950/75 hover:bg-champagne-400/15 border border-champagne-400/30 text-xs font-semibold text-champagne-200 transition cursor-pointer">
+            <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+              <path d="M12 14v4m-2-2 2 2 2-2"/>
+            </svg>
+            <span>Add .ics</span>
+          </button>
 
-            <!-- Center: Minimalist Gold Vector Skyline of Kraków Main Square -->
-            <div class="hidden xl:block w-64 h-8 opacity-90 drop-shadow-[0_4px_10px_rgba(234,182,66,0.25)]">
-                <svg viewBox="0 0 360 46" fill="none" class="w-full h-full">
-                    <line x1="0" y1="44" x2="360" y2="44" stroke="#eab642" stroke-width="1"/>
-                    <path d="M45,44 V26 L55,18 L65,26 V44 M65,44 V28 H195 V44 M72,44 V35 A4,4 0 0 1 80,35 V44 M88,44 V35 A4,4 0 0 1 96,35 V44 M104,44 V35 A4,4 0 0 1 112,35 V44 M120,44 V35 A4,4 0 0 1 128,35 V44 M136,44 V35 A4,4 0 0 1 144,35 V44 M152,44 V35 A4,4 0 0 1 160,35 V44 M168,44 V35 A4,4 0 0 1 176,35 V44 M184,44 V35 A4,4 0 0 1 192,35 V44" stroke="#f5d782" stroke-width="1"/>
-                    <path d="M122,28 V21 L130,14 L138,21 V28" stroke="#f5d782" stroke-width="1"/>
-                    <path d="M215,44 V14 L222,3 L229,14 V44 M229,44 V20 L235,11 L241,20 V44 M241,44 V28 H268 V44" stroke="#f5d782" stroke-width="1.1"/>
+          <!-- Background Music Equalizer Toggle -->
+          <button id="audio-toggle-btn" type="button" aria-label="Toggle Background Music"
+                  class="touch-manipulation inline-flex items-center gap-2 px-3 py-2 rounded-full bg-royal-950/75 hover:bg-champagne-400/15 border border-champagne-400/30 text-xs font-semibold text-champagne-200 transition cursor-pointer">
+            <span id="eq-bars" class="inline-flex items-end gap-[2px] h-3.5 w-3.5 justify-center">
+              <span class="eq-bar-1 w-[2px] h-1 bg-champagne-400 rounded-full"></span>
+              <span class="eq-bar-2 w-[2px] h-2.5 bg-champagne-400 rounded-full"></span>
+              <span class="eq-bar-3 w-[2px] h-1.5 bg-champagne-400 rounded-full"></span>
+              <span class="eq-bar-4 w-[2px] h-2 bg-champagne-400 rounded-full"></span>
+            </span>
+            <span id="audio-status-label">Sound: On</span>
+          </button>
+
+          <!-- Replay Portal Intro Button -->
+          <button id="replay-intro-btn" type="button"
+                  class="touch-manipulation inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-champagne-400/15 hover:bg-champagne-400/25 border border-champagne-400/45 text-xs font-semibold text-champagne-300 transition cursor-pointer">
+            <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v2m0 14v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M3 12h2m14 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/>
+            </svg>
+            <span>Replay Intro</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- TWO-COLUMN SPLIT DASHBOARD (LEFT: 4-DAY SCHEDULE | RIGHT: KRAKÓW GUEST COMPENDIUM) -->
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 flex-1 items-start">
+
+      <!-- LEFT COLUMN (7 COLS): 01 / INTERACTIVE 4-DAY PLANNER -->
+      <section id="section-schedule" class="lg:col-span-7 liquid-card p-4 sm:p-6 flex flex-col">
+        <!-- Section Eyebrow & Live Mode Preview Toggle -->
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3.5 mb-3.5 border-b border-champagne-400/15">
+          <div class="flex items-center gap-2.5">
+            <span class="text-[11px] font-bold tracking-[0.22em] uppercase text-champagne-400">01 / Schedule</span>
+            <span id="live-status-pill" class="hidden inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-champagne-400/20 text-champagne-200 border border-champagne-400/45">
+              <span class="relative w-2 h-2 rounded-full bg-champagne-400 live-ping"></span>
+              <span id="live-status-text">Live Summit View</span>
+            </span>
+          </div>
+
+          <!-- Simulate Live Summit Indicator Toggle -->
+          <button id="toggle-live-demo-btn" type="button"
+                  class="touch-manipulation inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium bg-royal-950/80 hover:bg-champagne-400/15 border border-champagne-400/25 text-slate-300 hover:text-champagne-200 transition cursor-pointer">
+            <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span id="live-demo-label">Preview Live Session</span>
+          </button>
+        </div>
+
+        <!-- Mode Switcher: Flying In (MON–THU) first, Summit Only (WED/THU) second -->
+        <div class="grid grid-cols-2 gap-2 p-1.5 rounded-xl bg-royal-950/90 border border-champagne-400/20 mb-3 relative z-20">
+          <button id="mode-flying-btn" type="button"
+                  class="touch-manipulation min-h-[42px] px-3 py-2 rounded-lg text-xs sm:text-sm font-display font-bold tracking-wide transition-all cursor-pointer bg-gradient-to-r from-champagne-300 via-champagne-400 to-champagne-500 text-royal-950 shadow-[0_4px_16px_rgba(234,182,66,0.35)]">
+            Flying In (MON–THU)
+          </button>
+          <button id="mode-summit-btn" type="button"
+                  class="touch-manipulation min-h-[42px] px-3 py-2 rounded-lg text-xs sm:text-sm font-display font-bold tracking-wide transition-all cursor-pointer text-slate-300 hover:text-champagne-200 hover:bg-white/5">
+            Summit Only (WED/THU)
+          </button>
+        </div>
+
+        <!-- Permanent Day Selector Tabs (MON, TUE, WED, THU) -->
+        <div class="grid grid-cols-4 gap-2 mb-3.5 relative z-20" role="tablist" aria-label="Summit Days">
+          <button id="tab-mon" data-day="MON" type="button" role="tab"
+                  class="day-tab touch-manipulation min-h-[46px] py-2 px-2 rounded-xl border text-center transition-all cursor-pointer">
+            <div class="font-display font-extrabold text-xs sm:text-sm tracking-wider">MON</div>
+            <div class="tabular-time text-[10px] opacity-80">14 Dec</div>
+          </button>
+          <button id="tab-tue" data-day="TUE" type="button" role="tab"
+                  class="day-tab touch-manipulation min-h-[46px] py-2 px-2 rounded-xl border text-center transition-all cursor-pointer">
+            <div class="font-display font-extrabold text-xs sm:text-sm tracking-wider">TUE</div>
+            <div class="tabular-time text-[10px] opacity-80">15 Dec</div>
+          </button>
+          <button id="tab-wed" data-day="WED" type="button" role="tab"
+                  class="day-tab touch-manipulation min-h-[46px] py-2 px-2 rounded-xl border text-center transition-all cursor-pointer">
+            <div class="font-display font-extrabold text-xs sm:text-sm tracking-wider">WED</div>
+            <div class="tabular-time text-[10px] opacity-80">16 Dec</div>
+          </button>
+          <button id="tab-thu" data-day="THU" type="button" role="tab"
+                  class="day-tab touch-manipulation min-h-[46px] py-2 px-2 rounded-xl border text-center transition-all cursor-pointer">
+            <div class="font-display font-extrabold text-xs sm:text-sm tracking-wider">THU</div>
+            <div class="tabular-time text-[10px] opacity-80">17 Dec</div>
+          </button>
+        </div>
+
+        <!-- Active Day Banner & Room Indicator -->
+        <div class="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-champagne-400/10 border border-champagne-400/25 mb-3">
+          <div>
+            <h2 id="day-title" class="font-display font-bold text-sm sm:text-base text-champagne-200">
+              Wednesday, 16 December — Main Summit Day
+            </h2>
+            <p id="day-subtitle" class="text-xs text-slate-300/85">
+              All sessions at Cisco Office 3rd floor • Evening gala dinner at Ziyad Castle
+            </p>
+          </div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-royal-950/80 border border-champagne-400/30 text-[11px] font-semibold text-champagne-300">
+            <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Cisco Office 3rd floor</span>
+          </span>
+        </div>
+
+        <!-- Schedule Items List (Tabular Numerals + Mobile Safe Gap) -->
+        <div id="schedule-list" class="space-y-2.5 lg:max-h-[540px] lg:overflow-y-auto custom-scroll pr-0.5">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN (5 COLS): KRAKÓW GUEST COMPENDIUM -->
+      <div class="lg:col-span-5 flex flex-col gap-4 sm:gap-5">
+
+        <!-- ROW 1: 02 / EMERGENCY IN POLAND & 04 / ACCOMMODATION (SHERATON) -->
+        <div id="section-maps" class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+
+          <!-- 02 / Emergency in Poland (112) -->
+          <section class="sm:col-span-5 liquid-card p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold tracking-[0.22em] uppercase text-champagne-400">02 / Emergency</span>
+                <svg class="w-4 h-4 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
                 </svg>
+              </div>
+              <div class="tabular-time font-display font-extrabold text-3xl sm:text-4xl gold-foil tracking-tight">
+                112
+              </div>
+              <p class="mt-1 text-xs text-slate-300 leading-relaxed">
+                European &amp; Polish 24/7 Emergency Number. English-speaking operators (Police, Medical, Fire).
+              </p>
             </div>
 
-            <!-- Right: Audio Toggle with Equalizer + Replay Intro -->
+            <a href="tel:112"
+               class="touch-manipulation mt-3.5 inline-flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-champagne-400/15 hover:bg-champagne-400/25 border border-champagne-400/45 text-xs font-bold text-champagne-200 transition">
+              <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>Dial 112 Now</span>
+            </a>
+          </section>
+
+          <!-- 04 / Guest Accommodation: Sheraton Grand Krakow -->
+          <section class="sm:col-span-7 liquid-card p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[10px] font-bold tracking-[0.22em] uppercase text-champagne-400">04 / Accommodation</span>
+                <span class="tabular-time inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-champagne-400/15 text-champagne-300 text-[10px] font-bold border border-champagne-400/30">
+                  Bus: 07:45
+                </span>
+              </div>
+              <h3 class="font-display font-bold text-base sm:text-lg text-white leading-snug">
+                Sheraton Grand Krakow
+              </h3>
+              <p class="text-xs text-slate-300 mt-0.5">
+                ul. Powiśle 7, 31-101 Kraków (by Wawel Castle)
+              </p>
+              <p class="text-[11px] text-champagne-300/90 mt-1.5 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-champagne-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 6v6M15 6v6M2 12h19.6M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/>
+                  <circle cx="7" cy="18" r="2"/>
+                  <path d="M9 18h5"/>
+                  <circle cx="16" cy="18" r="2"/>
+                </svg>
+                <span>Morning shuttle departs lobby at <strong class="tabular-time">07:45</strong></span>
+              </p>
+            </div>
+
+            <div class="mt-3.5 flex items-center gap-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Sheraton+Grand+Krakow+Powisle+7" target="_blank" rel="noopener noreferrer"
+                 class="touch-manipulation flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-gradient-to-r from-champagne-300 via-champagne-400 to-champagne-500 text-royal-950 font-bold text-xs shadow-[0_6px_20px_rgba(234,182,66,0.28)] hover:brightness-105 transition">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                </svg>
+                <span>Hotel Map</span>
+              </a>
+              <button type="button" data-copy="Sheraton Grand Krakow, ul. Powiśle 7, 31-101 Kraków"
+                      class="copy-address-btn touch-manipulation inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-royal-950/85 hover:bg-champagne-400/15 border border-champagne-400/35 text-xs font-semibold text-champagne-200 transition cursor-pointer"
+                      title="Copy Hotel Address for Uber/Bolt">
+                <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- ROW 2: 03 / SUMMIT VENUE & EMBEDDED DARK MAP -->
+        <section class="liquid-card p-4 sm:p-5">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div>
+              <span class="text-[10px] font-bold tracking-[0.22em] uppercase text-champagne-400 block mb-0.5">
+                03 / Venue
+              </span>
+              <h3 class="font-display font-bold text-base sm:text-lg text-white">
+                Summit Venue
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-300 mt-0.5">
+                Aleja Powstańców Wielkopolskich 13C, 30-707 Kraków
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button type="button" data-copy="Aleja Powstańców Wielkopolskich 13C, 30-707 Kraków"
+                      class="copy-address-btn touch-manipulation inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-royal-950/85 hover:bg-champagne-400/15 border border-champagne-400/35 text-xs font-semibold text-champagne-200 transition cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy Address</span>
+              </button>
+
+              <a href="https://www.google.com/maps/search/?api=1&query=Aleja+Powstancow+Wielkopolskich+13C+Krakow" target="_blank" rel="noopener noreferrer"
+                 class="touch-manipulation inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-champagne-400/15 hover:bg-champagne-400/25 border border-champagne-400/45 text-xs font-semibold text-champagne-200 transition">
+                <span>Directions</span>
+                <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17 17 7M7 7h10v10"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Embedded Map Miniature -->
+          <div class="relative w-full h-36 sm:h-40 rounded-xl overflow-hidden border border-champagne-400/30 bg-royal-950">
+            <iframe
+              title="Summit Venue Map - Aleja Powstańców Wielkopolskich 13C, Kraków"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=19.9585%2C50.0415%2C19.9745%2C50.0495&amp;layer=mapnik&amp;marker=50.0455%2C19.9665"
+              class="w-full h-full border-0 dark-gold-map"
+              loading="lazy">
+            </iframe>
+            <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-champagne-400/25"></div>
+          </div>
+        </section>
+
+        <!-- ROW 3: 05 / HOST CONTACT & FIRST TIME IN KRAKÓW -->
+        <section id="section-info" class="liquid-card p-4 sm:p-5">
+          <!-- Host Contact Quick-Access Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-2.5 pb-3.5 mb-3.5 border-b border-champagne-400/15">
             <div class="flex items-center gap-2.5">
-                <button type="button" id="audio-toggle-btn" onclick="toggleAudio()" title="Magical Fantasy - ✨ Extended Version of Magical Music by Dmitriy Sevostyanov @dspromusic" class="btn-3d flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-abyss-950/85 hover:bg-abyss-800 border border-gold-400/40 text-xs font-medium text-gold-200 cursor-pointer">
-                    <span id="audio-icon" class="text-gold-400 font-bold">▶</span>
-                    <span id="audio-label" class="hidden sm:inline tracking-wide">Magical Fantasy</span>
-                    <span id="eq-indicator" class="flex items-end gap-0.5 h-3.5">
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                    </span>
-                </button>
-
-                <button type="button" onclick="replayPortal()" class="btn-3d px-3.5 py-1.5 rounded-full bg-gold-400/15 hover:bg-gold-400 text-gold-300 hover:text-abyss-950 border border-gold-400/40 font-display text-xs font-bold tracking-wider cursor-pointer">
-                    ✨ Replay Intro
-                </button>
+              <div class="w-9 h-9 rounded-xl bg-champagne-400/15 border border-champagne-400/35 flex items-center justify-center text-champagne-400 shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-champagne-400 block">
+                  05 / Kraków Host Desk
+                </span>
+                <p class="text-xs font-semibold text-white">
+                  Need help with transfers or arrival?
+                </p>
+              </div>
             </div>
-        </header>
 
-        <!-- Main Split-Screen Workspace (Left 7/12 vs Right 5/12) -->
-        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3.5 min-h-0" style="transform-style: preserve-3d;">
+            <div class="flex items-center gap-2">
+              <a href="tel:+48120002027"
+                 class="touch-manipulation inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-royal-950/85 hover:bg-champagne-400/15 border border-champagne-400/30 text-xs font-semibold text-champagne-200 transition">
+                <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                <span>Call Host</span>
+              </a>
+              <a href="https://wa.me/48120002027?text=Hi%20DAT%20Tech%20Summit%20Krak%C3%B3w%20Host!" target="_blank" rel="noopener noreferrer"
+                 class="touch-manipulation inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-champagne-400/15 hover:bg-champagne-400/25 border border-champagne-400/45 text-xs font-semibold text-champagne-200 transition">
+                <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
 
-            <!-- Left Column (7/12): Schedule Divided by Attendee Profile -->
-            <section data-tilt-card data-tilt-max="1.5" class="lg:col-span-7 editorial-frame rounded-2xl flex flex-col min-h-[480px] lg:min-h-0 overflow-hidden">
+          <!-- First Time in Kraków 4-Card Grid with Refined Gold Line SVG Icons -->
+          <div class="flex items-center justify-between mb-2.5">
+            <h3 class="font-display font-bold text-sm sm:text-base text-champagne-200">
+              First Time in Kraków
+            </h3>
+            <span class="text-[11px] text-slate-400">Local Essentials</span>
+          </div>
 
-                <!-- Section Header + Attendee Mode Switcher + Day Tabs -->
-                <div class="relative z-20 shrink-0 px-4 sm:px-6 py-3.5 border-b editorial-cell flex flex-col gap-3">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-                        <div>
-                            <span class="font-display text-[11px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Schedule</span>
-                            <h2 class="font-display text-lg sm:text-xl font-bold text-white mt-0.5">Summit Planner</h2>
-                            <p id="day-subtitle" class="text-xs text-slate-300 mt-0.5">Wednesday • DAT TECH SUMMIT Day 1 &amp; Arcade Bee</p>
-                        </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <!-- Card 1: Wawel Dragon -->
+            <div class="liquid-subcard p-3">
+              <div class="flex items-center gap-2 mb-1">
+                <svg class="w-4 h-4 text-champagne-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                </svg>
+                <h4 class="font-display font-bold text-xs text-champagne-200">Wawel Dragon</h4>
+              </div>
+              <p class="text-[11px] text-slate-300/90 leading-relaxed">
+                Steps from Sheraton: the bronze dragon statue breathes real fire every few minutes by the Vistula river.
+              </p>
+            </div>
 
-                        <!-- Attendee Profile Toggle: Flying In (MON–THU) first, Summit Only (WED/THU) second -->
-                        <div role="group" aria-label="Schedule attendee mode" class="relative z-20 flex flex-wrap sm:inline-flex rounded-xl bg-abyss-950/95 p-1 border border-gold-400/25 gap-1 self-stretch sm:self-auto shadow-[inset_0_2px_8px_rgba(0,0,0,0.75)]">
-                            <button type="button" id="mode-flying" data-attendee-mode="flying" class="touch-manipulation select-none flex-1 sm:flex-initial min-h-[38px] px-3.5 py-2 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all text-slate-300 hover:text-white cursor-pointer">
-                                Flying In (MON–THU)
-                            </button>
-                            <button type="button" id="mode-local" data-attendee-mode="local" class="touch-manipulation select-none flex-1 sm:flex-initial min-h-[38px] px-3.5 py-2 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all bg-gold-400 text-abyss-950 shadow-[0_4px_14px_rgba(234,182,66,0.4)] cursor-pointer">
-                                Summit Only (WED/THU)
-                            </button>
-                        </div>
-                    </div>
+            <!-- Card 2: Hourly Bugle Call -->
+            <div class="liquid-subcard p-3">
+              <div class="flex items-center gap-2 mb-1">
+                <svg class="w-4 h-4 text-champagne-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18V5l12-2v13"/>
+                  <circle cx="6" cy="18" r="3"/>
+                  <circle cx="18" cy="16" r="3"/>
+                </svg>
+                <h4 class="font-display font-bold text-xs text-champagne-200">Hourly Bugle Call</h4>
+              </div>
+              <p class="text-[11px] text-slate-300/90 leading-relaxed">
+                Every hour from St. Mary’s Basilica tower, the <em>Hejnał</em> trumpet melody stops mid-note in honor of a 13th-century watchman.
+              </p>
+            </div>
 
-                    <!-- Day Switcher Tabs (Dynamically shows WED–THU for Summit Only or MON–THU for Flying In) -->
-                    <div id="day-tabs-container" role="tablist" aria-label="Schedule days" class="relative z-20 grid grid-cols-2 gap-1.5 bg-abyss-950/95 p-1 rounded-xl border border-gold-400/25">
-                        <!-- Populated dynamically via JavaScript -->
-                    </div>
-                </div>
+            <!-- Card 3: Currency & Cards -->
+            <div class="liquid-subcard p-3">
+              <div class="flex items-center gap-2 mb-1">
+                <svg class="w-4 h-4 text-champagne-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="2"/>
+                  <line x1="2" y1="10" x2="22" y2="10"/>
+                </svg>
+                <h4 class="font-display font-bold text-xs text-champagne-200">Currency &amp; Cards</h4>
+              </div>
+              <p class="text-[11px] text-slate-300/90 leading-relaxed">
+                Polish Złoty (PLN). Contactless cards, Apple Pay &amp; Google Pay work everywhere—even for single coffees and trams.
+              </p>
+            </div>
 
-                <!-- Desktop Column Headers -->
-                <div class="hidden sm:grid shrink-0 grid-cols-12 gap-4 px-6 py-2 text-[11px] font-display font-bold uppercase tracking-[0.18em] text-gold-300/80 border-b editorial-cell bg-abyss-950/45">
-                    <div class="col-span-3">Time</div>
-                    <div class="col-span-5">Activity</div>
-                    <div class="col-span-4">Room / Place</div>
-                </div>
+            <!-- Card 4: Local Must-Tries -->
+            <div class="liquid-subcard p-3">
+              <div class="flex items-center gap-2 mb-1">
+                <svg class="w-4 h-4 text-champagne-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                  <line x1="6" y1="1" x2="6" y2="4"/>
+                  <line x1="10" y1="1" x2="10" y2="4"/>
+                  <line x1="14" y1="1" x2="14" y2="4"/>
+                </svg>
+                <h4 class="font-display font-bold text-xs text-champagne-200">Local Must-Tries</h4>
+              </div>
+              <p class="text-[11px] text-slate-300/90 leading-relaxed">
+                Grab a warm braided <em>Obwarzanek</em> bagel from a blue street cart, traditional <em>Pierogi</em>, and mulled wine at the Main Square.
+              </p>
+            </div>
+          </div>
+        </section>
 
-                <!-- Scrollable Itinerary Rows -->
-                <div id="schedule-container" class="flex-1 overflow-y-auto custom-scroll divide-y divide-gold-400/15">
-                    <!-- Populated dynamically via JavaScript -->
-                </div>
-            </section>
+      </div>
+    </main>
+  </div>
 
-            <!-- Right Column (5/12): Guest Compendium -->
-            <aside class="lg:col-span-5 flex flex-col gap-3.5 min-h-0" style="transform-style: preserve-3d;">
+  <!-- FLOATING MOBILE BOTTOM PILL BAR (Thumb-Friendly Navigation on Phones) -->
+  <nav aria-label="Mobile Quick Navigation"
+       class="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-sm">
+    <div class="grid grid-cols-3 gap-1 p-1.5 rounded-full bg-royal-950/90 backdrop-blur-xl border border-champagne-400/40 shadow-[0_14px_38px_rgba(0,0,0,0.85)]">
+      <button type="button" data-jump="#section-schedule"
+              class="mobile-nav-pill touch-manipulation flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-full text-xs font-display font-bold text-royal-950 bg-gradient-to-r from-champagne-300 to-champagne-400 transition cursor-pointer">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span>Schedule</span>
+      </button>
 
-                <!-- Emergency in Poland (112) -->
-                <div data-tilt-card data-tilt-max="2.6" class="shrink-0 editorial-frame rounded-2xl px-4 sm:px-5 py-3 flex items-center justify-between gap-3">
-                    <div>
-                        <span class="font-display text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Emergency in Poland</span>
-                        <h3 class="font-display text-sm sm:text-base font-bold text-white">Universal Emergency Line</h3>
-                        <p class="text-[11px] text-slate-300">24/7 Police, Ambulance &amp; Fire • English operators</p>
-                    </div>
-                    <a href="tel:112" class="btn-3d shrink-0 bg-gold-400 hover:bg-gold-300 text-abyss-950 font-display font-extrabold text-xl px-4 py-1.5 rounded-xl">
-                        112
-                    </a>
-                </div>
+      <button type="button" data-jump="#section-maps"
+              class="mobile-nav-pill touch-manipulation flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-full text-xs font-display font-bold text-slate-200 hover:text-champagne-200 transition cursor-pointer">
+        <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <span>Maps &amp; Hotel</span>
+      </button>
 
-                <!-- Summit Venue + Embedded Map -->
-                <div data-tilt-card data-tilt-max="2.2" class="flex-1 editorial-frame rounded-2xl p-4 sm:p-5 flex flex-col min-h-[195px]">
-                    <div class="shrink-0 flex items-start justify-between gap-2 mb-2.5">
-                        <div>
-                            <span class="font-display text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Venue</span>
-                            <h3 class="font-display text-base font-bold text-white">Summit Venue</h3>
-                            <p class="text-xs text-slate-300 mt-0.5">Aleja Powstańców Wielkopolskich 13C</p>
-                        </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Aleja+Powstańców+Wielkopolskich+13C,+Kraków"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn-3d shrink-0 px-3 py-1.5 rounded-lg bg-abyss-950/90 hover:bg-gold-400 text-gold-300 hover:text-abyss-950 border border-gold-400/35 text-[11px] font-display font-bold tracking-wider">
-                            Maps ↗
-                        </a>
-                    </div>
-
-                    <div class="map-recessed-3d relative flex-1 rounded-xl overflow-hidden border border-gold-400/25 min-h-[110px]">
-                        <iframe
-                            title="Summit Venue Map"
-                            class="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[95%] opacity-90 hover:opacity-100 transition-opacity"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            src="https://maps.google.com/maps?q=Aleja%20Powsta%C5%84c%C3%B3w%20Wielkopolskich%2013C,%20Krak%C3%B3w&t=&z=15&ie=UTF8&iwloc=&output=embed">
-                        </iframe>
-                    </div>
-                </div>
-
-                <!-- Accommodation (Sheraton Grand Krakow) -->
-                <div data-tilt-card data-tilt-max="2.6" class="shrink-0 editorial-frame rounded-2xl px-4 sm:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                        <span class="font-display text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase block">Accommodation</span>
-                        <h3 class="font-display text-base font-bold text-white">Sheraton Grand Krakow</h3>
-                        <p class="text-xs text-slate-300">ul. Powiśle 7 • Morning bus departs <strong class="text-gold-300">07:45</strong></p>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Sheraton+Grand+Krakow+Powiśle+7"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="btn-3d shrink-0 inline-flex items-center justify-center px-3.5 py-2 rounded-xl bg-gold-400 hover:bg-gold-300 text-abyss-950 font-display font-bold text-xs tracking-wide">
-                        Hotel Map ↗
-                    </a>
-                </div>
-
-                <!-- First Time in Kraków (4 Highlights) -->
-                <div data-tilt-card data-tilt-max="2.2" class="shrink-0 editorial-frame rounded-2xl p-4 sm:px-5 sm:py-3.5">
-                    <span class="font-display text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase block mb-2">First Time in Kraków</span>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-                        <div class="tile-3d p-2.5 rounded-xl border border-gold-400/20">
-                            <p class="font-display font-bold text-gold-300">🐉 Wawel Dragon</p>
-                            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Right next to Sheraton! Breathes real fire every few minutes by the Vistula River.</p>
-                        </div>
-                        <div class="tile-3d p-2.5 rounded-xl border border-gold-400/20">
-                            <p class="font-display font-bold text-gold-300">🎺 Hourly Bugle Call</p>
-                            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Played live every hour from St. Mary’s Basilica tower on Europe’s largest medieval square.</p>
-                        </div>
-                        <div class="tile-3d p-2.5 rounded-xl border border-gold-400/20">
-                            <p class="font-display font-bold text-gold-300">💳 Currency &amp; Cards</p>
-                            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Polish Złoty (PLN). Apple Pay, Google Pay &amp; cards work everywhere—no cash needed.</p>
-                        </div>
-                        <div class="tile-3d p-2.5 rounded-xl border border-gold-400/20">
-                            <p class="font-display font-bold text-gold-300">🥨 Local Must-Tries</p>
-                            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Grab a warm <em>Obwarzanek</em> bagel from blue street carts and traditional <em>Pierogi</em>.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </aside>
-        </main>
+      <button type="button" data-jump="#section-info"
+              class="mobile-nav-pill touch-manipulation flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-full text-xs font-display font-bold text-slate-200 hover:text-champagne-200 transition cursor-pointer">
+        <svg class="w-3.5 h-3.5 text-champagne-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>112 &amp; Info</span>
+      </button>
     </div>
+  </nav>
 
-    <script>
-        // 1. 4-Day Summit Schedule (Room / place names only, no extra floor labels)
-        const summitSchedule = {
-            mon: {
-                label: "MON",
-                subtitle: "Monday • Leadership Arrival & Welcome Dinner",
-                events: [
-                    { time: "Morning", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
-                    { time: "10:00 – 12:30", activity: "Andy leadership meeting", place: "Stockholm + London", highlight: false },
-                    { time: "12:30 – 14:00", activity: "Lunch", place: "Ciao Bella Restaurant", highlight: false },
-                    { time: "14:00 – 17:00", activity: "Andy leadership meeting", place: "Stockholm + London", highlight: false },
-                    { time: "17:00", activity: "Transport to the hotel", place: "Taxi / Uber", highlight: false },
-                    { time: "18:00 – 18:30", activity: "Welcome drink", place: "Sheraton – Lobby Bar", highlight: false },
-                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (12 ppl)", place: "Dedicated Transfer", highlight: false },
-                    { time: "19:00 – 22:00", activity: "Dinner", place: "Unity Tower", highlight: true },
-                    { time: "22:00", activity: "Transport to the hotel (12 ppl)", place: "Dedicated Transfer", highlight: false }
-                ]
-            },
-            tue: {
-                label: "TUE",
-                subtitle: "Tuesday • Leaders Meeting, Dry Run & Ziyad Castle Dinner",
-                events: [
-                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
-                    { time: "07:45 – 08:15", activity: "Transport to the office (12–14 ppl)", place: "Bus", highlight: false },
-                    { time: "08:15 – 09:00", activity: "Morning Coffee & Prep", place: "Coffee Lounge", highlight: false },
-                    { time: "09:00 – 12:30", activity: "Leaders Meeting", place: "Sofia Conference Room", highlight: false },
-                    { time: "12:30 – 14:00", activity: "Lunch", place: "Ciao Bella Restaurant", highlight: false },
-                    { time: "14:00 – 17:30", activity: "Dry Run + Decoration", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "17:30", activity: "Transport to the hotel (12–14 ppl)", place: "Bus", highlight: false },
-                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus", highlight: false },
-                    { time: "19:00 – 22:00", activity: "Dinner", place: "Ziyad Castle", highlight: true },
-                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false }
-                ]
-            },
-            wed: {
-                label: "WED",
-                subtitle: "Wednesday • DAT TECH SUMMIT Day 1 & Arcade Bee",
-                events: [
-                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
-                    { time: "07:45 – 08:15", activity: "Transport to the office (21–23 ppl)", place: "Bus", highlight: false },
-                    { time: "08:15 – 09:00", activity: "Gifts sharing (t-shirts, mugs, etc.)", place: "Cisco Office 3rd floor", highlight: true },
-                    { time: "09:00 – 11:15", activity: "DAT TECH SUMMIT", place: "Cisco Office 3rd floor", highlight: true },
-                    { time: "11:15 – 11:30", activity: "Coffee Break", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "11:30 – 13:00", activity: "DAT TECH SUMMIT", place: "Cisco Office 3rd floor", highlight: true },
-                    { time: "13:00 – 14:00", activity: "Lunch Terrace", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "14:00 – 16:30", activity: "DAT TECH SUMMIT", place: "Cisco Office 3rd floor", highlight: true },
-                    { time: "14:00", activity: "Cake for participants • Photo booth", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "16:30 – 17:00", activity: "Group Photo", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "17:30 – 18:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus", highlight: false },
-                    { time: "19:00 – 22:00", activity: "Dinner & Team Activity", place: "Arcade Bee (games, arcade, darts)", highlight: true },
-                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false }
-                ]
-            },
-            thu: {
-                label: "THU",
-                subtitle: "Thursday • DAT TECH SUMMIT Day 2 & Forum Dinner",
-                events: [
-                    { time: "07:00 – 07:45", activity: "Breakfast", place: "Sheraton Grand", highlight: false },
-                    { time: "07:45 – 08:15", activity: "Transport to the office (21–23 ppl)", place: "Bus", highlight: false },
-                    { time: "08:15 – 09:00", activity: "Morning Coffee", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "09:00 – 11:15", activity: "DAT TECH SUMMIT", place: "Cisco Office 3rd floor", highlight: true },
-                    { time: "11:15 – 11:30", activity: "Coffee Break", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "11:30 – 13:00", activity: "DAT TECH SUMMIT", place: "Cisco Office 3rd floor", highlight: true },
-                    { time: "13:00 – 14:00", activity: "Lunch Terrace", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "14:00 – 16:30", activity: "DAT TECH SUMMIT", place: "Cisco Office 3rd floor", highlight: true },
-                    { time: "16:30 – 17:00", activity: "Gift distribution (pens)", place: "Cisco Office 3rd floor", highlight: false },
-                    { time: "17:30 – 18:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus", highlight: false },
-                    { time: "18:30 – 19:00", activity: "Transport to the restaurant (21–23 ppl)", place: "Bus / walking distance", highlight: false },
-                    { time: "19:00 – 22:00", activity: "Closing Dinner", place: "Forum", highlight: true },
-                    { time: "22:00", activity: "Transport to the hotel (21–23 ppl)", place: "Bus / walking distance", highlight: false }
-                ]
-            }
+  <script>
+    // =========================================================
+    // 1. SCHEDULE DATA (4 DAYS • CISCO OFFICE 3RD FLOOR ROOM)
+    // =========================================================
+    const SCHEDULE_DATA = {
+      MON: {
+        title: "Monday, 14 December — Arrivals & Welcome Evening",
+        subtitle: "Hotel check-in at Sheraton Grand Krakow & casual welcome dinner",
+        dateISO: "2026-12-14",
+        items: [
+          { start: "14:00", end: "18:00", title: "International Delegations Arrival & Check-In", location: "Sheraton Grand Krakow", tag: "Travel" },
+          { start: "19:00", end: "22:00", title: "Welcome Dinner & Kraków Panorama Networking", location: "Unity Tower • Roof Top", tag: "Dinner" }
+        ]
+      },
+      TUE: {
+        title: "Tuesday, 15 December — Pre-Summit Alignment",
+        subtitle: "Morning shuttle from Sheraton • Sessions at Cisco Office 3rd floor",
+        dateISO: "2026-12-15",
+        items: [
+          { start: "07:00", end: "07:45", title: "Breakfast at Hotel", location: "Sheraton Grand Krakow", tag: "Hotel" },
+          { start: "07:45", end: "08:15", title: "Morning Bus Transfer to Office", location: "Sheraton Lobby → Office", tag: "Transfer" },
+          { start: "08:30", end: "12:30", title: "Leadership & Architecture Sync", location: "Cisco Office 3rd floor", tag: "Session" },
+          { start: "12:30", end: "13:30", title: "Networking Lunch", location: "Cisco Office 3rd floor", tag: "Break" },
+          { start: "13:30", end: "17:00", title: "Technical Deep-Dives & Lab Prep", location: "Cisco Office 3rd floor", tag: "Session" },
+          { start: "18:30", end: "22:00", title: "Social Evening & Games", location: "Arcade Bee • Kraków", tag: "Social" }
+        ]
+      },
+      WED: {
+        title: "Wednesday, 16 December — Main Summit Day",
+        subtitle: "Keynotes & workshops at Cisco Office 3rd floor • Gala at Ziyad Castle",
+        dateISO: "2026-12-16",
+        items: [
+          { start: "07:00", end: "07:45", title: "Breakfast at Hotel", location: "Sheraton Grand Krakow", tag: "Hotel" },
+          { start: "07:45", end: "08:15", title: "Morning Bus Transfer to Office", location: "Sheraton Lobby → Office", tag: "Transfer" },
+          { start: "08:30", end: "10:30", title: "FY 27 DAT Tech Summit Opening Keynote & Vision", location: "Cisco Office 3rd floor", tag: "Keynote" },
+          { start: "10:45", end: "12:30", title: "Cross-Region Engineering Tracks & Demos", location: "Cisco Office 3rd floor", tag: "Session" },
+          { start: "12:30", end: "13:30", title: "Summit Lunch", location: "Cisco Office 3rd floor", tag: "Break" },
+          { start: "13:30", end: "17:00", title: "Interactive Workshops & Innovation Showcase", location: "Cisco Office 3rd floor", tag: "Workshop" },
+          { start: "18:30", end: "22:30", title: "Royal Gala Dinner & Castle Evening", location: "Ziyad Castle • Przegorzały", tag: "Gala" }
+        ]
+      },
+      THU: {
+        title: "Thursday, 17 December — Roadmap & Closing",
+        subtitle: "Final workshops at Cisco Office 3rd floor • Farewell dinner at Forum",
+        dateISO: "2026-12-17",
+        items: [
+          { start: "07:00", end: "07:45", title: "Breakfast at Hotel", location: "Sheraton Grand Krakow", tag: "Hotel" },
+          { start: "07:45", end: "08:15", title: "Morning Bus Transfer to Office", location: "Sheraton Lobby → Office", tag: "Transfer" },
+          { start: "08:30", end: "12:30", title: "FY 27 Execution Roadmap & Action Planning", location: "Cisco Office 3rd floor", tag: "Session" },
+          { start: "12:30", end: "13:30", title: "Lunch", location: "Cisco Office 3rd floor", tag: "Break" },
+          { start: "13:30", end: "16:30", title: "Readouts, Commitments & Summit Wrap-Up", location: "Cisco Office 3rd floor", tag: "Closing" },
+          { start: "18:30", end: "22:00", title: "Farewell Riverside Dinner", location: "Forum Przestrzenie • Vistula", tag: "Dinner" }
+        ]
+      }
+    };
+
+    // =========================================================
+    // 2. STATE & PLANNER RENDERING (WITH LIVE SESSION INDICATOR)
+    // =========================================================
+    let currentMode = "FLYING"; // "FLYING" (MON-THU) | "SUMMIT" (WED/THU)
+    let activeDay = "WED";
+    let simulateLiveMode = false;
+
+    const modeFlyingBtn = document.getElementById("mode-flying-btn");
+    const modeSummitBtn = document.getElementById("mode-summit-btn");
+    const dayTabs = document.querySelectorAll(".day-tab");
+    const scheduleListEl = document.getElementById("schedule-list");
+    const dayTitleEl = document.getElementById("day-title");
+    const daySubtitleEl = document.getElementById("day-subtitle");
+    const liveStatusPill = document.getElementById("live-status-pill");
+    const liveStatusText = document.getElementById("live-status-text");
+    const toggleLiveDemoBtn = document.getElementById("toggle-live-demo-btn");
+    const liveDemoLabel = document.getElementById("live-demo-label");
+
+    function timeToMinutes(hhmm) {
+      const [h, m] = hhmm.split(":").map(Number);
+      return h * 60 + m;
+    }
+
+    function getLiveContext() {
+      if (simulateLiveMode) {
+        return {
+          isLivePeriod: true,
+          dayKey: "WED",
+          currentMinutes: 11 * 60 + 25 // Simulates 11:25 AM on Wednesday during Engineering Tracks
         };
+      }
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      const todayISO = `${yyyy}-${mm}-${dd}`;
+      const mins = now.getHours() * 60 + now.getMinutes();
 
-        const attendeeModes = {
-            local: ['wed', 'thu'],
-            flying: ['mon', 'tue', 'wed', 'thu']
-        };
+      for (const [key, val] of Object.entries(SCHEDULE_DATA)) {
+        if (val.dateISO === todayISO) {
+          return { isLivePeriod: true, dayKey: key, currentMinutes: mins };
+        }
+      }
+      return { isLivePeriod: false, dayKey: null, currentMinutes: mins };
+    }
 
-        let currentAttendeeMode = 'local';
-        let currentDayKey = 'wed';
+    function renderPlanner() {
+      // Update Mode Buttons
+      const activeModeClasses = [
+        "bg-gradient-to-r", "from-champagne-300", "via-champagne-400", "to-champagne-500",
+        "text-royal-950", "shadow-[0_4px_16px_rgba(234,182,66,0.35)]"
+      ];
+      const inactiveModeClasses = ["text-slate-300", "hover:text-champagne-200", "hover:bg-white/5"];
 
-        function renderDayTabs(daysList, activeDay) {
-            const tabsContainer = document.getElementById('day-tabs-container');
-            if (!tabsContainer) return;
+      if (currentMode === "FLYING") {
+        modeFlyingBtn.classList.add(...activeModeClasses);
+        modeFlyingBtn.classList.remove(...inactiveModeClasses);
+        modeSummitBtn.classList.remove(...activeModeClasses);
+        modeSummitBtn.classList.add(...inactiveModeClasses);
+      } else {
+        modeSummitBtn.classList.add(...activeModeClasses);
+        modeSummitBtn.classList.remove(...inactiveModeClasses);
+        modeFlyingBtn.classList.remove(...activeModeClasses);
+        modeFlyingBtn.classList.add(...inactiveModeClasses);
+      }
 
-            tabsContainer.className = daysList.length === 4
-                ? 'relative z-20 grid grid-cols-4 gap-1.5 bg-abyss-950/95 p-1 rounded-xl border border-gold-400/25'
-                : 'relative z-20 grid grid-cols-2 gap-1.5 bg-abyss-950/95 p-1 rounded-xl border border-gold-400/25';
+      // Update Day Tabs
+      dayTabs.forEach((tab) => {
+        const day = tab.getAttribute("data-day");
+        const isDisabledInSummit = currentMode === "SUMMIT" && (day === "MON" || day === "TUE");
+        const isSelected = day === activeDay;
 
-            tabsContainer.innerHTML = daysList.map(key => {
-                const isActive = key === activeDay;
-                const activeClasses = 'bg-gold-400 text-abyss-950 shadow-[0_4px_14px_rgba(234,182,66,0.45)]';
-                const inactiveClasses = 'bg-abyss-900/50 text-slate-300 hover:text-white active:bg-abyss-800';
-                return `
-                    <button type="button" role="tab" aria-selected="${isActive}" data-day-key="${key}" id="tab-${key}" class="day-tab touch-manipulation select-none min-h-[38px] px-2.5 sm:px-3.5 py-2 rounded-lg font-display text-xs font-bold transition-all ${isActive ? activeClasses : inactiveClasses} cursor-pointer">
-                        ${summitSchedule[key].label}
-                    </button>
-                `;
-            }).join('');
+        tab.classList.remove(
+          "bg-champagne-400/20", "border-champagne-400", "text-champagne-200", "shadow-[0_0_20px_rgba(234,182,66,0.22)]",
+          "bg-royal-950/75", "border-champagne-400/20", "text-slate-300", "hover:border-champagne-400/45",
+          "opacity-35", "border-white/10", "text-slate-500"
+        );
 
-            tabsContainer.querySelectorAll('[data-day-key]').forEach(btn => {
-                const targetKey = btn.getAttribute('data-day-key');
-                btn.onclick = () => selectDay(targetKey);
-            });
+        if (isSelected) {
+          tab.classList.add("bg-champagne-400/20", "border-champagne-400", "text-champagne-200", "shadow-[0_0_20px_rgba(234,182,66,0.22)]");
+        } else if (isDisabledInSummit) {
+          tab.classList.add("bg-royal-950/50", "border-white/10", "text-slate-500", "opacity-45");
+        } else {
+          tab.classList.add("bg-royal-950/75", "border-champagne-400/20", "text-slate-300", "hover:border-champagne-400/45");
+        }
+      });
+
+      const dayData = SCHEDULE_DATA[activeDay];
+      dayTitleEl.textContent = dayData.title;
+      daySubtitleEl.textContent = dayData.subtitle;
+
+      const liveCtx = getLiveContext();
+      if (liveCtx.isLivePeriod) {
+        liveStatusPill.classList.remove("hidden");
+        liveStatusText.textContent = simulateLiveMode ? "Live Demo • WED 11:25" : "Live Summit Schedule";
+      } else {
+        liveStatusPill.classList.add("hidden");
+      }
+
+      // Build Items
+      scheduleListEl.innerHTML = "";
+      let foundNextUp = false;
+
+      dayData.items.forEach((item) => {
+        const startM = timeToMinutes(item.start);
+        const endM = timeToMinutes(item.end);
+        let statusState = "normal"; // "live" | "next" | "past" | "normal"
+        let progressPercent = 0;
+
+        if (liveCtx.isLivePeriod && liveCtx.dayKey === activeDay) {
+          if (liveCtx.currentMinutes >= startM && liveCtx.currentMinutes < endM) {
+            statusState = "live";
+            progressPercent = Math.min(100, Math.max(8, Math.round(((liveCtx.currentMinutes - startM) / (endM - startM)) * 100)));
+          } else if (liveCtx.currentMinutes < startM && !foundNextUp) {
+            statusState = "next";
+            foundNextUp = true;
+          } else if (liveCtx.currentMinutes >= endM) {
+            statusState = "past";
+          }
         }
 
-        function updateModeButtonsUI(mode) {
-            const localBtn = document.getElementById('mode-local');
-            const flyingBtn = document.getElementById('mode-flying');
-            const activeCls = 'touch-manipulation select-none flex-1 sm:flex-initial min-h-[38px] px-3.5 py-2 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all bg-gold-400 text-abyss-950 shadow-[0_4px_14px_rgba(234,182,66,0.4)] cursor-pointer';
-            const inactiveCls = 'touch-manipulation select-none flex-1 sm:flex-initial min-h-[38px] px-3.5 py-2 rounded-lg font-display text-[11px] font-bold tracking-wide transition-all bg-abyss-900/40 text-slate-300 hover:text-white active:bg-abyss-800 cursor-pointer';
+        const card = document.createElement("div");
+        card.className = [
+          "liquid-subcard p-3 sm:p-3.5 transition-all",
+          statusState === "live" ? "!border-champagne-400 !bg-champagne-400/12 shadow-[0_0_28px_rgba(234,182,66,0.2)]" : "",
+          statusState === "next" ? "!border-champagne-300/60 !bg-royal-850/90" : "",
+          statusState === "past" ? "opacity-60" : ""
+        ].join(" ");
 
-            if (localBtn) {
-                localBtn.className = mode === 'local' ? activeCls : inactiveCls;
-                localBtn.setAttribute('aria-pressed', mode === 'local' ? 'true' : 'false');
+        const badgeHTML = statusState === "live"
+          ? `<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-champagne-400 text-royal-950">
+               <span class="w-1.5 h-1.5 rounded-full bg-royal-950 animate-ping"></span>
+               Happening Now
+             </span>`
+          : statusState === "next"
+            ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-champagne-400/20 text-champagne-200 border border-champagne-400/45">
+                 Next Up
+               </span>`
+            : `<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-white/5 text-slate-300 border border-white/10">
+                 ${item.tag}
+               </span>`;
+
+        const progressHTML = statusState === "live"
+          ? `<div class="mt-2.5 w-full h-1.5 rounded-full bg-royal-950/90 overflow-hidden border border-champagne-400/25">
+               <div class="h-full rounded-full bg-gradient-to-r from-champagne-300 to-champagne-400 transition-all duration-500" style="width:${progressPercent}%"></div>
+             </div>`
+          : "";
+
+        card.innerHTML = `
+          <div class="flex items-start gap-3.5 sm:gap-4">
+            <!-- Left Time Column (Tabular Numerals & Generous Gap) -->
+            <div class="tabular-time shrink-0 w-[86px] sm:w-[98px] pt-0.5">
+              <div class="text-xs sm:text-[13px] font-bold ${statusState === "live" ? "text-champagne-300" : "text-champagne-200"}">
+                ${item.start}
+              </div>
+              <div class="text-[11px] text-slate-400">
+                ${item.end}
+              </div>
+            </div>
+
+            <!-- Right Activity Details -->
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1">
+                <h3 class="font-display font-bold text-xs sm:text-sm text-white leading-snug">
+                  ${item.title}
+                </h3>
+                ${badgeHTML}
+              </div>
+              <div class="flex items-center gap-1.5 text-[11px] text-slate-300/90">
+                <svg class="w-3.5 h-3.5 text-champagne-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span class="truncate">${item.location}</span>
+              </div>
+              ${progressHTML}
+            </div>
+          </div>
+        `;
+        scheduleListEl.appendChild(card);
+      });
+    }
+
+    // Mode & Day Event Listeners (Touch-Safe)
+    modeFlyingBtn.addEventListener("click", () => {
+      currentMode = "FLYING";
+      if (!["MON", "TUE", "WED", "THU"].includes(activeDay)) activeDay = "MON";
+      renderPlanner();
+    });
+
+    modeSummitBtn.addEventListener("click", () => {
+      currentMode = "SUMMIT";
+      if (activeDay === "MON" || activeDay === "TUE") {
+        activeDay = "WED";
+      }
+      renderPlanner();
+    });
+
+    dayTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const chosen = tab.getAttribute("data-day");
+        if (currentMode === "SUMMIT" && (chosen === "MON" || chosen === "TUE")) {
+          currentMode = "FLYING";
+        }
+        activeDay = chosen;
+        renderPlanner();
+      });
+    });
+
+    toggleLiveDemoBtn.addEventListener("click", () => {
+      simulateLiveMode = !simulateLiveMode;
+      if (simulateLiveMode) {
+        activeDay = "WED";
+        liveDemoLabel.textContent = "Exit Live Preview";
+        toggleLiveDemoBtn.classList.add("!border-champagne-400", "!bg-champagne-400/20", "!text-champagne-200");
+      } else {
+        liveDemoLabel.textContent = "Preview Live Session";
+        toggleLiveDemoBtn.classList.remove("!border-champagne-400", "!bg-champagne-400/20", "!text-champagne-200");
+      }
+      renderPlanner();
+    });
+
+    // =========================================================
+    // 3. TOAST, ONE-CLICK COPY ADDRESS & .ICS CALENDAR EXPORT
+    // =========================================================
+    let toastTimer = null;
+    function showToast(msg) {
+      const banner = document.getElementById("toast-banner");
+      const label = document.getElementById("toast-message");
+      label.textContent = msg;
+      banner.classList.remove("opacity-0", "-translate-y-3");
+      banner.classList.add("opacity-100", "translate-y-0");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        banner.classList.add("opacity-0", "-translate-y-3");
+        banner.classList.remove("opacity-100", "translate-y-0");
+      }, 2400);
+    }
+
+    function copyTextSafe(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast("Copied: " + text);
+      } catch (e) {
+        showToast("Address ready: " + text);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    document.querySelectorAll(".copy-address-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const addr = btn.getAttribute("data-copy");
+        if (addr) copyTextSafe(addr);
+      });
+    });
+
+    document.getElementById("download-ics-btn").addEventListener("click", () => {
+      const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//DAT Tech Summit 2027//Krakow//EN",
+        "CALSCALE:GREGORIAN",
+        "BEGIN:VEVENT",
+        "UID:dat-summit-day1-20261216@krakow",
+        "DTSTAMP:20261121T100000Z",
+        "DTSTART:20261216T074500",
+        "DTEND:20261216T170000",
+        "SUMMARY:Dat Tech Summit 2027 - Day 1 (Bus 07:45 Sheraton)",
+        "LOCATION:Aleja Powstańców Wielkopolskich 13C, 30-707 Kraków",
+        "DESCRIPTION:Morning bus departs Sheraton Grand Krakow lobby at 07:45. Sessions at Cisco Office 3rd floor. Gala Dinner at Ziyad Castle (18:30).",
+        "END:VEVENT",
+        "BEGIN:VEVENT",
+        "UID:dat-summit-day2-20261217@krakow",
+        "DTSTAMP:20261121T100000Z",
+        "DTSTART:20261217T074500",
+        "DTEND:20261217T163000",
+        "SUMMARY:Dat Tech Summit 2027 - Day 2 (Bus 07:45 Sheraton)",
+        "LOCATION:Aleja Powstańców Wielkopolskich 13C, 30-707 Kraków",
+        "DESCRIPTION:Morning bus departs Sheraton Grand Krakow lobby at 07:45. Sessions at Cisco Office 3rd floor. Farewell Dinner at Forum (18:30).",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Dat-Tech-Summit-2027-Krakow.ics";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Calendar (.ics) downloaded!");
+    });
+
+    // =========================================================
+    // 4. LIVE KRAKÓW WEATHER WIDGET (OPEN-METEO FREE API)
+    // =========================================================
+    async function fetchKrakowWeather() {
+      const weatherEl = document.getElementById("krk-weather-text");
+      try {
+        const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=50.0647&longitude=19.9450&current_weather=true");
+        if (!res.ok) throw new Error("Weather unavailable");
+        const data = await res.json();
+        if (data && data.current_weather) {
+          const temp = Math.round(data.current_weather.temperature);
+          const code = data.current_weather.weathercode;
+          let label = "Clear";
+          if (code >= 71 && code <= 77) label = "Snow";
+          else if (code >= 51 && code <= 67) label = "Rain";
+          else if (code >= 45 && code <= 48) label = "Mist";
+          else if (code >= 1 && code <= 3) label = "Cloudy";
+          weatherEl.textContent = `${temp}°C • ${label}`;
+        }
+      } catch (err) {
+        weatherEl.textContent = "2°C • Crisp Kraków";
+      }
+    }
+
+    // =========================================================
+    // 5. MOBILE BOTTOM PILL BAR NAVIGATION
+    // =========================================================
+    const mobilePills = document.querySelectorAll(".mobile-nav-pill");
+    mobilePills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const targetSel = pill.getAttribute("data-jump");
+        const targetEl = document.querySelector(targetSel);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        mobilePills.forEach((p) => {
+          p.classList.remove("text-royal-950", "bg-gradient-to-r", "from-champagne-300", "to-champagne-400");
+          p.classList.add("text-slate-200");
+        });
+        pill.classList.remove("text-slate-200");
+        pill.classList.add("text-royal-950", "bg-gradient-to-r", "from-champagne-300", "to-champagne-400");
+      });
+    });
+
+    // =========================================================
+    // 6. OPENING PORTAL CURTAIN & COSMOS STARDUST CANVAS
+    // =========================================================
+    const curtain = document.getElementById("intro-curtain");
+    const enterBtn = document.getElementById("enter-portal-btn");
+    const replayBtn = document.getElementById("replay-intro-btn");
+    let portalAutoTimer = null;
+
+    function openPortal() {
+      if (!curtain || curtain.style.display === "none") return;
+      clearTimeout(portalAutoTimer);
+      curtain.classList.add("curtain-opening");
+      document.body.classList.remove("portal-locked");
+      document.body.classList.add("portal-unlocked");
+      tryStartMusic();
+
+      setTimeout(() => {
+        curtain.style.display = "none";
+      }, 980);
+    }
+
+    function replayPortal() {
+      clearTimeout(portalAutoTimer);
+      curtain.style.display = "flex";
+      // Force reflow before removing opening state
+      void curtain.offsetWidth;
+      curtain.classList.remove("curtain-opening");
+      document.body.classList.remove("portal-unlocked");
+      document.body.classList.add("portal-locked");
+      portalAutoTimer = setTimeout(openPortal, 3400);
+    }
+
+    enterBtn.addEventListener("click", openPortal);
+    replayBtn.addEventListener("click", replayPortal);
+
+    // =========================================================
+    // 7. YOUTUBE BACKGROUND AUDIO (LYTbGh99bYA - MAGICAL FANTASY)
+    // =========================================================
+    let ytPlayer = null;
+    let isMusicPlaying = false;
+    const audioToggleBtn = document.getElementById("audio-toggle-btn");
+    const audioStatusLabel = document.getElementById("audio-status-label");
+    const eqBars = document.getElementById("eq-bars");
+
+    function updateAudioUI(playing) {
+      isMusicPlaying = playing;
+      if (playing) {
+        audioStatusLabel.textContent = "Sound: On";
+        eqBars.classList.add("eq-playing");
+      } else {
+        audioStatusLabel.textContent = "Sound: Off";
+        eqBars.classList.remove("eq-playing");
+      }
+    }
+
+    function tryStartMusic() {
+      if (ytPlayer && typeof ytPlayer.playVideo === "function") {
+        try {
+          ytPlayer.unMute();
+          ytPlayer.setVolume(45);
+          ytPlayer.playVideo();
+        } catch (e) {}
+      }
+    }
+
+    window.onYouTubeIframeAPIReady = function () {
+      ytPlayer = new YT.Player("yt-audio-player", {
+        height: "1",
+        width: "1",
+        videoId: "LYTbGh99bYA",
+        playerVars: {
+          autoplay: 1,
+          loop: 1,
+          playlist: "LYTbGh99bYA",
+          controls: 0,
+          disablekb: 1,
+          modestbranding: 1,
+          rel: 0
+        },
+        events: {
+          onReady: (event) => {
+            event.target.setVolume(45);
+            event.target.playVideo();
+          },
+          onStateChange: (event) => {
+            if (event.data === YT.PlayerState.PLAYING) {
+              updateAudioUI(true);
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+              updateAudioUI(false);
             }
-            if (flyingBtn) {
-                flyingBtn.className = mode === 'flying' ? activeCls : inactiveCls;
-                flyingBtn.setAttribute('aria-pressed', mode === 'flying' ? 'true' : 'false');
-            }
+          }
+        }
+      });
+    };
+
+    audioToggleBtn.addEventListener("click", () => {
+      if (!ytPlayer) return;
+      if (isMusicPlaying) {
+        ytPlayer.pauseVideo();
+        updateAudioUI(false);
+      } else {
+        tryStartMusic();
+        updateAudioUI(true);
+      }
+    });
+
+    // Unlock audio on first user gesture if browser blocked autoplay
+    ["pointerdown", "keydown", "touchstart"].forEach((evtName) => {
+      window.addEventListener(evtName, () => {
+        if (!isMusicPlaying && ytPlayer && typeof ytPlayer.playVideo === "function") {
+          tryStartMusic();
+        }
+      }, { once: true, passive: true });
+    });
+
+    // =========================================================
+    // 8. CANVAS VISUALS (INTRO ORBITING GLITTER, STARS & MICRO TRAIL)
+    // =========================================================
+    function initCanvases() {
+      // A. Intro Cosmos Canvas
+      const introCanvas = document.getElementById("intro-cosmos-canvas");
+      const ictx = introCanvas.getContext("2d");
+      let iw = (introCanvas.width = window.innerWidth);
+      let ih = (introCanvas.height = window.innerHeight);
+
+      const orbiters = Array.from({ length: 75 }, (_, i) => ({
+        angle: (Math.PI * 2 * i) / 75 + Math.random() * 0.4,
+        radius: 125 + Math.random() * Math.min(iw, ih) * 0.42,
+        speed: (0.0015 + Math.random() * 0.003) * (i % 2 === 0 ? 1 : -1),
+        size: 1 + Math.random() * 2.2,
+        alpha: 0.35 + Math.random() * 0.65,
+        gold: i % 3 !== 0
+      }));
+
+      // B. Background Ambient Starfield
+      const bgCanvas = document.getElementById("bg-star-canvas");
+      const bctx = bgCanvas.getContext("2d");
+      let bw = (bgCanvas.width = window.innerWidth);
+      let bh = (bgCanvas.height = window.innerHeight);
+
+      const bgStars = Array.from({ length: 65 }, () => ({
+        x: Math.random() * bw,
+        y: Math.random() * bh,
+        r: 0.6 + Math.random() * 1.4,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.015 + Math.random() * 0.025,
+        gold: Math.random() > 0.45
+      }));
+
+      // C. Subtle Micro Golden Cursor Dust Trail
+      const dustCanvas = document.getElementById("cursor-dust-canvas");
+      const dctx = dustCanvas.getContext("2d");
+      let dw = (dustCanvas.width = window.innerWidth);
+      let dh = (dustCanvas.height = window.innerHeight);
+      const motes = [];
+
+      window.addEventListener("pointermove", (e) => {
+        if (motes.length < 45) {
+          motes.push({
+            x: e.clientX + (Math.random() - 0.5) * 8,
+            y: e.clientY + (Math.random() - 0.5) * 8,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: -0.25 - Math.random() * 0.45,
+            size: 1 + Math.random() * 1.4,
+            life: 1
+          });
+        }
+      }, { passive: true });
+
+      window.addEventListener("resize", () => {
+        iw = introCanvas.width = window.innerWidth;
+        ih = introCanvas.height = window.innerHeight;
+        bw = bgCanvas.width = window.innerWidth;
+        bh = bgCanvas.height = window.innerHeight;
+        dw = dustCanvas.width = window.innerWidth;
+        dh = dustCanvas.height = window.innerHeight;
+      });
+
+      function animateFrame() {
+        // Render Intro Orbiting Glitter if curtain visible
+        if (curtain.style.display !== "none") {
+          ictx.clearRect(0, 0, iw, ih);
+          const cx = iw / 2;
+          const cy = ih / 2;
+          orbiters.forEach((p) => {
+            p.angle += p.speed;
+            const x = cx + Math.cos(p.angle) * p.radius;
+            const y = cy + Math.sin(p.angle) * (p.radius * 0.88);
+            ictx.beginPath();
+            ictx.arc(x, y, p.size, 0, Math.PI * 2);
+            ictx.fillStyle = p.gold
+              ? `rgba(247, 223, 148, ${p.alpha})`
+              : `rgba(226, 232, 240, ${p.alpha * 0.7})`;
+            ictx.fill();
+          });
         }
 
-        function selectAttendeeMode(mode) {
-            try {
-                if (!attendeeModes[mode]) return;
-                currentAttendeeMode = mode;
-                updateModeButtonsUI(mode);
-
-                const allowedDays = attendeeModes[mode];
-                let nextDay = currentDayKey;
-                if (mode === 'flying') {
-                    nextDay = 'mon';
-                } else if (!allowedDays.includes(currentDayKey)) {
-                    nextDay = 'wed';
-                }
-
-                renderDayTabs(allowedDays, nextDay);
-                selectDay(nextDay);
-            } catch (err) {
-                console.error('Error switching attendee mode:', err);
-            }
-        }
-
-        function selectDay(dayKey) {
-            try {
-                const allowedDays = attendeeModes[currentAttendeeMode] || attendeeModes.local;
-                const validDay = allowedDays.includes(dayKey) ? dayKey : allowedDays[0];
-                currentDayKey = validDay;
-
-                renderDayTabs(allowedDays, validDay);
-
-                const dayData = summitSchedule[validDay];
-                if (!dayData) return;
-
-                document.getElementById('day-subtitle').textContent = dayData.subtitle;
-
-                const container = document.getElementById('schedule-container');
-                container.innerHTML = dayData.events.map(item => {
-                    const bgClass = item.highlight
-                        ? 'bg-gold-400/10 hover:bg-gold-400/15'
-                        : 'hover:bg-abyss-800/45';
-                    const titleClass = item.highlight ? 'text-gold-200 font-bold' : 'text-white font-medium';
-
-                    return `
-                        <div class="flex flex-col sm:grid sm:grid-cols-12 gap-1.5 sm:gap-4 px-4 sm:px-6 py-3 ${bgClass} transition-all duration-200 hover:translate-x-0.5">
-                            <div class="sm:col-span-3 flex items-center">
-                                <span class="inline-block text-xs font-bold tracking-wide text-gold-400 bg-abyss-950/75 sm:bg-transparent px-2.5 py-0.5 sm:p-0 rounded border border-gold-400/25 sm:border-0 whitespace-nowrap">
-                                    ${item.time}
-                                </span>
-                            </div>
-                            <div class="sm:col-span-5 text-sm ${titleClass} leading-snug">
-                                ${item.activity}
-                            </div>
-                            <div class="sm:col-span-4 text-xs text-slate-300 leading-snug">
-                                ${item.place}
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                container.scrollTop = 0;
-            } catch (err) {
-                console.error('Error switching day:', err);
-            }
-        }
-
-        // 2. Expressive Golden Stardust & Micro-Glint Cursor Trail
-        const cursorDustCanvas = document.getElementById('cursor-dust-canvas');
-        const cursorDustCtx = cursorDustCanvas.getContext('2d');
-        let cursorDustParticles = [];
-        let lastDustSpawn = { x: null, y: null };
-
-        function resizeCursorDustCanvas() {
-            if (!cursorDustCanvas) return;
-            cursorDustCanvas.width = window.innerWidth;
-            cursorDustCanvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCursorDustCanvas);
-        resizeCursorDustCanvas();
-
-        function drawCursorFourPointGlint(ctx, x, y, size, alpha, rotation) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.rotate(rotation);
-            ctx.beginPath();
-            const inner = size * 0.24;
-            for (let i = 0; i < 4; i++) {
-                const a1 = (i * Math.PI) / 2;
-                const a2 = a1 + Math.PI / 4;
-                if (i === 0) {
-                    ctx.moveTo(Math.cos(a1) * size, Math.sin(a1) * size);
-                } else {
-                    ctx.lineTo(Math.cos(a1) * size, Math.sin(a1) * size);
-                }
-                ctx.lineTo(Math.cos(a2) * inner, Math.sin(a2) * inner);
-            }
-            ctx.closePath();
-            ctx.fillStyle = `rgba(255, 250, 232, ${Math.min(1, alpha).toFixed(3)})`;
-            ctx.shadowBlur = 7;
-            ctx.shadowColor = '#eab642';
-            ctx.fill();
-            ctx.restore();
-        }
-
-        function spawnCursorDust(x, y, stepDist) {
-            const count = stepDist > 14 ? 5 : 4;
-            for (let i = 0; i < count; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const offsetRadius = Math.random() * 16;
-                const speed = Math.random() * 0.55 + 0.14;
-                const paletteRoll = Math.random();
-                const tone = paletteRoll > 0.72
-                    ? 'white'
-                    : paletteRoll > 0.25
-                        ? 'gold'
-                        : 'amber';
-
-                cursorDustParticles.push({
-                    x: x + Math.cos(angle) * offsetRadius,
-                    y: y + Math.sin(angle) * offsetRadius,
-                    vx: Math.cos(angle) * speed * 0.65 + (Math.random() - 0.5) * 0.35,
-                    vy: Math.sin(angle) * speed * 0.65 - (Math.random() * 0.42 + 0.12),
-                    r: Math.random() * 1.45 + 0.85,
-                    alpha: Math.random() * 0.25 + 0.72,
-                    decay: Math.random() * 0.015 + 0.012,
-                    twinklePhase: Math.random() * Math.PI * 2,
-                    twinkleSpeed: Math.random() * 0.24 + 0.12,
-                    rotation: Math.random() * Math.PI,
-                    rotSpeed: (Math.random() - 0.5) * 0.08,
-                    isGlint: Math.random() > 0.76,
-                    tone: tone
-                });
-            }
-            if (cursorDustParticles.length > 190) {
-                cursorDustParticles.splice(0, cursorDustParticles.length - 190);
-            }
-        }
-
-        window.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            if (lastDustSpawn.x === null) {
-                spawnCursorDust(x, y, 6);
-                lastDustSpawn.x = x;
-                lastDustSpawn.y = y;
-            } else {
-                const dist = Math.hypot(x - lastDustSpawn.x, y - lastDustSpawn.y);
-                if (dist >= 2.5) {
-                    spawnCursorDust(x, y, dist);
-                    lastDustSpawn.x = x;
-                    lastDustSpawn.y = y;
-                }
-            }
-        }, { passive: true });
-
-        window.addEventListener('mouseleave', () => {
-            lastDustSpawn.x = null;
-            lastDustSpawn.y = null;
+        // Render Subtle Background Twinkling Stars
+        bctx.clearRect(0, 0, bw, bh);
+        bgStars.forEach((s) => {
+          s.phase += s.speed;
+          const a = 0.25 + ((Math.sin(s.phase) + 1) / 2) * 0.65;
+          bctx.beginPath();
+          bctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          bctx.fillStyle = s.gold
+            ? `rgba(234, 182, 66, ${a})`
+            : `rgba(248, 250, 252, ${a * 0.75})`;
+          bctx.fill();
         });
 
-        function renderCursorDust() {
-            cursorDustCtx.clearRect(0, 0, cursorDustCanvas.width, cursorDustCanvas.height);
-
-            for (let i = cursorDustParticles.length - 1; i >= 0; i--) {
-                const p = cursorDustParticles[i];
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vx *= 0.96;
-                p.vy *= 0.96;
-                p.alpha -= p.decay;
-                p.twinklePhase += p.twinkleSpeed;
-                p.rotation += p.rotSpeed;
-
-                if (p.alpha <= 0) {
-                    cursorDustParticles.splice(i, 1);
-                    continue;
-                }
-
-                const shimmer = 0.72 + (Math.sin(p.twinklePhase) * 0.5 + 0.5) * 0.28;
-                const finalAlpha = Math.min(1, p.alpha * shimmer);
-
-                if (p.isGlint) {
-                    drawCursorFourPointGlint(cursorDustCtx, p.x, p.y, p.r * 2.5, finalAlpha, p.rotation);
-                } else {
-                    cursorDustCtx.save();
-                    cursorDustCtx.beginPath();
-                    cursorDustCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-
-                    if (p.tone === 'white') {
-                        cursorDustCtx.fillStyle = `rgba(255, 249, 230, ${finalAlpha.toFixed(3)})`;
-                        cursorDustCtx.shadowColor = '#f5d782';
-                    } else if (p.tone === 'gold') {
-                        cursorDustCtx.fillStyle = `rgba(245, 215, 130, ${finalAlpha.toFixed(3)})`;
-                        cursorDustCtx.shadowColor = '#eab642';
-                    } else {
-                        cursorDustCtx.fillStyle = `rgba(234, 182, 66, ${finalAlpha.toFixed(3)})`;
-                        cursorDustCtx.shadowColor = '#cf951d';
-                    }
-
-                    cursorDustCtx.shadowBlur = 7;
-                    cursorDustCtx.fill();
-                    cursorDustCtx.restore();
-                }
-            }
-
-            requestAnimationFrame(renderCursorDust);
+        // Render Micro Gold Cursor Dust
+        dctx.clearRect(0, 0, dw, dh);
+        for (let i = motes.length - 1; i >= 0; i--) {
+          const m = motes[i];
+          m.x += m.vx;
+          m.y += m.vy;
+          m.life -= 0.032;
+          if (m.life <= 0) {
+            motes.splice(i, 1);
+            continue;
+          }
+          dctx.beginPath();
+          dctx.arc(m.x, m.y, m.size * m.life, 0, Math.PI * 2);
+          dctx.fillStyle = `rgba(247, 223, 148, ${m.life * 0.65})`;
+          dctx.fill();
         }
 
-        // 3. Interactive 3D Pointer Tilt on #intro-curtain Stage
-        const introCurtainEl = document.getElementById('intro-curtain');
-        const intro3dRig = document.getElementById('intro-3d-rig');
+        requestAnimationFrame(animateFrame);
+      }
 
-        if (introCurtainEl && intro3dRig) {
-            introCurtainEl.addEventListener('mousemove', (e) => {
-                if (introCurtainEl.classList.contains('opened')) return;
-                const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-                const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-                const rotateY = nx * 13;
-                const rotateX = -ny * 11;
-                intro3dRig.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
-            }, { passive: true });
+      animateFrame();
+    }
 
-            introCurtainEl.addEventListener('mouseleave', () => {
-                intro3dRig.style.transform = 'rotateX(0deg) rotateY(0deg)';
-            });
-        }
+    // =========================================================
+    // 9. INITIALIZE ON WINDOW LOAD
+    // =========================================================
+    window.onload = function () {
+      renderPlanner();
+      fetchKrakowWeather();
+      initCanvases();
 
-        // 4. Intro Cosmos Canvas: Twinkling Stars, Orbiting Golden Glitter & Shimmer Motes
-        const introCosmosCanvas = document.getElementById('intro-cosmos-canvas');
-        const introCosmosCtx = introCosmosCanvas.getContext('2d');
-        let bgTwinkleStars = [];
-        let orbitingGlitter = [];
-        let floatingShimmerMotes = [];
-        let introAnimFrame = null;
+      // Load YouTube IFrame API asynchronously
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
 
-        function resizeIntroCosmosCanvas() {
-            if (!introCosmosCanvas) return;
-            introCosmosCanvas.width = window.innerWidth;
-            introCosmosCanvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeIntroCosmosCanvas);
-        resizeIntroCosmosCanvas();
-
-        function initIntroCosmosScene() {
-            const w = introCosmosCanvas.width;
-            const h = introCosmosCanvas.height;
-            const maxDim = Math.max(w, h);
-
-            bgTwinkleStars = Array.from({ length: 145 }, () => ({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                r: Math.random() * 1.45 + 0.35,
-                phase: Math.random() * Math.PI * 2,
-                speed: Math.random() * 0.045 + 0.015,
-                isFourPoint: Math.random() > 0.82
-            }));
-
-            orbitingGlitter = Array.from({ length: 165 }, () => {
-                const band = Math.random();
-                const radius = band < 0.55
-                    ? 105 + Math.random() * 145
-                    : 250 + Math.random() * (maxDim * 0.38);
-                return {
-                    angle: Math.random() * Math.PI * 2,
-                    radius: radius,
-                    radialBreathAmp: Math.random() * 12 + 3,
-                    radialBreathPhase: Math.random() * Math.PI * 2,
-                    angularSpeed: (Math.random() * 0.0065 + 0.0022) * (Math.random() > 0.18 ? 1 : -0.7),
-                    size: Math.random() * 2.1 + 0.55,
-                    sparklePhase: Math.random() * Math.PI * 2,
-                    sparkleSpeed: Math.random() * 0.09 + 0.03,
-                    tiltRatio: 0.92 + Math.random() * 0.14,
-                    isBrightSparkle: Math.random() > 0.78
-                };
-            });
-
-            floatingShimmerMotes = Array.from({ length: 42 }, () => ({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                r: Math.random() * 14 + 4,
-                vx: (Math.random() - 0.5) * 0.25,
-                vy: -Math.random() * 0.22 - 0.05,
-                phase: Math.random() * Math.PI * 2,
-                speed: Math.random() * 0.025 + 0.01,
-                maxAlpha: Math.random() * 0.16 + 0.05
-            }));
-        }
-
-        function drawMiniSparkle(ctx, x, y, size, alpha) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.beginPath();
-            const inner = size * 0.22;
-            for (let i = 0; i < 4; i++) {
-                const a1 = (i * Math.PI) / 2;
-                const a2 = a1 + Math.PI / 4;
-                if (i === 0) {
-                    ctx.moveTo(Math.cos(a1) * size, Math.sin(a1) * size);
-                } else {
-                    ctx.lineTo(Math.cos(a1) * size, Math.sin(a1) * size);
-                }
-                ctx.lineTo(Math.cos(a2) * inner, Math.sin(a2) * inner);
-            }
-            ctx.closePath();
-            ctx.fillStyle = `rgba(255, 249, 230, ${alpha})`;
-            ctx.fill();
-            ctx.restore();
-        }
-
-        function renderIntroCosmos() {
-            const curtain = document.getElementById('intro-curtain');
-            if (!curtain || curtain.classList.contains('opened')) {
-                introAnimFrame = null;
-                return;
-            }
-
-            const w = introCosmosCanvas.width;
-            const h = introCosmosCanvas.height;
-            const cx = w / 2;
-            const cy = h * 0.46;
-
-            introCosmosCtx.clearRect(0, 0, w, h);
-
-            for (let i = 0; i < floatingShimmerMotes.length; i++) {
-                const m = floatingShimmerMotes[i];
-                m.x += m.vx;
-                m.y += m.vy;
-                m.phase += m.speed;
-                if (m.y < -m.r) m.y = h + m.r;
-                if (m.x < -m.r) m.x = w + m.r;
-                if (m.x > w + m.r) m.x = -m.r;
-
-                const alpha = (Math.sin(m.phase) * 0.5 + 0.5) * m.maxAlpha;
-                const grad = introCosmosCtx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r);
-                grad.addColorStop(0, `rgba(245, 215, 130, ${alpha})`);
-                grad.addColorStop(0.55, `rgba(234, 182, 66, ${alpha * 0.45})`);
-                grad.addColorStop(1, 'rgba(234, 182, 66, 0)');
-                introCosmosCtx.fillStyle = grad;
-                introCosmosCtx.beginPath();
-                introCosmosCtx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-                introCosmosCtx.fill();
-            }
-
-            for (let i = 0; i < bgTwinkleStars.length; i++) {
-                const st = bgTwinkleStars[i];
-                st.phase += st.speed;
-                const twinkle = 0.22 + (Math.sin(st.phase) * 0.5 + 0.5) * 0.78;
-                if (st.isFourPoint && twinkle > 0.65) {
-                    drawMiniSparkle(introCosmosCtx, st.x, st.y, st.r * 3.1, twinkle * 0.85);
-                } else {
-                    introCosmosCtx.beginPath();
-                    introCosmosCtx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
-                    introCosmosCtx.fillStyle = `rgba(255, 249, 230, ${twinkle * 0.85})`;
-                    introCosmosCtx.fill();
-                }
-            }
-
-            for (let i = 0; i < orbitingGlitter.length; i++) {
-                const g = orbitingGlitter[i];
-                g.angle += g.angularSpeed;
-                g.radialBreathPhase += 0.02;
-                g.sparklePhase += g.sparkleSpeed;
-
-                const r = g.radius + Math.sin(g.radialBreathPhase) * g.radialBreathAmp;
-                const gx = cx + Math.cos(g.angle) * r;
-                const gy = cy + Math.sin(g.angle) * r * g.tiltRatio;
-                const shimmer = 0.35 + (Math.sin(g.sparklePhase) * 0.5 + 0.5) * 0.65;
-
-                const tailAngle = g.angle - g.angularSpeed * 5;
-                const tx = cx + Math.cos(tailAngle) * r;
-                const ty = cy + Math.sin(tailAngle) * r * g.tiltRatio;
-                introCosmosCtx.beginPath();
-                introCosmosCtx.moveTo(tx, ty);
-                introCosmosCtx.lineTo(gx, gy);
-                introCosmosCtx.strokeStyle = `rgba(234, 182, 66, ${shimmer * 0.28})`;
-                introCosmosCtx.lineWidth = g.size * 0.75;
-                introCosmosCtx.stroke();
-
-                if (g.isBrightSparkle && shimmer > 0.72) {
-                    drawMiniSparkle(introCosmosCtx, gx, gy, g.size * 2.8, shimmer);
-                } else {
-                    introCosmosCtx.beginPath();
-                    introCosmosCtx.arc(gx, gy, g.size, 0, Math.PI * 2);
-                    introCosmosCtx.fillStyle = shimmer > 0.75
-                        ? `rgba(255, 249, 230, ${shimmer})`
-                        : `rgba(234, 182, 66, ${shimmer})`;
-                    introCosmosCtx.shadowBlur = 8;
-                    introCosmosCtx.shadowColor = '#eab642';
-                    introCosmosCtx.fill();
-                    introCosmosCtx.shadowBlur = 0;
-                }
-            }
-
-            introAnimFrame = requestAnimationFrame(renderIntroCosmos);
-        }
-
-        // 5. Immediate YouTube IFrame Player API ("Magical Fantasy - ✨ Extended Version of Magical Music by Dmitriy Sevostyanov @dspromusic" - LYTbGh99bYA)
-        let ytPlayer = null;
-        let isAudioPlaying = false;
-        let userManuallyPaused = false;
-        let autoplayRetryTimer = null;
-
-        function startSummitAudioImmediately() {
-            if (userManuallyPaused) return;
-            try {
-                if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                    if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
-                    if (typeof ytPlayer.setVolume === 'function') ytPlayer.setVolume(45);
-                    ytPlayer.playVideo();
-                }
-            } catch (err) {
-                console.error('Error starting YouTube audio:', err);
-            }
-        }
-
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(tag);
-
-        function onYouTubeIframeAPIReady() {
-            try {
-                ytPlayer = new YT.Player('yt-player', {
-                    videoId: 'LYTbGh99bYA',
-                    playerVars: {
-                        autoplay: 1,
-                        loop: 1,
-                        playlist: 'LYTbGh99bYA',
-                        controls: 0,
-                        disablekb: 1,
-                        fs: 0,
-                        modestbranding: 1,
-                        playsinline: 1
-                    },
-                    events: {
-                        onReady: (event) => {
-                            event.target.setVolume(45);
-                            event.target.unMute();
-                            event.target.playVideo();
-                            let attempts = 0;
-                            clearInterval(autoplayRetryTimer);
-                            autoplayRetryTimer = setInterval(() => {
-                                attempts += 1;
-                                if (isAudioPlaying || userManuallyPaused || attempts > 8) {
-                                    clearInterval(autoplayRetryTimer);
-                                    return;
-                                }
-                                try {
-                                    event.target.unMute();
-                                    event.target.playVideo();
-                                } catch (_) {}
-                            }, 350);
-                        },
-                        onStateChange: (event) => {
-                            if (event.data === YT.PlayerState.PLAYING) {
-                                isAudioPlaying = true;
-                                clearInterval(autoplayRetryTimer);
-                                updateAudioUI(true);
-                            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-                                isAudioPlaying = false;
-                                updateAudioUI(false);
-                            }
-                        }
-                    }
-                });
-            } catch (err) {
-                console.error('YouTube Player initialization error:', err);
-            }
-        }
-
-        function updateAudioUI(playing) {
-            const icon = document.getElementById('audio-icon');
-            const label = document.getElementById('audio-label');
-            const eq = document.getElementById('eq-indicator');
-            if (!icon || !label || !eq) return;
-            if (playing) {
-                icon.textContent = '❚❚';
-                label.textContent = 'Magical Fantasy';
-                eq.classList.add('eq-playing');
-            } else {
-                icon.textContent = '▶';
-                label.textContent = userManuallyPaused ? 'Paused' : 'Enable Sound';
-                eq.classList.remove('eq-playing');
-            }
-        }
-
-        function toggleAudio() {
-            if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
-            if (isAudioPlaying) {
-                userManuallyPaused = true;
-                clearInterval(autoplayRetryTimer);
-                ytPlayer.pauseVideo();
-            } else {
-                userManuallyPaused = false;
-                startSummitAudioImmediately();
-            }
-        }
-
-        window.addEventListener('load', () => {
-            startSummitAudioImmediately();
-        });
-
-        ['pointerdown', 'click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
-            window.addEventListener(evt, () => {
-                if (!userManuallyPaused && !isAudioPlaying) {
-                    startSummitAudioImmediately();
-                }
-            }, { passive: true });
-        });
-
-        // 6. Concentric Ring Portal Curtain Open / Replay
-        let portalTimer = null;
-
-        function enterSummitWithAudio() {
-            if (portalTimer) clearTimeout(portalTimer);
-            const curtain = document.getElementById('intro-curtain');
-            if (curtain) {
-                curtain.classList.add('opened');
-                curtain.style.pointerEvents = 'none';
-                curtain.style.visibility = 'hidden';
-            }
-            userManuallyPaused = false;
-            startSummitAudioImmediately();
-        }
-
-        function playPortal() {
-            if (portalTimer) clearTimeout(portalTimer);
-            const curtain = document.getElementById('intro-curtain');
-            if (intro3dRig) {
-                intro3dRig.style.transform = 'rotateX(0deg) rotateY(0deg)';
-            }
-            if (curtain) {
-                curtain.style.display = '';
-                curtain.style.pointerEvents = '';
-                curtain.style.visibility = '';
-                curtain.classList.remove('opened');
-            }
-            startSummitAudioImmediately();
-            initIntroCosmosScene();
-            if (!introAnimFrame) {
-                renderIntroCosmos();
-            }
-            portalTimer = setTimeout(() => {
-                if (curtain) {
-                    curtain.classList.add('opened');
-                    curtain.style.pointerEvents = 'none';
-                    curtain.style.visibility = 'hidden';
-                }
-                startSummitAudioImmediately();
-            }, 1900);
-        }
-
-        function replayPortal() {
-            playPortal();
-        }
-
-        // 7. Interactive Multi-Depth 3D Golden Constellation Starfield & Nebula Parallax
-        const canvas = document.getElementById('constellation-canvas');
-        const ctx = canvas.getContext('2d');
-        const nebulaPlane = document.getElementById('nebula-plane');
-        let farStars = [];
-        let midStars = [];
-        let nearStars = [];
-        let mouse = { x: null, y: null };
-        let smoothMouse = { x: 0, y: 0 };
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        }, { passive: true });
-
-        window.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        for (let i = 0; i < 85; i++) {
-            farStars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.08,
-                vy: (Math.random() - 0.5) * 0.08,
-                r: Math.random() * 0.9 + 0.3,
-                phase: Math.random() * Math.PI * 2
-            });
-        }
-
-        for (let i = 0; i < 55; i++) {
-            midStars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.2,
-                vy: (Math.random() - 0.5) * 0.2,
-                r: Math.random() * 1.4 + 0.55
-            });
-        }
-
-        for (let i = 0; i < 22; i++) {
-            nearStars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.36,
-                vy: (Math.random() - 0.5) * 0.36,
-                r: Math.random() * 2.1 + 1.1
-            });
-        }
-
-        function drawConstellations() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            const targetNx = mouse.x !== null ? (mouse.x / canvas.width - 0.5) * 2 : 0;
-            const targetNy = mouse.y !== null ? (mouse.y / canvas.height - 0.5) * 2 : 0;
-            smoothMouse.x += (targetNx - smoothMouse.x) * 0.06;
-            smoothMouse.y += (targetNy - smoothMouse.y) * 0.06;
-
-            if (nebulaPlane) {
-                nebulaPlane.style.transform = `translate3d(${(-smoothMouse.x * 16).toFixed(1)}px, ${(-smoothMouse.y * 14).toFixed(1)}px, 0)`;
-            }
-
-            const farOffsetX = -smoothMouse.x * 8;
-            const farOffsetY = -smoothMouse.y * 8;
-            for (let i = 0; i < farStars.length; i++) {
-                const f = farStars[i];
-                f.x += f.vx;
-                f.y += f.vy;
-                f.phase += 0.025;
-                if (f.x < 0) f.x = canvas.width;
-                if (f.x > canvas.width) f.x = 0;
-                if (f.y < 0) f.y = canvas.height;
-                if (f.y > canvas.height) f.y = 0;
-
-                const alpha = 0.28 + (Math.sin(f.phase) * 0.5 + 0.5) * 0.42;
-                ctx.beginPath();
-                ctx.arc(f.x + farOffsetX, f.y + farOffsetY, f.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 249, 230, ${alpha})`;
-                ctx.fill();
-            }
-
-            const midOffsetX = -smoothMouse.x * 22;
-            const midOffsetY = -smoothMouse.y * 22;
-            for (let i = 0; i < midStars.length; i++) {
-                const s1 = midStars[i];
-                s1.x += s1.vx;
-                s1.y += s1.vy;
-                if (s1.x < 0 || s1.x > canvas.width) s1.vx *= -1;
-                if (s1.y < 0 || s1.y > canvas.height) s1.vy *= -1;
-
-                const x1 = s1.x + midOffsetX;
-                const y1 = s1.y + midOffsetY;
-
-                for (let j = i + 1; j < midStars.length; j++) {
-                    const s2 = midStars[j];
-                    const x2 = s2.x + midOffsetX;
-                    const y2 = s2.y + midOffsetY;
-                    const dist = Math.hypot(x1 - x2, y1 - y2);
-                    if (dist < 145) {
-                        ctx.beginPath();
-                        ctx.moveTo(x1, y1);
-                        ctx.lineTo(x2, y2);
-                        ctx.strokeStyle = `rgba(234, 182, 66, ${(1 - dist / 145) * 0.22})`;
-                        ctx.lineWidth = 0.65;
-                        ctx.stroke();
-                    }
-                }
-
-                ctx.beginPath();
-                ctx.arc(x1, y1, s1.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 249, 230, 0.78)';
-                ctx.fill();
-            }
-
-            const nearOffsetX = -smoothMouse.x * 42;
-            const nearOffsetY = -smoothMouse.y * 42;
-            for (let i = 0; i < nearStars.length; i++) {
-                const n = nearStars[i];
-                n.x += n.vx;
-                n.y += n.vy;
-                if (n.x < 0) n.x = canvas.width;
-                if (n.x > canvas.width) n.x = 0;
-                if (n.y < 0) n.y = canvas.height;
-                if (n.y > canvas.height) n.y = 0;
-
-                const nx = n.x + nearOffsetX;
-                const ny = n.y + nearOffsetY;
-
-                const glow = ctx.createRadialGradient(nx, ny, 0, nx, ny, n.r * 4.5);
-                glow.addColorStop(0, 'rgba(255, 249, 230, 0.92)');
-                glow.addColorStop(0.35, 'rgba(234, 182, 66, 0.35)');
-                glow.addColorStop(1, 'rgba(234, 182, 66, 0)');
-                ctx.fillStyle = glow;
-                ctx.beginPath();
-                ctx.arc(nx, ny, n.r * 4.5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            requestAnimationFrame(drawConstellations);
-        }
-
-        // 8. Gentle 3D Card Perspective Tilt
-        function init3DEditorialCards() {
-            const cards = document.querySelectorAll('[data-tilt-card]');
-            cards.forEach(card => {
-                const maxTilt = parseFloat(card.getAttribute('data-tilt-max')) || 2.0;
-
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const px = (e.clientX - rect.left) / rect.width;
-                    const py = (e.clientY - rect.top) / rect.height;
-
-                    const rotateY = (px - 0.5) * (maxTilt * 2);
-                    const rotateX = (0.5 - py) * (maxTilt * 2);
-
-                    card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(6px)`;
-                }, { passive: true });
-
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-                });
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const flyingBtn = document.getElementById('mode-flying');
-            const localBtn = document.getElementById('mode-local');
-            if (flyingBtn) flyingBtn.addEventListener('click', () => selectAttendeeMode('flying'));
-            if (localBtn) localBtn.addEventListener('click', () => selectAttendeeMode('local'));
-
-            selectAttendeeMode('local');
-            playPortal();
-            startSummitAudioImmediately();
-            drawConstellations();
-            renderCursorDust();
-            init3DEditorialCards();
-        });
-    </script>
+      // Auto-open portal after 3.2 seconds
+      portalAutoTimer = setTimeout(openPortal, 3200);
+    };
+  </script>
 </body>
 </html>
